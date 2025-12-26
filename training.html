@@ -1,0 +1,1821 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Workspace Bilingual Training — Aidyn Khan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Весь контент и скрипты взяты из d:\Documents\google\index.html и перенесены как отдельная страница обучения -->
+</head>
+<body class="antialiased has-sidebar">
+    <!-- Ссылка назад на основное портфолио -->
+    <div class="w-full bg-slate-900 text-white py-3 px-4 text-sm flex justify-between items-center">
+        <span>Google Workspace Training · Aidyn Khan</span>
+        <a href="index.html" class="underline hover:text-teal-300">← Назад в портфолио</a>
+    </div>
+    <!-- Дальше следует полный контент из учебной страницы -->
+    <!-- (он уже сохранён в этом файле) -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f9fc;
+            color: #202124;
+        }
+        /* Collapsible left sidebar (desktop only) */
+        /* Always reserve space for sidebar */
+        body.has-sidebar {
+            padding-left: 88px;
+        }
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: 88px;
+            background: #ffffff;
+            border-right: 1px solid #eef2f7;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+            z-index: 50;
+            transition: width 0.2s ease-in-out;
+            display: block;
+        }
+        .sidebar:hover { width: 280px; }
+        .sidebar-inner {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            padding: 12px;
+            gap: 6px;
+            overflow-y: auto;
+        }
+        .sidebar .nav-item { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 10px; }
+        .sidebar .nav-item:hover { background-color: #f3f6fb; }
+        .sidebar .text-label { opacity: 0; transform: translateX(-6px); transition: opacity 0.18s ease, transform 0.18s ease; white-space: nowrap; }
+        .sidebar:hover .text-label { opacity: 1; transform: translateX(0); }
+        .nav-item {
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: all 0.2s ease-in-out;
+            color: #5f6368;
+            font-weight: 500;
+        }
+        .nav-item.active {
+            color: #1a73e8;
+            background-color: #e8f0fe;
+            font-weight: 600;
+            box-shadow: 0 1px 2px rgba(66, 133, 244, 0.2);
+        }
+        .content-card {
+            background-color: #ffffff;
+            border-radius: 18px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08), 0 10px 15px rgba(0, 0, 0, 0.05);
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .color-blue { color: #1a73e8; }
+        .color-green { color: #34a853; }
+        .color-red { color: #ea4335; }
+        .color-yellow { color: #fbbc04; }
+
+        .practice-list {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 1rem;
+        }
+        .practice-list li {
+            position: relative;
+            padding: 12px 16px 12px 40px;
+            margin-bottom: 10px;
+            line-height: 1.5;
+            background-color: #f0fdf4;
+            border-left: 4px solid #34a853;
+            border-radius: 8px;
+            transition: all 0.3s;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            font-weight: 500;
+        }
+        .practice-list li:hover {
+            background-color: #e6f4ea;
+        }
+        .practice-list li::before {
+            content: attr(data-list-counter);
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            background-color: #34a853;
+            color: white;
+            border-radius: 50%;
+            font-size: 0.875rem;
+            font-weight: 700;
+            box-shadow: 0 1px 4px rgba(52, 168, 83, 0.4);
+        }
+
+        .interactive-section p {
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 10px;
+            font-style: italic;
+            border: 1px dashed #fbbc04;
+            background-color: #fffbeb;
+        }
+        .interactive-section strong {
+            color: #202124;
+            font-style: normal;
+        }
+
+        .score-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 9999px;
+            font-size: 1rem;
+            font-weight: 700;
+            margin-top: 1rem;
+            transition: background-color 0.3s, color 0.3s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .score-low { background-color: #fce8e6; color: #ea4335; }
+        .score-medium { background-color: #e8f0fe; color: #1a73e8; }
+        .score-high { background-color: #e6f4ea; color: #34a853; }
+        
+        .lang-switch button {
+            transition: background-color 0.2s, color 0.2s;
+            padding: 4px 8px;
+            border-radius: 6px;
+        }
+        .lang-switch .active {
+            background-color: #1a73e8;
+            color: white;
+            font-weight: 600;
+            box-shadow: 0 1px 3px rgba(26, 115, 232, 0.4);
+        }
+    </style>
+</head>
+<body class="antialiased has-sidebar">
+
+    <!-- Left collapsible sidebar (desktop) -->
+    <aside id="left-sidebar" class="sidebar">
+        <nav class="sidebar-inner">
+            <ul id="sidebar-navigation" class="flex flex-col gap-1"></ul>
+        </nav>
+    </aside>
+
+    <div class="container mx-auto p-4 md:p-8 max-w-7xl">
+        
+        <header class="text-center mb-4">
+            <h1 id="main-title" class="text-3xl md:text-4xl font-extrabold text-gray-800"></h1>
+            <p id="main-subtitle" class="text-lg text-gray-600 mt-2"></p>
+        </header>
+
+        <!-- Language switcher moved here; top navigation hidden -->
+        <div class="flex justify-end items-center gap-2 mb-6">
+            <button id="open-ai-settings" class="bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 font-medium py-2 px-3 rounded-lg shadow-sm">AI ⚙️</button>
+            <div id="language-switcher" class="lang-switch flex items-center bg-gray-100 rounded-lg p-1 shadow-inner">
+                <button id="lang-ru" data-lang="ru" class="active text-sm">Рус</button>
+                <button id="lang-kk" data-lang="kk" class="text-sm">Қаз</button>
+            </div>
+        </div>
+
+        <nav class="hidden bg-white rounded-xl shadow-lg p-4 mb-8 sticky top-4 z-10 flex justify-between items-center">
+            <!-- Navigation buttons are rendered here (disabled/hidden) -->
+            <ul id="navigation" class="flex flex-wrap justify-center items-center gap-2 md:gap-4 flex-grow"></ul>
+        </nav>
+
+        <!-- Simple anchor navigation for the training site sections (kept below; can be removed if not needed) -->
+        <section class="mb-6 hidden">
+            <div class="flex flex-wrap gap-2 justify-center">
+                <a href="#home" class="nav-item active bg-white shadow-sm border border-gray-200">Главная</a>
+                <a href="#materials" class="nav-item bg-white shadow-sm border border-gray-200">Учебные материалы</a>
+            </div>
+        </section>
+
+        
+
+        <main class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div id="content-display" class="lg:col-span-2">
+                <div class="content-card p-6 md:p-8 min-h-[600px]">
+                    <p id="welcome-message" class="text-gray-600 mb-6 border-b pb-4"></p>
+                    <div id="module-content"></div>
+                </div>
+            </div>
+
+            <aside class="lg:col-span-1">
+                <div class="content-card p-6 text-center sticky top-32">
+                    <h3 id="progress-title" class="text-xl font-semibold text-gray-800 mb-4 border-b pb-3"></h3>
+                    
+                    <div class="chart-container relative w-full max-w-xs mx-auto h-64 max-h-64 mb-4">
+                        <canvas id="progressChart"></canvas>
+                    </div>
+
+                    <div id="completion-display" class="score-badge mt-4 mx-auto score-medium text-lg"></div>
+
+                    <div id="score-display" class="score-badge mt-4 mx-auto score-low text-lg"></div>
+
+                     <div class="mt-6 border-t pt-4">
+                        <h3 id="additional-title" class="text-xl font-semibold text-gray-800 mb-4"></h3>
+                         <button id="bonus-toggle" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition-colors shadow-md">
+                        </button>
+                    </div>
+                </div>
+            </aside>
+        </main>
+
+        <!-- Course Landing: tailored to this course -->
+        <section id="home" class="content-card p-6 md:p-8 mt-8">
+            <h2 id="home-title" class="text-2xl md:text-3xl font-bold text-gray-800 mb-4">О курсе</h2>
+            <p id="home-text" class="text-gray-700 mb-2"></p>
+        </section>
+
+        <!-- Course Materials: list of course modules -->
+        <section id="materials" class="content-card p-6 md:p-8 mt-8">
+            <h2 id="materials-title" class="text-2xl md:text-3xl font-bold text-gray-800 mb-4">Материалы курса</h2>
+            <p id="materials-intro" class="text-gray-700 mb-4"></p>
+            <div id="materials-video" class="relative w-full aspect-video rounded-xl overflow-hidden border border-gray-200 shadow-md mb-4">
+                <iframe class="w-full h-full" src="https://www.youtube.com/embed/g36my1Q9PKs" title="Курс: видео" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+            <div id="materials-list" class="hidden grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3"></div>
+        </section>
+
+        <!-- Modals -->
+        <div id="bonus-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center p-4 z-50">
+            <div class="content-card p-8 max-w-2xl w-full">
+                <div class="flex justify-between items-center mb-4 border-b pb-3">
+                    <h2 id="bonus-modal-title" class="text-2xl font-bold text-gray-800"></h2>
+                    <button id="close-modal" class="text-gray-500 hover:text-gray-800 text-3xl leading-none">&times;</button>
+                </div>
+                <div id="bonus-content" class="text-gray-700 space-y-4"></div>
+            </div>
+        </div>
+
+        <div id="summary-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center p-4 z-50">
+            <div class="content-card p-8 max-w-3xl w-full">
+                <div class="flex justify-between items-center mb-4 border-b pb-3">
+                    <h2 id="summary-modal-title" class="text-2xl font-bold text-gray-800"></h2>
+                    <button id="close-summary" class="text-gray-500 hover:text-gray-800 text-3xl leading-none">&times;</button>
+                </div>
+                <div id="summary-content" class="text-gray-700 space-y-6 max-h-[70vh] overflow-y-auto"></div>
+            </div>
+        </div>
+
+        <!-- AI Settings Modal -->
+        <div id="ai-settings-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center p-4 z-50">
+            <div class="content-card p-6 max-w-lg w-full">
+                <div class="flex justify-between items-center mb-4 border-b pb-3">
+                    <h2 class="text-xl font-bold text-gray-800">Настройки ИИ (Gemini)</h2>
+                    <button id="close-ai-settings" class="text-gray-500 hover:text-gray-800 text-3xl leading-none">&times;</button>
+                </div>
+                <div class="space-y-4">
+                    <label class="block text-sm font-medium text-gray-700">API Key</label>
+                    <input id="ai-api-key" type="password" class="w-full border border-gray-300 rounded-lg p-2" placeholder="Введите ключ Gemini API">
+                    <label class="block text-sm font-medium text-gray-700">Модель</label>
+                    <select id="ai-model" class="w-full border border-gray-300 rounded-lg p-2">
+                        <option value="gemini-1.5-flash">gemini-1.5-flash</option>
+                        <option value="gemini-1.5-pro">gemini-1.5-pro</option>
+                    </select>
+                    <div class="flex justify-end gap-2">
+                        <button id="save-ai-settings" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">Сохранить</button>
+                    </div>
+                    <p class="text-xs text-gray-500">Ключ хранится локально в браузере (localStorage).</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="feedback-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center p-4 z-50">
+            <div class="content-card p-6 max-w-sm w-full text-center">
+                <h3 id="feedback-title" class="text-2xl font-bold mb-3"></h3>
+                <p id="feedback-message" class="text-gray-700 mb-4"></p>
+                <button id="close-feedback" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition-colors shadow-md"></button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // --- GEMINI API Configuration ---
+        let apiKey = localStorage.getItem('gemini_api_key') || "";
+        let apiModel = localStorage.getItem('gemini_api_model') || "gemini-1.5-flash";
+        const apiBase = "https://generativelanguage.googleapis.com/v1beta/models/";
+        function getApiUrl() { return `${apiBase}${apiModel}:generateContent?key=`; }
+
+        let currentLang = 'ru'; // Default language
+
+        // --- FIXED UI TEXT TRANSLATIONS ---
+        const uiText = {
+            ru: {
+                mainTitle: 'Основы работы с Google Workspace (Расширенный курс)',
+                mainSubtitle: 'Модуль I. Интерактивное знакомство с цифровой экосистемой',
+                welcome: 'Добро пожаловать в интерактивный гид! Выберите интересующую вас тему в панели навигации выше, чтобы изучить ее цели, задания, практику и проверить знания в мини-тесте. Ваш прогресс будет отображаться в диаграмме справа.',
+                progressTitle: 'Статистика Прогресса',
+                additionalTitle: 'Дополнительно',
+                bonusToggle: 'Показать бонусные идеи',
+                modulesLabel: 'Модули',
+                testsLabel: 'Тесты',
+                bonusModalTitle: 'Бонусные интерактивные идеи',
+                closeButton: 'Понятно',
+                feedbackAttention: 'Внимание',
+                feedbackCorrect: 'Отлично',
+                feedbackWrong: 'Неверно',
+                feedbackMessageEmpty: 'Пожалуйста, выберите один из вариантов ответа.',
+                feedbackMessageCorrect: 'Вы дали правильный ответ. Хорошая работа!',
+                feedbackMessageWrong: 'Это неверный ответ. Повторите материал и попробуйте снова.',
+                feedbackTestCorrect: '✅ Правильно! Идем дальше.',
+                feedbackTestWrong: '❌ Неверно. Попробуйте еще раз.',
+                sectionGoal: 'Цель / Goal:',
+                sectionPractice: 'Практическое задание / Practice:',
+                sectionInteractive: 'Интерактив / Interactive:',
+                sectionAssignment: 'Задание / Assignment:',
+                sectionCase: 'Кейс / Example:',
+                sectionVideo: 'Видео по теме',
+                sectionTest: '🧠 Мини-Тест: Проверка знаний',
+                buttonCheck: 'Проверить ответ',
+                aiHelpTitle: 'Помощь с заданием от ИИ',
+                aiButton: '✨ Сгенерировать идеи от Gemini',
+                aiLoading: 'Gemini генерирует ответ...',
+                aiResult: 'Gemini ұсынған жауап (ЖИ-көмек):',
+                aiSystemPrompt: "Вы — профессиональный помощник, который предоставляет структурированные и лаконичные ответы на учебные задания по Google Workspace на русском языке. Ответ должен быть сразу по существу задания.",
+                aiUserPromptPrefix: "Действуй как эксперт Google Workspace. Ответь на следующее задание для учебного модуля, предоставив конкретный, структурированный ответ. Сформулируй его четко, без лишних вступлений, используя русские термины Google Workspace. Задание: ",
+            },
+            kk: {
+                mainTitle: 'Google Workspace-пен жұмыс негіздері (Кеңейтілген курс)',
+                mainSubtitle: 'I модуль. Сандық экожүйемен интерактивті танысу',
+                welcome: 'Интерактивті нұсқаулыққа қош келдіңіз! Мақсаттарын, тапсырмаларын, практикасын зерттеу және біліміңізді мини-тестте тексеру үшін жоғарыдағы навигациялық тақтадан өзіңізді қызықтырған тақырыпты таңдаңыз. Сіздің прогресіңіз оң жақтағы диаграммада көрсетіледі.',
+                progressTitle: 'Үйрену Прогресі',
+                additionalTitle: 'Қосымша',
+                bonusToggle: 'Бонустық идеяларды көрсету',
+                modulesLabel: 'Модульдер',
+                testsLabel: 'Тесттер',
+                bonusModalTitle: 'Бонустық интерактивті идеялар',
+                closeButton: 'Түсінікті',
+                feedbackAttention: 'Назар аударыңыз',
+                feedbackCorrect: 'Тамаша',
+                feedbackWrong: 'Қате',
+                feedbackMessageEmpty: 'Жауап нұсқаларының бірін таңдаңыз.',
+                feedbackMessageCorrect: 'Сіз дұрыс жауап бердіңіз. Жақсы жұмыс!',
+                feedbackMessageWrong: 'Бұл қате жауап. Материалды қайталап, қайта көріңіз.',
+                feedbackTestCorrect: '✅ Дұрыс! Алға жылжимыз.',
+                feedbackTestWrong: '❌ Қате. Қайта көріңіз.',
+                sectionGoal: 'Мақсат / Goal:',
+                sectionPractice: 'Практикалық Тапсырма / Practice:',
+                sectionInteractive: 'Интерактив / Interactive:',
+                sectionAssignment: 'Тапсырма / Assignment:',
+                sectionCase: 'Кейс / Example:',
+                sectionVideo: 'Тақырыптық бейне',
+                sectionTest: '🧠 Мини-Тест: Білімді тексеру',
+                buttonCheck: 'Жауапты тексеру',
+                aiHelpTitle: 'ЖМ (Жасанды интеллект) тапсырмасына көмек',
+                aiButton: '✨ Gemini-ден идеяларды генерациялау',
+                aiLoading: 'Gemini жауапты генерациялап жатыр...',
+                aiResult: 'Gemini ұсынған жауап (ЖИ-көмек):',
+                aiSystemPrompt: "Сіз Google Workspace бойынша оқу тапсырмаларына құрылымды және қысқа жауаптар беретін кәсіби көмекшісіз. Жауап міндетті түрде қазақ тілінде болуы керек.",
+                aiUserPromptPrefix: "Google Workspace сарапшысы ретінде әрекет етіңіз. Келесі оқу тапсырмасына нақты, құрылымды жауап беріңіз. Жауапты артық кіріспе сөздерсіз, қазақ тіліндегі Google Workspace терминдерін қолдана отырып, нақты тұжырымдаңыз. Тапсырма: ",
+            }
+        };
+
+        async function fetchWithBackoff(url, options, retries = 3, delay = 1000) {
+            try {
+                const response = await fetch(url, options);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response;
+            } catch (error) {
+                if (retries > 0 && error.message.includes('429')) {
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                    return fetchWithBackoff(url, options, retries - 1, delay * 2);
+                }
+                throw error;
+            }
+        }
+        
+        async function generateAssignmentHelp(moduleId) {
+            const moduleData = bilingualModulesData.find(m => m.id === moduleId);
+            if (!moduleData) return;
+
+            const assignmentText = moduleData.content[currentLang].задание;
+            const t = uiText[currentLang];
+            
+            const loadingElement = document.getElementById(`assignment-loading-${moduleId}`);
+            const resultElement = document.getElementById(`assignment-result-${moduleId}`);
+            const button = document.getElementById(`gemini-button-${moduleId}`);
+
+            loadingElement.classList.remove('hidden');
+            resultElement.innerHTML = '';
+            button.disabled = true;
+
+            const userPrompt = t.aiUserPromptPrefix + `"${assignmentText}"`;
+            const systemPrompt = t.aiSystemPrompt;
+
+            const payload = {
+                contents: [{ parts: [{ text: userPrompt }] }],
+                systemInstruction: { parts: [{ text: systemPrompt }] },
+            };
+
+            try {
+                const response = await fetchWithBackoff(getApiUrl() + apiKey, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+                const generatedText = result.candidates?.[0]?.content?.parts?.[0]?.text || "Не удалось получить ответ от Gemini. / Gemini-ден жауап алу мүмкін болмады.";
+                
+                resultElement.innerHTML = `<h4 class="font-semibold mt-4 mb-2 text-gray-700">${t.aiResult}</h4><div class="p-3 bg-red-100 rounded-lg border border-red-300 text-sm shadow-inner">${generatedText.replace(/\n/g, '<br>')}</div>`;
+
+            } catch (error) {
+                console.error("Gemini API Error:", error);
+                const msg = (error.message.includes('401') || error.message.includes('403'))
+                  ? 'Доступ к API отклонен (401/403). Проверьте ключ и модель в настройках AI ⚙️.'
+                  : `Ошибка при получении данных: ${error.message}`;
+                // Local fallback: simple rubric generator
+                const fallback = `Черновик рубрики (3×3):\n\nКритерии: К1 Ясность; К2 Полнота; К3 Оформление.\nУровни: Низкий (0-1) — частично/ошибки; Средний (2) — в целом выполнено; Высокий (3) — требования полностью соблюдены.`;
+                resultElement.innerHTML = `<div class="mt-3 space-y-2"><p class="text-red-500">${msg}</p><pre class="p-3 bg-gray-50 border rounded text-sm whitespace-pre-wrap">${fallback}</pre></div>`;
+            } finally {
+                loadingElement.classList.add('hidden');
+                button.disabled = false;
+            }
+        }
+
+        // --- ICONS ---
+        const iconG = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93V17h2v2.93c-1.39.29-2.85.29-4.24 0zM17.93 13H15v-2h2.93c.29 1.39.29 2.85 0 4.24zM6.07 11H9v2H6.07c-.29-1.39-.29-2.85 0-4.24zM12 4.07V7h2V4.07c-1.39-.29-2.85-.29-4.24 0z" fill="#4285F4"/><path d="M12 4.07V7h2V4.07c-1.39-.29-2.85-.29-4.24 0z" fill="#34A853"/><path d="M11 17h2v2.93c-1.39.29-2.85.29-4.24 0V17h2z" fill="#EA4335"/><path d="M6.07 11H9v2H6.07c-.29-1.39-.29-2.85 0-4.24z" fill="#F9BC05"/></svg>`;
+        const iconChrome = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" fill="#EA4335"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" fill="#F9BC05"/><circle cx="12" cy="12" r="6" fill="#34A853"/><path d="M12 6.5C8.96 6.5 6.5 8.96 6.5 12s2.46 5.5 5.5 5.5 5.5-2.46 5.5-5.5-2.46-5.5-5.5-5.5zm0 9c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z" fill="#1A73E8"/></svg>`;
+        const iconGmail = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z" fill="#EA4335"/><path d="M20 6l-8 5-8-5" stroke="#F9BC05" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+        const iconCalendar = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11zM7 11h2v2H7zm4 0h2v2h-2zm4 0h2v2h-2z" fill="#1A73E8"/><rect x="5" y="6" width="14" height="3" fill="#34A853"/></svg>`;
+        const iconKeep = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 19H7V5h2v14zm4 0h-2V5h2v14zm4 0h-2V5h2v14z" fill="#F9BC05"/><path d="M17 7h-6v2h6V7zm-6 4h4v2h-4v-2zm4 4h-4v2h4v-2z" fill="#34A853"/></svg>`;
+        const iconDrive = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 18h12l3-6-3-6H6l-3 6 3 6z" fill="#F9BC05"/><path d="M6 18l6-6-6-6H3l3 6 3 6z" fill="#34A853"/><path d="M18 18l-6-6 6-6h3l-3 6z" fill="#4285F4"/></svg>`;
+        const iconSheets = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM8 19H4v-4h4v4zm0-6H4v-4h4v4zm0-6H4V5h4v4zm6 12h-4v-4h4v4zm0-6h-4v-4h4v4zm0-6h-4V5h4v4zm6 12h-4v-4h4v4zm0-6h-4v-4h4v4zm0-6h-4V5h4v4z" fill="#34A853"/></svg>`;
+        const iconSearch = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1A73E8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-open-check"><path d="M8 2.5L5 2v20l3-2.5 3 2.5 3-2.5 3 2.5 3-2.5V2l-3 .5"/><path d="m13 7 2 2 4-4"/></svg>`;
+        const iconDocs = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4285F4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>`;
+        const iconYouTube = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#EA4335" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-youtube"><path d="M2.5 17a24.12 24.12 0 0 1 0-10C2.5 5 4 3.5 6 3.5h12c2 0 3.5 1.5 3.5 3.5a24.12 24.12 0 0 1 0 10c0 2-1.5 3.5-3.5 3.5H6c-2 0-3.5-1.5-3.5-3.5"/><polygon fill="#EA4335" points="10 8 16 12 10 16 10 8"/></svg>`;
+        const iconSlides = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F9BC05" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-presentation"><path d="M2 3h20"/><path d="M2 17h20"/><path d="M2 7h20"/><path d="M12 22v-5"/><path d="m5 17 5 5h4l5-5"/></svg>`;
+        const iconForms = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#34A853" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-list-checks"><path d="m3 14 3 3 7-7"/><path d="m3 21 3-3 7 7"/><path d="M16 17h6"/><path d="M16 10h6"/><path d="M16 3h6"/></svg>`;
+        const iconScholar = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4285F4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-graduation-cap"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.084a1 1 0 0 0 0 1.838l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12v5a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3v-5"/></svg>`;
+
+        // Additional icons for new modules
+        const iconMeet = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1A73E8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-video"><path d="M22 8l-6 4 6 4V8z"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg>`;
+        const iconSites = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#34A853" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-layout"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18"/><path d="M9 4v6"/></svg>`;
+        const iconClassroom = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1A73E8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chalkboard"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M6 19v2"/><path d="M18 19v2"/><circle cx="12" cy="12" r="2"/></svg>`;
+        const iconSpark = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#EA4335" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sparkle"><path d="M12 3v4"/><path d="M12 17v4"/><path d="M3 12h4"/><path d="M17 12h4"/><path d="M5.6 5.6l2.8 2.8"/><path d="M15.6 15.6l2.8 2.8"/><path d="M5.6 18.4l2.8-2.8"/><path d="M15.6 8.4l2.8-2.8"/></svg>`;
+
+        // Icons for new modules
+        const iconImage = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#EA4335" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-image"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>`;
+        const iconResearch = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1A73E8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>`;
+        const iconDrawings = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#34A853" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shapes"><polygon points="5 3 19 3 19 12 5 12 5 3"/><circle cx="12" cy="17" r="4"/></svg>`;
+
+        const iconGoal = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-target"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>`;
+        const iconPractice = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wrench"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94-7.94l-3.76 3.76a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0z"/><path d="M12 20l-4 4"/></svg>`;
+        const iconInteractive = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users-2"><path d="M14 19a6 6 0 0 0-12 0"/><circle cx="8" cy="10" r="4"/><path d="M22 19a6 6 0 0 0-6-6 3 3 0 1 0-3-3"/><path d="M10 2a4 4 0 0 0 0 8"/></svg>`;
+        const iconAssignment = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pen-square"><path d="M11 20H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10"/><path d="M18.5 12.5a2.12 2.12 0 0 1 3 3L17 20l-4 1 1-4Z"/></svg>`;
+        const iconCase = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-briefcase-business"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="M12 18h.01"/><path d="M12 12h.01"/><path d="M12 6h.01"/></svg>`;
+        
+        // --- BILINGUAL MODULE DATA (EXPANDED) ---
+        const bilingualModulesData = [
+            { id: 0, icon: iconG, title: { ru: '1. Введение в Workspace', kk: '1. Workspace-ке кіріспе' }, content: {
+                ru: { 
+                    goal: 'Понять, что такое Google Workspace и какие инструменты доступны для работы.', 
+                    interactive: '<strong>Круглый стол (Обсуждение):</strong> Каждый участник называет **одну проблему** в своей текущей работе и предлагает, как ее может решить **один из инструментов Workspace** (Docs, Sheets, Calendar, Chat).<br> <strong>Задание на визуализацию:</strong> Нарисуйте на доске (или в Docs) "карту" приложений и соедините их стрелками, показывая, как они взаимодействуют и делятся данными.', 
+                    case: 'Тренер получает электронное письмо с приглашением в совместный документ. Участники обсуждают, как можно работать в одном документе одновременно.',
+                    задание: 'Сформулировать одним предложением, почему Google Workspace важен для совместной работы в современном мире.',
+                    практика: '<ul><li>**1. Изучение интерфейса:** Откройте в браузере **7 ключевых приложений** (Gmail, Chat, Calendar, Keep, Drive, Docs, Sheets) в отдельных вкладках.</li><li>**2. Создание рабочего дашборда:** Сгруппируйте вкладки **трех наиболее важных** для вас приложений (например, Gmail, Calendar, Drive) в одну группу вкладок с названием "**Рабочий день**".</li><li>**3. Проверка уведомлений:** Откройте Центр уведомлений Google и убедитесь, что вы видите все последние действия.</li></ul>',
+                    миниТест: { q: 'Какое приложение Google Workspace используется для создания электронных таблиц?', options: ['Docs (Документы)', 'Slides (Презентации)', 'Sheets (Таблицы)'], correct: 2 }
+                },
+                kk: {
+                    goal: 'Google Workspace не екенін және жұмыс істеуге арналған қандай құралдар бар екенін түсіну.',
+                    interactive: '<strong>Дөңгелек үстел (Талқылау):</strong> Әр қатысушы өз жұмысындағы **бір мәселені** атайды және оны **Workspace құралдарының бірі** (Docs, Sheets, Calendar, Chat) қалай шеше алатынын ұсынады.<br> <strong>Визуализация тапсырмасы:</strong> Тақтаға (немесе Docs-та) қосымшалардың "картасын" салып, олардың қалай әрекеттесетінін және деректерді қалай бөлісетінін көрсететін бағыттаушы сызықтармен қосыңыз.',
+                    case: 'Тренер бірлескен құжатқа шақырумен электрондық хат алады. Қатысушылар бір құжатта бір уақытта қалай жұмыс істеуге болатынын талқылайды.',
+                    задание: 'Қазіргі заманғы әлемде Google Workspace неліктен бірлескен жұмыс үшін маңызды екенін бір сөйлеммен тұжырымдаңыз.',
+                    практика: '<ul><li>**1. Интерфейсті зерттеу:** Браузерде **7 негізгі қолданбаны** (Gmail, Chat, Calendar, Keep, Drive, Docs, Sheets) жеке қойындыларда ашыңыз.</li><li>**2. Жұмыс тақтасын құру:** Сіз үшін **ең маңызды үш** қолданбаның (мысалы, Gmail, Calendar, Drive) қойындыларын "**Жұмыс күні**" деп аталатын бір қойындылар тобына біріктіріңіз.</li><li>**3. Хабарландыруларды тексеру:** Google Хабарландыру орталығын ашыңыз және барлық соңғы әрекеттерді көретініңізге көз жеткізіңіз.</li></ul>',
+                    миниТест: { q: 'Электрондық кестелерді жасау үшін Google Workspace-тің қай қолданбасы қолданылады?', options: ['Docs (Құжаттар)', 'Slides (Презентациялар)', 'Sheets (Кестелер)'], correct: 2 }
+                }
+            } },
+            // Module 2
+            { id: 1, icon: iconChrome, title: { ru: '2. Аккаунт и Chrome', kk: '2. Аккаунт және Chrome' }, content: {
+                ru: { 
+                    goal: 'Научиться управлять аккаунтом Google, синхронизировать данные и пользоваться Chrome.', 
+                    interactive: '<strong>Live-переключение:</strong> Участники должны в реальном времени **переключиться** с рабочего профиля Chrome на личный и обратно, демонстрируя смену цветовой темы и набора закладок.<br> <strong>Обсуждение безопасности:</strong> Сравните, как выглядит ваш Workspace, когда вы **не вошли** в аккаунт, и когда **вошли** (обращая внимание на боковую панель).', 
+                    case: 'Настройка двух учетных записей для работы и личного пользования, переключение между ними.',
+                    задание: 'Составьте список из 5 преимуществ, которые дает синхронизация данных в браузере Chrome для рабочего процесса.',
+                    практика: '<ul><li>**1. Управление профилями:** Создайте **два отдельных профиля** Chrome (например, "Work" и "Personal"). Переключайтесь между ними, чтобы увидеть, как различаются настройки.</li><li>**2. Настройка синхронизации:** Убедитесь, что синхронизация включена хотя бы для **закладок** и **истории** в вашем рабочем профиле.</li><li>**3. Настройка поиска:** Измените поисковую систему по умолчанию в одном из профилей на альтернативную (например, DuckDuckGo), а затем верните **Google**.',
+                    миниТест: { q: 'Какая функция Chrome позволяет легко переключаться между рабочими и личными настройками?', options: ['Режимы инкогнито', 'Профили пользователей', 'Закладки'], correct: 1 }
+                },
+                kk: {
+                    goal: 'Google аккаунтын басқаруды, деректерді синхрондауды және Chrome-ды пайдалануды үйрену.',
+                    interactive: '<strong>Тікелей ауысу:</strong> Қатысушылар Chrome-ның жұмыс профилінен жеке профильге және керісінше **нақты уақыт режимінде ауысуы** керек, осылайша түс тақырыбы мен бетбелгілер жинағының өзгеруін көрсетеді.<br> <strong>Қауіпсіздікті талқылау:</strong> Аккаунтқа **кірмеген** кезде және **кірген** кезде (бүйірлік панельге назар аударыңыз) сіздің Workspace-іңіздің қалай көрінетінін салыстырыңыз.',
+                    case: 'Жұмыс пен жеке пайдалану үшін екі аккаунтты орнату, олардың арасында ауысу.',
+                    задание: 'Chrome браузерінде деректерді синхрондау жұмыс процесіне беретін 5 артықшылықтың тізімін жасаңыз.',
+                    практика: '<ul><li>**1. Профильдерді басқару:** Chrome-ның **екі бөлек профилін** жасаңыз (мысалы, "Work" және "Personal"). Параметрлердің қалай өзгеретінін көру үшін олардың арасында ауысыңыз.</li><li>**2. Синхрондауды орнату:** Жұмыс профиліңізде синхрондау кем дегенде **бетбелгілер** мен **тарих** үшін қосулы екеніне көз жеткізіңіз.</li><li>**3. Іздеуді орнату:** Профильдердің бірінде әдепкі іздеу жүйесін баламалыға (мысалы, DuckDuckGo) өзгертіңіз, содан кейін **Google-ді** қайтарыңыз.',
+                    миниТест: { q: 'Chrome-ның қай функциясы жұмыс және жеке параметрлер арасында оңай ауысуға мүмкіндік береді?', options: ['Жасырын режимдер', 'Пайдаланушы профильдері', 'Бетбелгілер'], correct: 1 }
+                }
+            } },
+            // Module 3
+            { id: 2, icon: iconGmail, title: { ru: '3. Gmail и Chat', kk: '3. Gmail және Chat' }, content: { 
+                ru: { 
+                    goal: 'Эффективно использовать Gmail и Google Chat для коммуникаций.', 
+                    interactive: '<strong>Сценарий "Быстрый ответ" (Демо):</strong> Тренер отправляет письмо с темой "Срочный вопрос по проекту". Участник должен отправить **быстрый ответ из Gmail (без открытия Chat)** в соответствующий чат-рум, используя **@упоминание**.<br> <strong>Ролевая игра:</strong> Обмен сообщениями между участниками с использованием **ярлыков, фильтров и упоминаний** для планирования мини-проекта.', 
+                    case: 'Получили письмо с заданием. Нужно ответить и одновременно обсудить детали в Chat, прикрепив документ из Drive.',
+                    задание: 'Напишите 3 правила эффективного использования ярлыков и фильтров в Gmail для организации входящих писем.',
+                    практика: '<ul><li>**1. Автоматизация почты:** Создайте ярлык "**Проект X - Ждет ответа**". Настройте фильтр, который автоматически присваивает этот ярлык всем входящим письмам от адреса-тренера, если в теме есть слово "**Проект X**" и оно не имеет ответа.</li><li>**2. Создание комнаты в Chat:** Создайте новую комнату (пространство) в Google Chat и пригласите туда хотя бы **одного коллегу**.</li><li>**3. Интеграция Chat:** В этой комнате отправьте сообщение с **@упоминанием** коллеги, прикрепив **любой тестовый файл** из вашего Google Drive.</li></ul>',
+                    миниТест: { q: 'Для чего используется символ «@» в Google Chat?', options: ['Для выделения текста', 'Для упоминания конкретного пользователя', 'Для вставки ссылки'], correct: 1 }
+                },
+                kk: {
+                    goal: 'Gmail және Google Chat-ты қарым-қатынас үшін тиімді пайдалану.',
+                    interactive: '<strong>"Жылдам жауап" сценарийі (Демо):</strong> Тренер "Жоба бойынша шұғыл сұрақ" тақырыбымен хат жібереді. Қатысушы **Gmail-ден (Chat-ты ашпай)** сәйкес чат бөлмесіне **@ескертуді** қолдана отырып, **жылдам жауап** жіберуі керек.<br> <strong>Рөлдік ойын:</strong> Мини-жобаны жоспарлау үшін **белгілерді, сүзгілерді және ескертулерді** қолдана отырып, қатысушылар арасында хабар алмасу.',
+                    case: 'Тапсырмамен хат алдыңыз. Жауап беру және сонымен бірге Drive-дағы құжатты тіркеп, Chat-та мәліметтерді талқылау қажет.',
+                    задание: 'Кіріс хаттарды ұйымдастыру үшін Gmail-де белгілер мен сүзгілерді тиімді пайдаланудың 3 ережесін жазыңыз.',
+                    практика: '<ul><li>**1. Поштаны автоматтандыру:** Создайте ярлык "**Х жобасы - Жауап күтуде**". Настройте фильтр, который автоматически присваивает этот ярлык всем входящим письмам от адреса-тренера, если в теме есть слово "**Х жобасы**" и оно не имеет ответа.</li><li>**2. Создание комнаты в Chat:** Создайте новую комнату (пространство) в Google Chat и пригласите туда хотя бы **одного коллегу**.</li><li>**3. Интеграция Chat:** В этой комнате отправьте сообщение с **@упоминанием** коллеги, прикрепив **любой тестовый файл** из вашего Google Drive.</li></ul>',
+                    миниТест: { q: 'Google Chat-та «@» символы не үшін қолданылады?', options: ['Мәтінді бөліп көрсету үшін', 'Нақты пайдаланушыны еске түсіру үшін', 'Сілтеме қою үшін'], correct: 1 }
+                }
+            } },
+            // Module 4
+            { id: 3, icon: iconCalendar, title: { ru: '4. Google Calendar', kk: '4. Google Calendar' }, content: { 
+                ru: { 
+                    goal: 'Научиться создавать события, управлять календарями и делиться расписанием.', 
+                    interactive: '<strong>Поиск свободного слота (Live):</strong> Участники используют функцию **"Найти время"** для планирования 15-минутной встречи между тремя условными коллегами, демонстрируя, как Calendar показывает доступность каждого.<br> <strong>Практика RSVP:</strong> Ответьте на приглашение на мероприятие, добавив заметку о своей доступности и **предложив новое время**.', 
+                    case: 'Организация тренинга с несколькими тренерами и участниками. Как согласовать время и место онлайн-встречи.',
+                    задание: 'Опишите, в чем заключается ключевая разница между «Событием» (Event) и «Задачей» (Task) в Google Calendar.',
+                    практика: '<ul><li>**1. Планирование встречи:** Создайте событие на следующую неделю, добавьте **3 гостя** и включите **видеоконференцию Google Meet**.</li><li>**2. Повторяющееся событие:** Установите это событие как **ежемесячное** (например, "Отчет") и настройте уведомление **за 1 час** до начала.</li><li>**3. Использование задач:** Создайте новую **Задачу** ("Подготовить повестку дня"), которая привязана к созданному вами событию.</li></ul>',
+                    миниТест: { q: 'Какую функцию вы используете, чтобы найти удобное время встречи для всех приглашенных?', options: ['Quick Add', 'Time Suggestion', 'View Tasks'], correct: 1 }
+                },
+                kk: {
+                    goal: 'Іс-шараларды жасауды, күнтізбелерді басқаруды және кестемен бөлісуді үйрену.',
+                    interactive: '<strong>Бос уақыт аралығын іздеу (Тікелей):</strong> Қатысушылар Calendar әркімнің қолжетімділігін қалай көрсететінін көрсете отырып, үш шартты әріптес арасында 15 минуттық кездесуді жоспарлау үшін **"Уақытты табу"** функциясын қолданады.<br> <strong>RSVP практикасы:</strong> Іс-шараға шақыруға жауап беріңіз, өзіңіздің қолжетімділігіңіз туралы ескерту қосыңыз және **жаңа уақытты ұсыныңыз**.',
+                    case: 'Жұмыс пен жеке пайдалану үшін екі аккаунтты орнату, олардың арасында ауысу.',
+                    задание: 'Google Calendar-дағы «Оқиға» (Event) мен «Тапсырма» (Task) арасындағы негізгі айырмашылық неде екенін сипаттаңыз.',
+                    практика: '<ul><li>**1. Кездесуді жоспарлау:** Келесі аптаға оқиға жасаңыз, **3 қонақ** қосыңыз және **Google Meet бейнеконференциясын** қосыңыз.</li><li>**2. Қайталанатын оқиға:** Бұл оқиғаны **ай сайынғы** ретінде орнатыңыз (мысалы, "Есеп") және басталуына **1 сағат қалғанда** хабарландыруды орнатыңыз.</li><li>**3. Тапсырмаларды пайдалану:** Сіз жасаған оқиғаға байланысты жаңа **Тапсырма** ("Күн тәртібін дайындау") жасаңыз.</li></ul>',
+                    миниТест: { q: 'Барлық шақырылғандар үшін қолайлы кездесу уақытын табу үшін қандай функцияны қолданасыз?', options: ['Quick Add', 'Time Suggestion', 'View Tasks'], correct: 1 }
+                }
+            } },
+            // Module 5
+            { id: 4, icon: iconKeep, title: { ru: '5. Задачи и Keep', kk: '5. Тапсырмалар және Keep' }, content: { 
+                ru: { 
+                    goal: 'Управлять задачами и заметками, синхронизированными между устройствами.', 
+                    interactive: '<strong>Общий список покупок (Коллективная работа):</strong> Создайте общую заметку-список "**Закупки для офиса**" в Keep. Один участник добавляет 3 позиции, второй ставит им **напоминание по местоположению** (например, "Офис"), а третий ставит **метку (ярлык) "Срочно"**.<br> <strong>Демонстрация интеграции:</strong> Покажите, как заметка Keep интегрируется в **боковую панель** Gmail или Calendar.', 
+                    case: 'Подготовка программы мероприятия: раздельные блоки для теоретической части и практики.',
+                    задание: 'Предложите структуру заметок Keep для личного тайм-менеджмента, используя как минимум 3 ярлыка и 2 цвета.',
+                    практика: '<ul><li>**1. Заметки с напоминанием:** Создайте заметку-список "**Подготовка к тренингу**" с 5 пунктами.</li><li>**2. Настройка и оформление:** Присвойте этой заметке **зеленый цвет** и добавьте **напоминание по времени** (например, завтра в 9:00).</li><li>**3. Совместная работа:** Поделитесь этой заметкой-списком с коллегой и попросите его **отметить один пункт как выполненный**.',
+                    миниТест: { q: 'Как можно упорядочить заметки в Google Keep?', options: ['Только по дате создания', 'С помощью ярлыков и цветов', 'Только по алфавиту'], correct: 1 }
+                },
+                kk: {
+                    goal: 'Құрылғылар арасында синхрондалған тапсырмалар мен жазбаларды басқару.',
+                    interactive: '<strong>Жалпы сатып алу тізімі (Ұжымдық жұмыс):</strong> Keep-те "**Кеңсеге арналған сатып алулар**" жалпы жазба-тізімін жасаңыз. Бір қатысушы 3 позицияны қосады, екіншісі оларға **орналасқан жері бойынша еске салғыш** (мысалы, "Кеңсе") қояды, ал үшіншісі **"Шұғыл" белгісін (ярлық)** қояды.<br> <strong>Интеграцияны көрсету:</strong> Keep жазбасы Gmail немесе Calendar-дың **бүйірлік панеліне** қалай біріктірілгенін көрсетіңіз.',
+                    case: 'Іс-шара бағдарламасын дайындау: теориялық бөлім мен практикаға арналған бөлек блоктар.',
+                    задание: 'Кем дегенде 3 белгі мен 2 түсті қолдана отырып, жеке уақытты басқаруға арналған Keep жазбаларының құрылымын ұсыныңыз.',
+                    практика: '<ul><li>**1. Еске салғыштары бар жазбалар:** 5 тармақтан тұратын "**Тренингке дайындық**" жазба-тізімін жасаңыз.</li><li>**2. Реттеу және безендіру:** Бұл жазбаға **жасыл түс** беріңіз және **уақыт бойынша еске салғыш** (мысалы, ертең 9:00-де) қосыңыз.</li><li>**3. Бірлескен жұмыс:** Бұл жазба-тізіммен әріптесіңізбен бөлісіңiz және одан **бір тармақты орындалған деп белгілеуін** сұраңыз.',
+                    миниТест: { q: 'Google Keep-те жазбаларды қалай реттеуге болады?', options: ['Тек жасалған күні бойынша', 'Белгілер мен түстер арқылы', 'Тек алфавит бойынша'], correct: 1 }
+                }
+            } },
+            // Module 6
+            { id: 5, icon: iconDrive, title: { ru: '6. Введение в Drive', kk: '6. Drive-қа кіріспе' }, content: { 
+                ru: { 
+                    goal: 'Понимать структуру Drive и работать с файлами.', 
+                    interactive: '<strong>Эстафета доступа (Chain of Access):</strong> Создайте документ. Установите доступ "**Редактирование**" для Участника А. Участник А меняет доступ Участнику Б на "**Комментатор**". Участник Б пытается отредактировать документ и видит, что может только комментировать.<br> <strong>Углубленный поиск:</strong> Найдите в "**Доступные мне**" документ, отфильтровав его по **типу ("Таблица")** и **имени владельца**.', 
+                    case: 'Тренер загружает учебные материалы, делится ссылкой с участниками, и все вносят правки в один документ.',
+                    задание: 'Объясните разницу между тремя основными уровнями доступа к файлу/папке в Google Drive: «Читатель», «Комментатор» и «Редактор».',
+                    практика: '<ul><li>**1. Создание структуры:** Создайте в "Мой Диск" папку "**Архив 2024**". Внутри создайте подпапку "**Шаблоны**".</li><li>**2. Загрузка файла:** Загрузите любой **тестовый документ** (например, изображение или PDF) в папку "Шаблоны".</li><li>**3. Управление доступом:** Настройте доступ к документу в папке "Шаблоны" как "**Комментатор**" по ссылке для всех, у кого есть ссылка.</li></ul>',
+                    миниТест: { q: 'В Google Drive, где находятся файлы, которыми с вами поделились другие пользователи?', options: ['В Мой Диск', 'В Доступные мне', 'В Недавние'], correct: 1 }
+                },
+                kk: {
+                    goal: 'Drive құрылымын түсіну және файлдармен жұмыс істеу.',
+                    interactive: '<strong>Қолжетімділік эстафетасы (Chain of Access):</strong> Құжат жасаңыз. А қатысушысына "**Өңдеу**" қолжетімділігін орнатыңыз. А қатысушысы В қатысушысына қолжетімділікті "**Түсініктеме берушіге**" өзгертеді. В қатысушысы құжатты өңдеуге тырысады және тек түсініктеме бере алатынын көреді.<br> <strong>Тереңдетілген іздеу:</strong> "**Маған қолжетімді**" бөлімінен құжатты **түрі ("Кесте")** және **иесінің аты** бойынша сүзіп, табыңыз.',
+                    case: 'Тренер оқу материалдарын жүктеп салады, қатысушылармен сілтемемен бөліседі, және барлығы бір құжатқа өзгерістер енгізеді.',
+                    задание: 'Google Drive-дағы файлға/қалтаға қол жеткізудің үш негізгі деңгейінің арасындағы айырмашылықты түсіндіріңіз: «Оқырман», «Түсініктеме беруші» және «Редактор».',
+                    практика: '<ul><li>**1. Құрылымды жасау:** "Менің Дискімде" "**Архив 2024**" қалтасын жасаңыз. Ішінде "**Үлгілер**" қосалқы қалтасын жасаңыз.</li><li>**2. Файл жүктеу:** "Үлгілер" қалтасына кез келген **тест құжатын** (мысалы, кескін немесе PDF) жүктеңіз.</li><li>**3. Қолжетімділікті басқару:** "Үлгілер" қалтасындағы құжатқа сілтемесі бар барлық адамдар үшін сілтеме арқылы "**Түсініктеме беруші**" ретінде қолжетімділікті орнатыңыз.</li></ul>',
+                    миниТест: { q: 'Google Drive-да басқа пайдаланушылар сізбен бөліскен файлдар қайда орналасқан?', options: ['Менің Дискімде', 'Маған қолжетімді', 'Соңғы'], correct: 1 }
+                }
+            } },
+            // Module 7
+            { id: 6, icon: iconSheets, title: { ru: '7. Google Sheets', kk: '7. Google Sheets' }, content: { 
+                ru: { 
+                    goal: 'Основы работы с таблицами: формулы, фильтры, графики.', 
+                    interactive: '<strong>Фильтрация данных (Speed Run):</strong> Предоставьте таблицу с 10 строками (например, список расходов). Участники используют **временные фильтры** для быстрого отображения только тех строк, которые соответствуют определенному условию.<br> <strong>Совместная формула:</strong> Двое участников одновременно вносят данные в один столбец, а третий в ячейке внизу вводит формулу **SUM()**, которая автоматически обновляет результат.', 
+                    case: 'Подсчёт бюджета мероприятия: добавление расходов, формулы для сумм, графики для визуализации.',
+                    задание: 'Придумайте, как можно использовать Google Sheets для отслеживания личных целей по здоровью и фитнесу (2-3 метрики).',
+                    практика: '<ul><li>**1. Бюджетирование:** Введите в ячейки A1, A2, A3 числовые значения расходов (например, 1000, 2500, 500). В ячейке A4 используйте формулу **`=SUM(A1:A3)`** для подсчета итоговой суммы.</li><li>**2. Сортировка и фильтр:** Примените к данным простейший **фильтр**.</li><li>**3. Визуализация:** На основе ячеек A1-A3 и A4 создайте **круговую диаграмму** и настройте ее заголовок.</li></ul>',
+                    миниТест: { q: 'Какая формула используется для суммирования диапазона ячеек в Google Sheets?', options: ['TOTAL()', 'ADD()', 'SUM()'], correct: 2 }
+                },
+                kk: {
+                    goal: 'Кестелермен жұмыс негіздері: формулалар, сүзгілер, графиктер.',
+                    interactive: '<strong>Деректерді сүзу (Speed Run):</strong> 10 жолы бар кесте (мысалы, шығындар тізімі) беріңіз. Қатысушылар белгілі бір шартқа сәйкес келетін жолдарды ғана жылдам көрсету үшін **уақытша сүзгілерді** пайдаланады.<br> <strong>Бірлескен формула:</strong> Екі қатысушы бір уақытта бір бағанға деректерді енгізеді, ал үшіншісі төменгі ұяшықта нәтижені автоматты түрде жаңартатын **SUM()** формуласын енгізеді.',
+                    case: 'Іс-шара бюджетін есептеу: шығындарды қосу, сомаларға арналған формулалар, визуализацияға арналған графиктер.',
+                    задание: 'Жеке денсаулық пен фитнес мақсаттарын бақылау үшін Google Sheets-ті қалай пайдалануға болатынын ойлаңыз (2-3 метрика).',
+                    практика: '<ul><li>**1. Бюджеттеу:** A1, A2, A3 ұяшықтарына шығындардың сандық мәндерін (мысалы, 1000, 2500, 500) енгізіңіз. A4 ұяшығында жалпы соманы есептеу үшін **`=SUM(A1:A3)`** формуласын қолданыңыз.</li><li>**2. Сұрыптау және сүзгі:** Деректерге қарапайым **сүзгіні** қолданыңыз.</li><li>**3. Визуализация:** A1-A3 және A4 ұяшықтары негізінде **дөңгелек диаграмма** жасаңыз және оның тақырыбын орнатыңыз.</li></ul>',
+                    миниТест: { q: 'Google Sheets-те ұяшықтар диапазонын қосу үшін қандай формула қолданылады?', options: ['TOTAL()', 'ADD()', 'SUM()'], correct: 2 }
+                }
+            } },
+            // NEW MODULES START HERE
+            { id: 7, icon: iconDocs, title: { ru: '8. Docs – Совместная работа', kk: '8. Docs – Бірлескен жұмыс' }, content: {
+                ru: { 
+                    goal: 'Эффективно управлять доступом, отслеживать изменения и оставлять конструктивные комментарии в Docs.', 
+                    interactive: '<strong>Спорный момент:</strong> Участник А выделяет абзац и оставляет комментарий "**Тут нужна ссылка на источник**". Участник Б отвечает на комментарий, а Участник С **завершает обсуждение**.<br> <strong>Восстановление:</strong> Измените текст, затем перейдите в **Историю версий** и восстановите предыдущую версию, показывая, что можно отменить недавние изменения.', 
+                    case: 'Несколько преподавателей работают над созданием единого учебного плана. Один предлагает новый раздел, другой просит внести правки, а третий одобряет итоговый вариант.',
+                    задание: 'Опишите пошагово, как предоставить доступ к документу только **одному конкретному человеку** с правами «Комментатор».',
+                    практика: '<ul><li>**1. Настройка доступа:** Создайте новый Docs, переименуйте его. Настройте доступ "**Ограниченный**" и добавьте **одного коллегу** с ролью **«Редактор»**.</li><li>**2. Комментирование:** Вставьте в документ 3 абзаца текста. Попросите коллегу добавить **комментарий** к первому абзацу и **предложить правку** во втором.</li><li>**3. Отслеживание:** Проверьте **Историю версий**, чтобы увидеть изменения, внесенные коллегой.</li></ul>',
+                    миниТест: { q: 'Какая роль позволяет только оставлять комментарии, но не менять текст?', options: ['Читатель', 'Комментатор', 'Редактор'], correct: 1 }
+                },
+                kk: {
+                    goal: 'Docs-та қолжетімділікті тиімді басқару, өзгерістерді бақылау және конструктивті түсініктемелер қалдыру.',
+                    interactive: '<strong>Даулы сәт:</strong> А қатысушысы абзацты белгілеп, "**Бұл жерде дереккөзге сілтеме қажет**" деген түсініктеме қалдырады. В қатысушысы түсініктемеге жауап береді, ал С қатысушысы **талқылауды аяқтайды**.<br> <strong>Қалпына келтіру:</strong> Мәтінді өзгертіңіз, содан кейін **Нұсқалар тарихына** өтіңіз және соңғы өзгерістерді болдырмауға болатынын көрсете отырып, алдыңғы нұсқаны қалпына келтіріңіз.',
+                    case: 'Бірнеше оқытушылар бірыңғай оқу жоспарын құрумен жұмыс істейді. Біреуі жаңа бөлімді ұсынады, екіншісі өзгерістер енгізуді сұрайды, ал үшіншісі қорытынды нұсқаны мақұлдайды.',
+                    задание: 'Құжатқа тек **бір нақты адамға** «Түсініктеме беруші» құқығымен қолжетімділікті беру жолын қадамдап сипаттаңыз.',
+                    практика: '<ul><li>**1. Қолжетімділікті орнату:** Жаңа Docs жасаңыз, оның атын өзгертіңіз. Қолжетімділікті "**Шектеулі**" деп орнатыңыз және **бір әріптесіңізді** **«Редактор»** рөлімен қосыңыз.</li><li>**2. Түсініктеме беру:** Құжатқа 3 абзац мәтін қосыңыз. Әріптесіңізден бірінші абзацқа **түсініктеме** қосуды және екінші абзацқа **түзетуді ұсынуды** сұраңыз.</li><li>**3. Бақылау:** Әріптесіңіз енгізген өзгерістерді көру үшін **Нұсқалар тарихын** тексеріңіз.</li></ul>',
+                    миниТест: { q: 'Қай рөл тек түсініктеме қалдыруға мүмкіндік береді, бірақ мәтінді өзгертуге болмайды?', options: ['Оқырман', 'Түсініктеме беруші', 'Редактор'], correct: 1 }
+                }
+            } },
+            // Module 9: YouTube Integration (NEW)
+            { id: 8, icon: iconYouTube, title: { ru: '9. YouTube – Интеграция видео', kk: '9. YouTube – Бейне интеграциясы' }, content: {
+                ru: { 
+                    goal: 'Находить, сохранять образовательные видео и интегрировать их в рабочие документы.', 
+                    interactive: '<strong>Создание плейлиста:</strong> Найдите 3 образовательных видео по вашей теме и создайте из них **новый плейлист** под названием "**Мои ресурсы**".<br> <strong>Интеграция:</strong> Скопируйте ссылку на этот плейлист и вставьте ее в новый Docs, используя функцию **"Вставка > Ссылка"** для красивого отображения названия видео.', 
+                    case: 'Тренер собирает список видео-инструкций для курса и хочет легко поделиться им с учениками в одном документе.',
+                    задание: 'Опишите, как вставить видео из YouTube в Google Slides, чтобы оно начало воспроизводиться **с определенной секунды**.',
+                    практика: '<ul><li>**1. Поиск:** Найдите на YouTube видео-урок, связанный с **Google Sheets**, длительностью не более **10 минут**.</li><li>**2. Сохранение:** Добавьте это видео в свой плейлист "**Смотреть позже**".</li><li>**3. Вставка в Docs:** Создайте Docs, вставьте ссылку на это видео, используя команду **@Youtube** для быстрого создания **смарт-чипа** с названием видео.</li></ul>',
+                    миниТест: { q: 'Какая функция позволяет организовать набор видео для последовательного просмотра?', options: ['Канал', 'Плейлист', 'Подписка'], correct: 1 }
+                },
+                kk: {
+                    goal: 'Оқу бейнелерін табу, сақтау және оларды жұмыс құжаттарына біріктіру.',
+                    interactive: '<strong>Ойнату тізімін жасау:</strong> Өзіңіздің тақырыбыңыз бойынша 3 оқу бейнесін тауып, олардан "**Менің ресурстарым**" деп аталатын **жаңа ойнату тізімін** жасаңыз.<br> <strong>Интеграция:</strong> Осы ойнату тізіміне сілтемені көшіріп, оны жаңа Docs-қа **"Кірістіру > Сілтеме"** функциясын пайдаланып, бейненің атауы әдемі көрінуі үшін қойыңыз.',
+                    case: 'Тренер курсқа арналған бейне нұсқаулықтар тізімін жинап, оны бір құжатта оқушылармен оңай бөліскісі келеді.',
+                    задание: 'YouTube-тан бейнені Google Slides-қа **белгілі бір секундтан бастап** ойнатылатындай етіп қалай кірістіруге болатынын сипаттаңыз.',
+                    практика: '<ul><li>**1. Іздеу:** YouTube-тан **Google Sheets-ке** қатысты, ұзақтығы **10 минуттан** аспайтын бейне сабақты табыңыз.</li><li>**2. Сақтау:** Бұл бейнені "**Кейін көру**" ойнату тізіміңізге қосыңыз.</li><li>**3. Docs-қа кірістіру:** Docs жасаңыз, бейненің атауымен **смарт-чипті** жылдам жасау үшін **@Youtube** командасын пайдаланып, осы бейнеге сілтемені қойыңыз.</li></ul>',
+                    миниТест: { q: 'Қандай функция бейнелер жинағын дәйекті көру үшін ұйымдастыруға мүмкіндік береді?', options: ['Арна', 'Ойнату тізімі', 'Жазылым'], correct: 1 }
+                }
+            } },
+            // Module 10: Google Slides Collaboration (NEW)
+            { id: 9, icon: iconSlides, title: { ru: '10. Slides – Совместная презентация', kk: '10. Slides – Бірлескен презентация' }, content: {
+                ru: { 
+                    goal: 'Создавать, оформлять и совместно редактировать презентации, включая мультимедийные элементы.', 
+                    interactive: '<strong>Командное оформление:</strong> Участник А создает титульный слайд, Участник Б добавляет изображение на второй слайд, а Участник С вставляет **видео с YouTube** на третий слайд. Все работают **одновременно**.<br> <strong>Мастер слайдов:</strong> Покажите, как изменить **Master Slide** (Образец слайдов), чтобы применить новый фирменный стиль ко всем текущим и будущим слайдам.', 
+                    case: 'Команда готовит отчет для руководства. Каждый член команды отвечает за свой раздел и должен быстро добавить свой контент и графики.',
+                    задание: 'Сравните процесс вставки изображения с Google Drive и процесс вставки изображения с локального компьютера в Slides (по 2 шага для каждого).',
+                    практика: '<ul><li>**1. Создание и тема:** Создайте новую презентацию и выберите для нее **светлую тему оформления**.</li><li>**2. Вставка мультимедиа:** На второй слайд добавьте **любое изображение** с вашего Drive. На третий слайд вставьте **короткий клип YouTube**.</li><li>**3. Комментарий:** На титульном слайде оставьте **комментарий** с просьбой к коллеге проверить заголовок.</li></ul>',
+                    миниТест: { q: 'Какой элемент Slides позволяет быстро применить единый стиль ко всей презентации?', options: ['Фоновый рисунок', 'Образец слайдов', 'Инструмент "Копировать формат"'], correct: 1 }
+                },
+                kk: {
+                    goal: 'Мультимедиялық элементтерді қоса алғанда, презентацияларды жасау, безендіру және бірлесіп өңдеу.',
+                    interactive: '<strong>Командалық безендіру:</strong> А қатысушысы титулдық слайдты жасайды, В қатысушысы екінші слайдқа сурет қосады, ал С қатысушысы үшінші слайдқа **YouTube-тан бейне** қояды. Барлығы **бір уақытта** жұмыс істейді.<br> <strong>Слайд мастері:</strong> Жаңа фирмалық стильді барлық ағымдағы және болашақ слайдтарға қолдану үшін **Master Slide** (Слайд үлгісін) қалай өзгертуге болатынын көрсетіңіз.',
+                    case: 'Команда басшылыққа арналған есеп дайындауда. Әрбір команда мүшесі өз бөліміне жауап береді және өз мазмұны мен графиктерді тез қосуы керек.',
+                    задание: 'Google Drive-тан суретті кірістіру процесін және жергілікті компьютерден суретті Slides-қа кірістіру процесін салыстырыңыз (әрқайсысы үшін 2 қадам).',
+                    практика: '<ul><li>**1. Жасау және тақырып:** Жаңа презентация жасаңыз және оған **ашық безендіру тақырыбын** таңдаңыз.</li><li>**2. Мультимедианы кірістіру:** Екінші слайдқа Drive-дағы **кез келген суретті** қосыңыз. Үшінші слайдқа **қысқа YouTube клипін** қойыңыз.</li><li>**3. Түсініктеме:** Титулдық слайдқа әріптесіңізден тақырыпты тексеруді сұрайтын **түсініктеме** қалдырыңыз.</li></ul>',
+                    миниТест: { q: 'Slides-тің қай элементі бүкіл презентацияға бірыңғай стильді жылдам қолдануға мүмкіндік береді?', options: ['Фондық сурет', 'Слайдтар үлгісі', '"Пішімді көшіру" құралы'], correct: 1 }
+                }
+            } },
+            // Module 11: Google Forms Test (NEW)
+            { id: 10, icon: iconForms, title: { ru: '11. Forms – Тестирование', kk: '11. Forms – Тестілеу' }, content: {
+                ru: { 
+                    goal: 'Создавать тесты с автоматической проверкой, используя разные типы вопросов.', 
+                    interactive: '<strong>Настройка ключа:</strong> Создайте 3 вопроса (Один ответ, Несколько ответов, Текст). Для первого вопроса настройте **ключ ответа** и назначьте **1 балл**.<br> <strong>Отправка:</strong> Создайте тестовый ответ на свою форму, чтобы увидеть, как автоматически формируются **сводные данные** в разделе "Ответы".', 
+                    case: 'Преподавателю необходимо провести быстрое входное тестирование для 20 студентов и сразу получить статистику по ответам.',
+                    задание: 'Объясните, почему для теста с единственным правильным ответом лучше использовать тип вопроса «Один из списка» (Multiple Choice), а не «Флажки» (Checkboxes).',
+                    практика: '<ul><li>**1. Настройка теста:** Создайте новую Forms. Перейдите в **Настройки** и включите режим **«Тест»** (Quiz).</li><li>**2. Вопросы:** Добавьте вопрос типа **«Один из списка»** (3 варианта, 1 верный), вопрос типа **«Флажки»** (4 варианта, 2 верных) и вопрос типа **«Текст»**.</li><li>**3. Автоматическая проверка:** Настройте **ключи ответов** для вопросов «Один из списка» и «Флажки», назначив им **по 2 балла** каждому.</li></ul>',
+                    миниТест: { q: 'Где в Google Forms настраивается автоматическая проверка и баллы за вопросы?', options: ['Вкладка "Ответы"', 'Вкладка "Настройки"', 'На вкладке "Вопросы" в ключе ответа'], correct: 2 }
+                },
+                kk: {
+                    goal: 'Сұрақтардың әртүрлі түрлерін пайдалана отырып, автоматты тексерумен тесттер жасау.',
+                    interactive: '<strong>Кілтті орнату:</strong> 3 сұрақ жасаңыз (Бір жауап, Бірнеше жауап, Мәтін). Бірінші сұрақ үшін **жауап кілтін** орнатыңыз және **1 балл** тағайындаңыз.<br> <strong>Жіберу:</strong> "Жауаптар" бөлімінде **жинақтық деректердің** автоматты түрде қалай қалыптасатынын көру үшін өз формаңызға тест жауабын жасаңыз.',
+                    case: 'Оқытушыға 20 студентке жылдам кіріспе тестілеу жүргізу және жауаптар бойынша статистиканы бірден алу қажет.',
+                    задание: 'Неліктен жалғыз дұрыс жауабы бар тест үшін «Тізімнен біреу» (Multiple Choice) сұрақ түрін, ал «Құсбелгілерді» (Checkboxes) емес, пайдаланған дұрыс екенін түсіндіріңіз.',
+                    практика: '<ul><li>**1. Тестті орнату:** Жаңа Forms жасаңыз. **Параметрлерге** өтіп, **«Тест»** (Quiz) режимін қосыңыз.</li><li>**2. Сұрақтар:** Добавьте вопрос типа **«Тізімнен біреу»** (3 нұсқа, 1 дұрыс), вопрос типа **«Құсбелгілер»** (4 нұсқа, 2 дұрыс) и вопрос типа **«Мәтін»**.</li><li>**3. Автоматты тексеру:** «Тізімнен біреу» және «Құсбелгілер» сұрақтары үшін **жауап кілттерін** орнатыңыз, олардың әрқайсысына **2 баллдан** тағайындаңыз.</li></ul>',
+                    миниТест: { q: 'Google Forms-да автоматты тексеру және сұрақтар үшін ұпайлар қайда орнатылады?', options: ['"Жауаптар" қойындысы', '"Параметрлер" қойындысы', '"Сұрақтар" қойындысындағы жауап кілтінде'], correct: 2 }
+                }
+            } },
+            // Module 12: Google Scholar (NEW)
+            { id: 11, icon: iconScholar, title: { ru: '12. Google Scholar', kk: '12. Google Scholar' }, content: {
+                ru: { 
+                    goal: 'Научиться находить надежные академические источники для исследований и учебных работ.', 
+                    interactive: '<strong>Speed Search Challenge:</strong> Кто первым найдет наиболее цитируемую статью на тему "**machine learning in finance**", опубликованную **после 2020 года**?<br> <strong>Citation Relay:</strong> Найдите статью, скопируйте цитату в формате **APA** и вставьте ее в общий Google Docs. Следующий участник должен найти статью, которая цитирует первую, и добавить ее цитату.', 
+                    case: 'Студент пишет курсовую работу и ему необходимо составить библиографию из авторитетных источников, избегая блогов и новостных сайтов. Он использует Google Scholar, чтобы найти основополагающие работы и отследить их цитирование для понимания развития темы.',
+                    задание: 'Найдите три рецензируемые статьи по теме "**дистанционное образование**". Для каждой предоставьте правильно отформатированную цитату в стиле **APA** и краткую аннотацию в одно предложение.',
+                    практика: '<ul><li>**1. Поиск по автору:** Найдите все публикации автора **"Geoffrey Hinton"**.</li><li>**2. Сохранение в библиотеку:** Сохраните **две наиболее релевантные** для вас статьи в свою личную библиотеку, нажав на иконку **звёздочки (⭐)**.</li><li>**3. Получение цитаты:** Для одной из сохраненных статей скопируйте готовую цитату в формате **APA**, нажав на иконку **кавычек (")**.</li></ul> ',
+                    миниТест: { q: 'Что означает число в разделе "Цитируется" (Cited by) под результатом поиска?', options: ['Количество страниц в статье', 'Сколько раз на эту статью сослались другие ученые', 'Рейтинг автора'], correct: 1 }
+                },
+                kk: {
+                    goal: 'Зерттеулер мен оқу жұмыстары үшін сенімді академиялық дереккөздерді табуды үйрену.',
+                    interactive: '<strong>Speed Search Challenge:</strong> "**machine learning in finance**" тақырыбы бойынша **2020 жылдан кейін** жарияланған ең көп сілтеме жасалған мақаланы кім бірінші табады?<br> <strong>Citation Relay:</strong> Мақаланы табыңыз, **APA** форматындағы дәйексөзді көшіріп, оны жалпы Google Docs-қа қойыңыз. Келесі қатысушы бірінші мақалаға сілтеме жасайтын мақаланы тауып, оның дәйексөзін қосуы керек.',
+                    case: 'Студент курстық жұмыс жазып жатыр және оған блогтар мен жаңалықтар сайттарын болдырмай, беделді дереккөздерден библиография құрастыру қажет. Ол негізгі жұмыстарды табу және тақырыптың дамуын түсіну үшін олардың сілтемелерін бақылау үшін Google Scholar-ды пайдаланады.',
+                    задание: '"**қашықтан оқыту**" тақырыбы бойынша үш рецензияланған мақаланы табыңыз. Әрқайсысы үшін **APA** стилінде дұрыс пішімделген дәйексөзді және бір сөйлемнен тұратын қысқаша аннотацияны ұсыныңыз.',
+                    практика: '<ul><li>**1. Автор бойынша іздеу:** "**Geoffrey Hinton**" авторының барлық жарияланымдарын табыңыз.</li><li>**2. Кітапханаға сақтау:** Сіз үшін **ең өзекті екі** мақаланы **жұлдызша (⭐)** белгішесін басу арқылы жеке кітапханаңызға сақтаңыз.</li><li>**3. Дәйексөзді алу:** Сақталған мақалалардың бірі үшін **тырнақша (")** белгішесін басу арқылы **APA** форматындағы дайын дәйексөзді көшіріңіз.</li></ul> ',
+                    миниТест: { q: 'Іздеу нәтижесінің астындағы "Сіленген" (Cited by) бөліміндегі сан нені білдіреді?', options: ['Мақаладағы беттер саны', 'Бұл мақалаға басқа ғалымдар қанша рет сілтеме жасағанын', 'Автордың рейтингі'], correct: 1 }
+                }
+            } }
+            ,
+            // 13: Google Meet (new)
+            { id: 12, icon: iconMeet, title: { ru: '13. Google Meet', kk: '13. Google Meet' }, content: {
+                ru: {
+                    goal: 'Создавать встречи, приглашать участников, делиться экраном и проводить короткие презентации.',
+                    interactive: '<strong>Практикум 2 минуты:</strong> Создайте встречу, пригласите соседа по ссылке и включите <em>Представить сейчас → Весь экран</em> для мини-презентации.',
+                    case: 'Команда собирается на ежедневный стендап. Нужно быстро начать встречу и показать прогресс на экране.',
+                    задание: 'Создайте встречу на сегодня, пригласите двух коллег и включите демонстрацию экрана. Продолжительность — 2 минуты.',
+                    практика: '<ul><li><strong>1. Создать встречу:</strong> meet.google.com → Новая встреча → Для позже → скопируйте ссылку.</li><li><strong>2. Пригласить:</strong> Отправьте ссылку в Gmail/Chat или через Люди → Пригласить.</li><li><strong>3. Демонстрация:</strong> Встреча → Представить сейчас → Весь экран/Окно/Вкладка.</li></ul>',
+                    миниТест: { q: 'Где включается демонстрация экрана в Meet?', options: ['Люди → Добавить', 'Представить сейчас', 'Настройки → Видео'], correct: 1 },
+                    video: 'https://www.youtube.com/embed/g36my1Q9PKs'
+                },
+                kk: {
+                    goal: 'Кездесулерді құру, қатысушыларды шақыру, экранмен бөлісу және қысқа презентация өткізу.',
+                    interactive: '<strong>2 минут практикумы:</strong> Кездесу жасаңыз, көршіңізді сілтемемен шақырыңыз және <em>Қазір көрсету → Толық экран</em> қосып мини‑презентация жасаңыз.',
+                    case: 'Топ күнделікті стендапқа жиналады. Кездесуді жылдам бастап, экранда прогресті көрсету қажет.',
+                    задание: 'Бүгінге кездесу жасаңыз, екі әріптесті шақырыңыз және экран көрсетуді қосыңыз. Ұзақтығы — 2 минут.',
+                    практика: '<ul><li><strong>1. Кездесу:</strong> meet.google.com → Жаңа кездесу → Кейінге → сілтемені көшіріңіз.</li><li><strong>2. Шақыру:</strong> Сілтемені Gmail/Chat арқылы жіберіңіз немесе Адамдар → Шақыру арқылы қосыңыз.</li><li><strong>3. Көрсету:</strong> Кездесу → Қазір көрсету → Толық экран/Терезе/Қойынды.</li></ul>',
+                    миниТест: { q: 'Meet ішінде экранмен бөлісу қайда қосылады?', options: ['Адамдар → Қосу', 'Қазір көрсету', 'Баптаулар → Видео'], correct: 1 },
+                    video: 'https://www.youtube.com/embed/g36my1Q9PKs'
+                }
+            } }
+            ,
+            // 14: Google Sites (new)
+            { id: 13, icon: iconSites, title: { ru: '14. Google Sites', kk: '14. Google Sites' }, content: {
+                ru: {
+                    goal: 'Создать учебный сайт с разделами, текстом, изображениями и видео.',
+                    interactive: '<strong>Скелет сайта:</strong> Создайте два раздела — "Главная" и "Материалы" — добавьте текстовый блок, картинку и встройте YouTube‑видео.',
+                    case: 'Преподавателю нужно быстро собрать лендинг курса с материалами и видеоинструкциями.',
+                    задание: 'Создайте сайт в Google Sites с двумя страницами, добавьте изображение и встроенное видео.',
+                    практика: '<ul><li><strong>1. Создание:</strong> sites.google.com → + Пустой сайт → Название.</li><li><strong>2. Страницы:</strong> Панель Страницы → + → "Главная", "Учебные материалы".</li><li><strong>3. Контент:</strong> Вставка → Текст/Изображение/Встроить → URL YouTube.</li></ul>',
+                    миниТест: { q: 'Как добавить новую страницу в Sites?', options: ['Через Drive', 'Через панель Страницы', 'Через Настройки темы'], correct: 1 },
+                    video: 'https://www.youtube.com/embed/1Ne1hqOXKKI'
+                },
+                kk: {
+                    goal: 'Екі бөліммен оқу сайтын жасау, мәтін, сурет және бейне қосу.',
+                    interactive: '<strong>Сайт қаңқасы:</strong> "Басты бет" және "Материалдар" беттерін жасаңыз — мәтіндік блок, сурет және YouTube бейнесін қосыңыз.',
+                    case: 'Оқытушы курсқа арналған лендингті материалдар мен бейне-нұсқаулықтармен тез жинауы керек.',
+                    задание: 'Google Sites-та екі беті бар сайт жасаңыз, сурет және ендірілген бейне қосыңыз.',
+                    практика: '<ul><li><strong>1. Жасау:</strong> sites.google.com → + Бос сайт → Атауы.</li><li><strong>2. Беттер:</strong> Беттер панелі → + → "Басты бет", "Оқу материалдары".</li><li><strong>3. Контент:</strong> Кірістіру → Мәтін/Сурет/Ендіру → YouTube URL.</li></ul>',
+                    миниТест: { q: 'Sites-те жаңа бетті қалай қосасыз?', options: ['Drive арқылы', 'Беттер панелі арқылы', 'Тақырып баптаулары арқылы'], correct: 1 },
+                    video: 'https://www.youtube.com/embed/1Ne1hqOXKKI'
+                }
+            } }
+            ,
+            // 15: Classroom — старт и интерфейс
+            { id: 14, icon: iconClassroom, title: { ru: '15. Classroom — Старт и интерфейс', kk: '15. Classroom — Бастау' }, content: {
+                ru: {
+                    goal: 'Создать класс, выбрать тему/обложку и понять вкладки Лента/Задания.',
+                    interactive: '<strong>Обзор:</strong> Создайте класс, откройте Ленту и Задания, найдите, где включается уведомление для учащихся.',
+                    case: 'Новый курс запускается — нужно быстро подготовить рабочее пространство.',
+                    задание: 'Создайте класс, задайте тему оформления и загрузите обложку, изучите Ленту и Задания.',
+                    практика: '<ul><li><strong>1. Создание:</strong> classroom.google.com → + → Создать курс.</li><li><strong>2. Тема/обложка:</strong> Выбрать тему или Загрузить фото.</li><li><strong>3. Навигация:</strong> Лента — объявления, Задания — материалы и задания.</li></ul>',
+                    миниТест: { q: 'Где создаются задания в Classroom?', options: ['Лента', 'Задания', 'Люди'], correct: 1 },
+                    video: 'https://www.youtube.com/embed/2I2n7Z0aJxE'
+                },
+                kk: {
+                    goal: 'Сынып құру, тақырып/қаптаманы таңдау және Лента/Тапсырмалар қойындыларын түсіну.',
+                    interactive: '<strong>Шолу:</strong> Сынып құрыңыз, Лента және Тапсырмалар қойындыларын ашыңыз, оқушыларға хабарландыруды қайда қосатынын табыңыз.',
+                    case: 'Жаңа курс іске қосылады — жұмыс кеңістігін тез дайындау керек.',
+                    задание: 'Сынып құрыңыз, безендіру тақырыбын орнатыңыз және қаптаманы жүктеңіз; Лента және Тапсырмалармен танысыңыз.',
+                    практика: '<ul><li><strong>1. Құру:</strong> classroom.google.com → + → Курс жасау.</li><li><strong>2. Тақырып/қаптама:</strong> Тақырыпты таңдау немесе Фотосуретті жүктеу.</li><li><strong>3. Навигация:</strong> Лента — хабарламалар, Тапсырмалар — материалдар мен тапсырмалар.</li></ul>',
+                    миниТест: { q: 'Classroom-да тапсырмалар қайда жасалады?', options: ['Лента', 'Тапсырмалар', 'Адамдар'], correct: 1 },
+                    video: 'https://www.youtube.com/embed/2I2n7Z0aJxE'
+                }
+            } }
+            ,
+            // 16: Classroom — Материалы и темы
+            { id: 15, icon: iconClassroom, title: { ru: '16. Classroom — Материалы и темы', kk: '16. Classroom — Материалдар' }, content: {
+                ru: {
+                    goal: 'Добавлять теоретические материалы и организовывать их по темам.',
+                    interactive: '<strong>Структура:</strong> Создайте 3 темы и разместите материалы по разделам курса.',
+                    case: 'Материалы курса нужно логично сгруппировать, чтобы студентам было проще ориентироваться.',
+                    задание: 'Добавьте две темы и прикрепите по одному материалу в каждую.',
+                    практика: '<ul><li><strong>1. Темы:</strong> Задания → Создать → Тема.</li><li><strong>2. Материал:</strong> Задания → Создать → Материал → добавьте файл/ссылку/видео.</li><li><strong>3. Организация:</strong> Перетащите материалы между темами.</li></ul>',
+                    миниТест: { q: 'Какой тип создаете для непроверяемого контента?', options: ['Задание', 'Материал', 'Тест с квизом'], correct: 1 }
+                },
+                kk: {
+                    goal: 'Теориялық материалдарды қосу және оларды тақырыптар бойынша ұйымдастыру.',
+                    interactive: '<strong>Құрылым:</strong> 3 тақырып жасап, материалдарды бөлімдерге орналастырыңыз.',
+                    case: 'Курс материалдарын логикалық топтау керек — студенттерге ыңғайлы болу үшін.',
+                    задание: 'Екі тақырып қосып, әрқайсысына бір материал тіркеңіз.',
+                    практика: '<ul><li><strong>1. Тақырыптар:</strong> Тапсырмалар → Құру → Тақырып.</li><li><strong>2. Материал:</strong> Тапсырмалар → Құру → Материал → файл/сілтеме/бейне қосыңыз.</li><li><strong>3. Ұйымдастыру:</strong> Материалдарды тақырыптар арасында сүйреп ауыстырыңыз.</li></ul>',
+                    миниТест: { q: 'Бағаланбайтын контент үшін қандай түрді жасайсыз?', options: ['Тапсырма', 'Материал', 'Квиз-тест'], correct: 1 }
+                }
+            } }
+            ,
+            // 17: Classroom — Лента и уведомления
+            { id: 16, icon: iconClassroom, title: { ru: '17. Classroom — Лента и уведомления', kk: '17. Classroom — Лента және хабарландырулар' }, content: {
+                ru: {
+                    goal: 'Публиковать объявления и управлять уведомлениями.',
+                    interactive: '<strong>Объявление:</strong> Опубликуйте пост в Ленте с ссылкой на статью и настройте уведомления.',
+                    case: 'Нужно быстро сообщить группе об обновлении и направить к ресурсу.',
+                    задание: 'Опубликуйте объявление в Ленте и прикрепите ссылку на внешний ресурс.',
+                    практика: '<ul><li><strong>1. Лента:</strong> Введите текст объявления.</li><li><strong>2. Ресурс:</strong> Прикрепите ссылку/файл/видео.</li><li><strong>3. Уведомления:</strong> Настройки → Уведомления — включите нужные.</li></ul>',
+                    миниТест: { q: 'Где публикуются объявления для всего класса?', options: ['Задания', 'Лента', 'Оценки'], correct: 1 }
+                },
+                kk: {
+                    goal: 'Хабарламаларды жариялау және хабарландыруларды басқару.',
+                    interactive: '<strong>Хабарлама:</strong> Лентада мақала сілтемесімен пост жариялап, хабарландыруларды баптаңыз.',
+                    case: 'Топқа жаңартуды тез жеткізіп, ресурсқа бағыттау қажет.',
+                    задание: 'Лентада хабарлама жариялап, сыртқы ресурсқа сілтеме тіркеңіз.',
+                    практика: '<ul><li><strong>1. Лента:</strong> Хабарлама мәтінін енгізіңіз.</li><li><strong>2. Ресурс:</strong> Сілтеме/файл/бейне тіркеңіз.</li><li><strong>3. Хабарландырулар:</strong> Баптаулар → Хабарландырулар — қажет түрлерін қосыңыз.</li></ul>',
+                    миниТест: { q: 'Бүкіл сыныпқа арналған хабарламалар қайда жарияланады?', options: ['Тапсырмалар', 'Лента', 'Бағалар'], correct: 1 }
+                }
+            } }
+            ,
+            // 18: Classroom — Типы вопросов и оценивание
+            { id: 17, icon: iconForms, title: { ru: '18. Classroom — Типы вопросов', kk: '18. Classroom — Сұрақ түрлері' }, content: {
+                ru: {
+                    goal: 'Понимать типы вопросов для оценивания (через Google Forms/Задание с тестом).',
+                    interactive: '<strong>Квиз:</strong> Создайте форму с Один из списка, Флажки и Короткий ответ, включите режим квиза.',
+                    case: 'Нужно быстро подготовить входной тест с автоматической проверкой.',
+                    задание: 'Создайте “Тест с квизом” с 3 вопросами и назначьте баллы.',
+                    практика: '<ul><li><strong>1. Задание с тестом:</strong> Задания → Создать → Тест с квизом.</li><li><strong>2. Типы:</strong> В Forms добавьте вопросы: Один из списка, Флажки, Короткий ответ.</li><li><strong>3. Баллы:</strong> Ключ ответа → баллы.</li></ul>',
+                    миниТест: { q: 'Как включить автооценивание в Forms?', options: ['Во вкладке Ответы', 'В Настройках → Квиз', 'В меню Файл'], correct: 1 }
+                },
+                kk: {
+                    goal: 'Бағалау үшін сұрақ түрлерін түсіну (Google Forms/Квиз арқылы).',
+                    interactive: '<strong>Квиз:</strong> Форма жасаңыз: Тізімнен біреу, Құсбелгілер және Қысқа жауап; квиз режимін қосыңыз.',
+                    case: 'Кіріспе тестті автоматты тексерумен тез дайындау керек.',
+                    задание: '3 сұрағы бар “Квиз-тест” жасаңыз және ұпай тағайындаңыз.',
+                    практика: '<ul><li><strong>1. Квиз-тест:</strong> Тапсырмалар → Құру → Квиз-тест.</li><li><strong>2. Түрлер:</strong> Forms-та сұрақтар: Тізімнен біреу, Құсбелгілер, Қысқа жауап.</li><li><strong>3. Ұпай:</strong> Жауап кілті → ұпай.</li></ul>',
+                    миниТест: { q: 'Forms-та автобағалауды қалай қосасыз?', options: ['Жауаптар қойындысы', 'Баптаулар → Квиз', 'Файл мәзірі'], correct: 1 }
+                }
+            } }
+            ,
+            // 19: Classroom — Создание и распределение заданий
+            { id: 18, icon: iconClassroom, title: { ru: '19. Classroom — Задания', kk: '19. Classroom — Тапсырмалар' }, content: {
+                ru: {
+                    goal: 'Создавать задания, распределять по ученикам и темам.',
+                    interactive: '<strong>Назначение:</strong> Создайте задание с файлом из Drive, назначьте срок и тему.',
+                    case: 'Нужно выдать работу отдельной группе студентов.',
+                    задание: 'Создайте задание, назначьте только определенным учащимся.',
+                    практика: '<ul><li><strong>1. Создать:</strong> Задания → Создать → Задание.</li><li><strong>2. Настроить:</strong> Баллы, срок, тема, адресаты.</li><li><strong>3. Материалы:</strong> Прикрепите файл/ссылку/Документ.</li></ul>',
+                    миниТест: { q: 'Где ограничить адресатов задания?', options: ['В Ленте', 'В поле “Для” в карточке задания', 'В Настройках класса'], correct: 1 }
+                },
+                kk: {
+                    goal: 'Тапсырмалар жасау, оларды студенттер мен тақырыптарға тағайындау.',
+                    interactive: '<strong>Тағайындау:</strong> Drive файлымен тапсырма жасаңыз, мерзім мен тақырып қойыңыз.',
+                    case: 'Жұмысты белгілі бір студенттер тобына беру керек.',
+                    задание: 'Тапсырма жасаңыз және тек таңдаулы оқушыларға тағайындаңыз.',
+                    практика: '<ul><li><strong>1. Құру:</strong> Тапсырмалар → Құру → Тапсырма.</li><li><strong>2. Баптау:</strong> Ұпай, мерзім, тақырып, адресаттар.</li><li><strong>3. Материалдар:</strong> Файл/сілтеме/Құжатты тіркеңіз.</li></ul>',
+                    миниТест: { q: 'Тапсырманың адресаттарын қай жерде шектеуге болады?', options: ['Лентада', 'Тапсырма картасындағы “Кімге” өрісінде', 'Сынып баптауларында'], correct: 1 }
+                }
+            } }
+            ,
+            // 20: Classroom — Оценивание работ
+            { id: 19, icon: iconClassroom, title: { ru: '20. Classroom — Оценивание работ', kk: '20. Classroom — Жұмыстарды бағалау' }, content: {
+                ru: {
+                    goal: 'Проверять и возвращать работы с баллами и комментариями.',
+                    interactive: '<strong>Проверка:</strong> Откройте Работы учащихся, добавьте комментарии и верните работу.',
+                    case: 'Нужно быстро проставить оценки по рубрике.',
+                    задание: 'Оцените две работы и верните результаты.',
+                    практика: '<ul><li><strong>1. Работы учащихся:</strong> Откройте список и выберите файл.</li><li><strong>2. Комментарии/баллы:</strong> Вставьте комментарии, выставьте баллы.</li><li><strong>3. Вернуть:</strong> Нажмите Вернуть.</li></ul>',
+                    миниТест: { q: 'Где увидеть все файлы от учеников по заданию?', options: ['Лента', 'Работы учащихся', 'Оценки'], correct: 1 }
+                },
+                kk: {
+                    goal: 'Жұмыстарды тексеріп, ұпай және пікірмен қайтару.',
+                    interactive: '<strong>Тексеру:</strong> Оқушылардың жұмыстары бөлімін ашып, пікір қалдырып, жұмысты қайтарыңыз.',
+                    case: 'Рубрика бойынша бағаларды жылдам қою керек.',
+                    задание: 'Екі жұмысты бағалап, нәтижелерін қайтарыңыз.',
+                    практика: '<ul><li><strong>1. Оқушылардың жұмыстары:</strong> Тізімді ашып, файлды таңдаңыз.</li><li><strong>2. Пікір/ұпай:</strong> Пікір қосыңыз, ұпай қойыңыз.</li><li><strong>3. Қайтару:</strong> Қайтару батырмасын басыңыз.</li></ul>',
+                    миниТест: { q: 'Белгілі бір тапсырма бойынша барлық файлдарды қайдан көресіз?', options: ['Лента', 'Оқушылардың жұмыстары', 'Бағалар'], correct: 1 }
+                }
+            } }
+            ,
+            // 21: Classroom — Оценивание тестов
+            { id: 20, icon: iconForms, title: { ru: '21. Classroom — Оценивание тестов', kk: '21. Classroom — Квизтерді бағалау' }, content: {
+                ru: {
+                    goal: 'Проверять ответы в Google Forms, публиковать баллы.',
+                    interactive: '<strong>Автооценка:</strong> Создайте ключи и посмотрите сводку ответов.',
+                    case: 'После теста нужно быстро разослать баллы и комментарии.',
+                    задание: 'Проверьте один ответ вручную и опубликуйте результаты.',
+                    практика: '<ul><li><strong>1. Ответы:</strong> Forms → Ответы → проверка.</li><li><strong>2. Баллы:</strong> Опубликовать оценки.</li><li><strong>3. Экспорт:</strong> Создайте таблицу ответов при необходимости.</li></ul>',
+                    миниТест: { q: 'Где опубликовать оценки по тесту?', options: ['Во вкладке Вопросы', 'Во вкладке Ответы', 'В Classroom на Ленте'], correct: 1 }
+                },
+                kk: {
+                    goal: 'Google Forms жауаптарын тексеріп, ұпайларды жариялау.',
+                    interactive: '<strong>Автобагалау:</strong> Жауап кілттерін жасап, жауаптар қорытындысын қараңыз.',
+                    case: 'Тесттен кейін ұпайлар мен пікірлерді тез жіберу керек.',
+                    задание: 'Бір жауапты қолмен тексеріп, нәтижелерді жариялаңыз.',
+                    практика: '<ul><li><strong>1. Жауаптар:</strong> Forms → Жауаптар → тексеру.</li><li><strong>2. Ұпай:</strong> Бағаларды жариялау.</li><li><strong>3. Экспорт:</strong> Қажет болса, жауаптар кестесін жасаңыз.</li></ul>',
+                    миниТест: { q: 'Тест бойынша бағаларды қай жерде жариялайсыз?', options: ['Сұрақтар қойындысында', 'Жауаптар қойындысында', 'Classroom Лентасында'], correct: 1 }
+                }
+            } }
+            ,
+            // 22: Forms — Математические формулы
+            { id: 21, icon: iconForms, title: { ru: '22. Forms — Формулы', kk: '22. Forms — Формулалар' }, content: {
+                ru: {
+                    goal: 'Добавлять математические формулы в Google Forms.',
+                    interactive: '<strong>Варианты:</strong> Используйте дополнение Equatio или вставьте формулу как изображение/LaTeX‑рендер.',
+                    case: 'Преподавателю нужны задачи с формулами в тесте.',
+                    задание: 'Создайте вопрос с формулой и приложите изображение формулы.',
+                    практика: '<ul><li><strong>1. Дополнение:</strong> Equatio (или аналог) для ввода формул.</li><li><strong>2. Изображение:</strong> Сгенерируйте формулу и вставьте как картинку.</li><li><strong>3. Подписи:</strong> Добавьте текст с условием.</li></ul>',
+                    миниТест: { q: 'Какой путь без дополнений для формулы?', options: ['Только текст', 'Вставить изображение формулы', 'Нельзя'], correct: 1 }
+                },
+                kk: {
+                    goal: 'Google Forms-та математикалық формулаларды қосу.',
+                    interactive: '<strong>Тәсілдер:</strong> Equatio қосымшасын пайдаланыңыз немесе формуланы сурет/LaTeX ретінде кірістіріңіз.',
+                    case: 'Оқытушыға тестте формулалары бар тапсырмалар қажет.',
+                    задание: 'Формуласы бар сұрақ жасаңыз және формула кескінін тіркеңіз.',
+                    практика: '<ul><li><strong>1. Қосымша:</strong> Equatio (немесе ұқсасы) арқылы формула енгізу.</li><li><strong>2. Сурет:</strong> Формуланы генерациялап, сурет ретінде кірістіру.</li><li><strong>3. Мәтін:</strong> Шарт мәтінін қосу.</li></ul>',
+                    миниТест: { q: 'Қосымшасыз формуланы қалай қосуға болады?', options: ['Тек мәтін', 'Формула суретін кірістіру', 'Мүмкін емес'], correct: 1 }
+                }
+            } }
+            ,
+            // 23: Classroom — Интеграции
+            { id: 22, icon: iconClassroom, title: { ru: '23. Classroom — Интеграции', kk: '23. Classroom — Интеграциялар' }, content: {
+                ru: {
+                    goal: 'Интегрировать сторонние сервисы и ресурсы в задания и материалы.',
+                    interactive: '<strong>Интеграция:</strong> Прикрепите ссылку на внешний сервис и YouTube‑видео в одно задание.',
+                    case: 'Курс использует внешние тренажёры — ссылки должны быть в одном месте.',
+                    задание: 'Создайте материал с 3 ссылками на внешние ресурсы и коротким описанием.',
+                    практика: '<ul><li><strong>1. Материал:</strong> Задания → Создать → Материал.</li><li><strong>2. Ресурсы:</strong> Прикрепите ссылки/LTI/Видео/Файлы.</li><li><strong>3. Проверка:</strong> Откройте в режиме ученика и убедитесь, что всё доступно.</li></ul>',
+                    миниТест: { q: 'Где прикреплять внешний ресурс к объявлению?', options: ['В Ленте при создании поста', 'Только в Заданиях', 'Нельзя'], correct: 0 }
+                },
+                kk: {
+                    goal: 'Сабақтарға сыртқы сервистер мен ресурстарды біріктіру.',
+                    interactive: '<strong>Интеграция:</strong> Бір тапсырмаға сыртқы сервис сілтемесін және YouTube бейнесін тіркеңіз.',
+                    case: 'Курс сыртқы тренажерларды пайдаланады — сілтемелер бір жерде болуы керек.',
+                    задание: 'Үш сыртқы ресурс сілтемесі бар материал жасаңыз және қысқа сипаттама қосыңыз.',
+                    практика: '<ul><li><strong>1. Материал:</strong> Тапсырмалар → Құру → Материал.</li><li><strong>2. Ресурстар:</strong> Сілтемелер/LTI/Бейне/Файлдарды тіркеңіз.</li><li><strong>3. Тексеру:</strong> Оқушы режимінде ашып, қолжетімділігін тексеріңіз.</li></ul>',
+                    миниТест: { q: 'Хабарламаға сыртқы ресурсты қайда тіркейсіз?', options: ['Лентада жазба жасағанда', 'Тек Тапсырмаларда', 'Мүмкін емес'], correct: 0 }
+                }
+            } }
+            ,
+            // 24: Gemini — Интро модуля
+            { id: 23, icon: iconSpark, title: { ru: '24. Gemini — Интро модуля', kk: '24. Gemini — Модульге кіріспе' }, content: {
+                ru: {
+                    goal: 'Понять цели курса по Gemini и как мы будем работать с ИИ‑инструментами.',
+                    interactive: '<strong>Ожидания:</strong> Напишите 1–2 задачи, где ИИ может ускорить вашу работу (документы, задания, оценивание).',
+                    case: 'Преподаватель хочет автоматизировать рутинные заготовки материалов и комментариев к работам.',
+                    задание: 'Сформулируйте три результата, которых вы хотите достичь с помощью Gemini на курсе.',
+                    практика: '<ul><li><strong>1. Аккаунт:</strong> Убедитесь в доступе к Gemini.</li><li><strong>2. Примеры:</strong> Найдите 2–3 промпта для вашей дисциплины.</li><li><strong>3. Этикет:</strong> Определите ограничения и правила использования ИИ.</li></ul>',
+                    миниТест: { q: 'Что важно сделать перед использованием ИИ в учебном процессе?', options: ['Игнорировать политику', 'Определить правила и ограничения', 'Делегировать студентам'], correct: 1 }
+                },
+                kk: {
+                    goal: 'Gemini курсының мақсаттарын және ІИ құралдарымен қалай жұмыс істейтінімізді түсіну.',
+                    interactive: '<strong>Күтілімдер:</strong> ІИ жұмысты жеделдететін 1–2 тапсырманы жазыңыз (құжаттар, тапсырмалар, бағалау).',
+                    case: 'Оқытушы материалдардың шаблондарын және пікірлерді автоматтандырғысы келеді.',
+                    задание: 'Gemini көмегімен курс барысында қол жеткізгіңіз келетін үш нәтижені тұжырымдаңыз.',
+                    практика: '<ul><li><strong>1. Аккаунт:</strong> Gemini қолжетімділігін тексеріңіз.</li><li><strong>2. Мысалдар:</strong> Пәніңізге 2–3 промпт табыңыз.</li><li><strong>3. Этика:</strong> ІИ пайдаланудың шектеулері мен ережелерін анықтаңыз.</li></ul>',
+                    миниТест: { q: 'Оқу процесінде ІИ қолданар алдында не маңызды?', options: ['Саясатты елемеу', 'Ережелер мен шектеулерді анықтау', 'Студенттерге тапсыру'], correct: 1 }
+                }
+            } }
+            ,
+            // 25: Prompt Engineering Intro
+            { id: 24, icon: iconSpark, title: { ru: '25. Prompt Engineering — Введение', kk: '25. Prompt Engineering — Кіріспе' }, content: {
+                ru: {
+                    goal: 'Освоить структуру хорошего промпта: роль, контекст, данные, задание, формат.',
+                    interactive: '<strong>Рефакторинг:</strong> Улучшите сырой запрос, добавив роль, ограничения и формат ответа.',
+                    case: 'Нужно получить методичную инструкцию по шагам; без структуры ИИ даёт размытый ответ.',
+                    задание: 'Соберите шаблон промпта для ваших типовых задач (≤150 слов).',
+                    практика: '<ul><li><strong>1. Роль:</strong> Определите роль модели (эксперт‑методист).</li><li><strong>2. Контекст:</strong> Целевая аудитория и цель.</li><li><strong>3. Формат:</strong> Требуемый вид ответа (таблица/список/шаблон).</li></ul>',
+                    миниТест: { q: 'Какой элемент повышает воспроизводимость ответа?', options: ['Случайный пример', 'Явный формат вывода', 'Длина текста'], correct: 1 }
+                },
+                kk: {
+                    goal: 'Жақсы промпт құрылымын меңгеру: рөл, контекст, деректер, тапсырма, формат.',
+                    interactive: '<strong>Рефакторинг:</strong> Рөл, шектеулер және жауап форматын қосып, шикі сұранысты жақсартыңыз.',
+                    case: 'Қадамдық нұсқаулық қажет; құрылымсыз ІИ бұлдыр жауап береді.',
+                    задание: 'Типтік тапсырмаларыңыз үшін промпт үлгісін құрастырыңыз (≤150 сөз).',
+                    практика: '<ul><li><strong>1. Рөл:</strong> Модель рөлін анықтаңыз (әдіскер‑сарапшы).</li><li><strong>2. Контекст:</strong> Мақсатты аудитория және мақсат.</li><li><strong>3. Формат:</strong> Қажетті жауап түрі (кесте/тізім/үлгі).</li></ul>',
+                    миниТест: { q: 'Қай элемент жауаптың қайталанымдылығын арттырады?', options: ['Кездейсоқ мысал', 'Шығыс форматын нақтылау', 'Мәтін ұзындығы'], correct: 1 }
+                }
+            } }
+            ,
+            // 26: Знакомство с Google Gemini
+            { id: 25, icon: iconSpark, title: { ru: '26. Знакомство с Google Gemini', kk: '26. Google Gemini-пен танысу' }, content: {
+                ru: {
+                    goal: 'Понять возможности Gemini (текст/изображения/код) и ограничения.',
+                    interactive: '<strong>Демо:</strong> Спросите Gemini о курсе и попросите предложить план улучшений.',
+                    case: 'Нужно быстро получить черновик модуля и идеи заданий.',
+                    задание: 'Сформируйте пять вопросов, которые вы зададите Gemini для вашего курса.',
+                    практика: '<ul><li><strong>1. Доступ:</strong> Откройте интерфейс Gemini.</li><li><strong>2. Сценарии:</strong> Пробные запросы: план, критерии оценивания, чек-лист.</li><li><strong>3. Экспорт:</strong> Сохраните лучшие ответы в Docs.</li></ul>',
+                    миниТест: { q: 'Что из ниже — корректное ограничение при работе с ИИ?', options: ['Полная точность всегда', 'Проверка фактов и авторство', 'Не нужно указывать источники'], correct: 1 }
+                },
+                kk: {
+                    goal: 'Gemini мүмкіндіктерін (мәтін/кескін/код) және шектеулерін түсіну.',
+                    interactive: '<strong>Демо:</strong> Gemini-ден курс туралы сұрап, жақсарту жоспарын ұсынуды өтініңіз.',
+                    case: 'Модульдің қарасын және тапсырма идеяларын тез алу керек.',
+                    задание: 'Курсыңыз үшін Gemini-ге қоятын бес сұрақ құрастырыңыз.',
+                    практика: '<ul><li><strong>1. Қолжетімділік:</strong> Gemini интерфейсін ашыңыз.</li><li><strong>2. Сценарийлер:</strong> Сынама сұраныстар: жоспар, бағалау критерийлері, чек-лист.</li><li><strong>3. Экспорт:</strong> Үздік жауаптарды Docs-қа сақтаңыз.</li></ul>',
+                    миниТест: { q: 'ІІ‑мен жұмыс кезінде қайсысы дұрыс шектеу?', options: ['Әрқашан абсолют дәлдік', 'Фактчекинг және авторлық', 'Дереккөздер қажет емес'], correct: 1 }
+                }
+            } }
+            ,
+            // 27: Создание текстов в Gemini
+            { id: 26, icon: iconSpark, title: { ru: '27. Создание текстов в Gemini', kk: '27. Gemini-де мәтін жасау' }, content: {
+                ru: {
+                    goal: 'Генерировать структурированные тексты: анонсы, инструкции, шаблоны заданий.',
+                    interactive: '<strong>Форматирование:</strong> Попросите Gemini выдать текст в виде чек-листа и таблицы.',
+                    case: 'Нужно быстро оформить методичку в едином стиле.',
+                    задание: 'Сгенерируйте анонс занятия (≤120 слов) и чек-лист подготовки.',
+                    практика: '<ul><li><strong>1. Шаблон:</strong> Используйте промпт с ролью и форматом.</li><li><strong>2. Итерации:</strong> Уточните тон и объем.</li><li><strong>3. Проверка:</strong> Отредактируйте итог в Docs.</li></ul>',
+                    миниТест: { q: 'Что поможет контролировать длину выдачи?', options: ['Рандомизация', 'Ограничение слов/символов', 'Больше эмодзи'], correct: 1 }
+                },
+                kk: {
+                    goal: 'Құрылымды мәтіндер жасау: анонстар, нұсқаулықтар, тапсырма үлгілері.',
+                    interactive: '<strong>Пішімдеу:</strong> Gemini-ден мәтінді чек-лист және кесте түрінде беруді сұраңыз.',
+                    case: 'Әдістемені бір стильде тез рәсімдеу қажет.',
+                    задание: 'Сабақ анонсын (≤120 сөз) және дайындық чек-листін жасаңыз.',
+                    практика: '<ul><li><strong>1. Үлгі:</strong> Рөл және формат бар промптты қолданыңыз.</li><li><strong>2. Итерациялар:</strong> Тон мен көлемді нақтылаңыз.</li><li><strong>3. Тексеру:</strong> Нәтижені Docs-та өңдеңіз.</li></ul>',
+                    миниТест: { q: 'Шығыс ұзындығын бақылауға не көмектеседі?', options: ['Рандомизация', 'Сөз/таңба шектеуі', 'Көбірек эмодзи'], correct: 1 }
+                }
+            } }
+            ,
+            // 28: Создание заданий в Gemini
+            { id: 27, icon: iconSpark, title: { ru: '28. Создание заданий в Gemini', kk: '28. Gemini-де тапсырмалар жасау' }, content: {
+                ru: {
+                    goal: 'Проектировать задания с критериями, уровнями и примерами ответов.',
+                    interactive: '<strong>Рубрика:</strong> Попросите Gemini создать рубрику оценивания (критерии/уровни/баллы).',
+                    case: 'Нужно быстро подготовить задание и прозрачную систему оценивания.',
+                    задание: 'Создайте задание и рубрику (3 критерия × 3 уровня) для вашей темы.',
+                    практика: '<ul><li><strong>1. Требования:</strong> Сформулируйте цель, формат сдачи, дедлайн.</li><li><strong>2. Рубрика:</strong> Попросите сгенерировать шкалу.</li><li><strong>3. Экспорт:</strong> Вставьте в Classroom/Docs.</li></ul>',
+                    миниТест: { q: 'Что обязательно включить в рубрику?', options: ['Только баллы', 'Критерии и уровни описания', 'Ссылку на YouTube'], correct: 1 }
+                },
+                kk: {
+                    goal: 'Критерийлері, деңгейлері және жауап үлгілері бар тапсырмалар жобалау.',
+                    interactive: '<strong>Рубрика:</strong> Gemini-ден бағалау рубрикасын (критерий/деңгей/ұпай) құруды сұраңыз.',
+                    case: 'Тапсырма мен айқын бағалау жүйесін тез дайындау қажет.',
+                    задание: 'Тақырыбыңыз үшін (3 критерий × 3 деңгей) рубрикасы бар тапсырма жасаңыз.',
+                    практика: '<ul><li><strong>1. Талаптар:</strong> Мақсат, тапсыру форматы, дедлайнды белгілеңіз.</li><li><strong>2. Рубрика:</strong> Шкаланы генерациялауды сұраңыз.</li><li><strong>3. Экспорт:</strong> Classroom/Docs-қа енгізіңіз.</li></ul>',
+                    миниТест: { q: 'Рубрикаға не міндетті түрде кіруі керек?', options: ['Тек ұпайлар', 'Критерийлер және деңгей сипаттамалары', 'YouTube сілтемесі'], correct: 1 }
+                }
+            } },
+            // 29: Генерация изображений (Gemini)
+            { id: 28, icon: iconImage, title: { ru: '29. Генерация изображений (Gemini)', kk: '29. Бейне/сурет генерациясы (Gemini)' }, content: {
+                ru: {
+                    goal: 'Освоить генерацию изображений по текстовому описанию и безопасные практики.',
+                    interactive: '<strong>Промпт-дизайн:</strong> Сформулируйте запрос: стиль, предмет, фон, цветовая палитра, аспект‑ratio. Добавьте ограничения (без логотипов/лиц).',
+                    case: 'Для баннера мероприятия требуется иллюстрация в фирменных цветах без использования торговых марок.',
+                    задание: 'Сгенерируйте 2 варианта обложки (разные стили) по одному промпту с уточнением палитры и композиции.',
+                    практика: '<ul><li><strong>1. Бриф:</strong> Опишите цель (баннер/обложка), аудиторию и стиль.</li><li><strong>2. Промпт:</strong> Укажите объект, фон, цвета, ракурс, освещение, композицию.</li><li><strong>3. Безопасность:</strong> Исключите бренды/лица: «без логотипов, без узнаваемых персонажей».</li><li><strong>4. Итерации:</strong> Переформулируйте промпт для второго стиля.</li></ul>',
+                    миниТест: { q: 'Что важнее для управляемой генерации?', options: ['Длинный ввод без структуры', 'Чёткий промпт с атрибутами (стиль/цвет/ракурс)', 'Случайный seed'], correct: 1 }
+                },
+                kk: {
+                    goal: 'Мәтіндік сипаттама бойынша суреттер генерациясын меңгеру және қауіпсіз тәжірибелер.',
+                    interactive: 'Сұраныс құрастырыңыз: стиль, нысан, фон, палитра, аспект‑ratio. Шектеулер қосыңыз (логотиптер/бет жоқ).',
+                    case: 'Іс-шара баннеріне бренд түстерінде, сауда белгілерінсіз иллюстрация керек.',
+                    задание: 'Бір промпт бойынша палитра мен композицияны нақтылап, 2 стильде обложка генерациялаңыз.',
+                    практика: '<ul><li><strong>1. Бриф:</strong> Мақсат, аудитория, стиль.</li><li><strong>2. Промпт:</strong> Нысан, фон, түстер, ракурс, жарық, композиция.</li><li><strong>3. Қауіпсіздік:</strong> «логотипсіз, танымал тұлғасыз».</li><li><strong>4. Итерация:</strong> Екінші стильге қайта құрастырыңыз.</li></ul>',
+                    миниТест: { q: 'Басқарылатын генерация үшін не маңызды?', options: ['Құрылымсыз ұзын мәтін', 'Атрибуттары бар нақты промпт', 'Кездейсоқ seed'], correct: 1 }
+                }
+            } },
+            // 30: Глубокое исследование в Gemini
+            { id: 29, icon: iconResearch, title: { ru: '30. Глубокое исследование в Gemini', kk: '30. Gemini-де терең зерттеу' }, content: {
+                ru: {
+                    goal: 'Проводить многошаговое исследование с планом, ссылками и сжатием источников.',
+                    interactive: '<strong>Chain‑of‑Thought:</strong> Попросите Gemini: 1) составить план исследования, 2) собрать источники, 3) сделать выжимки и сравнение.',
+                    case: 'Нужно подготовить обзор инструментов совместной работы с аргументами и ссылками на первоисточники.',
+                    задание: 'Выполните исследование: план → 5 источников → сравнительная таблица с критериями → вывод в 5–7 предложениях.',
+                    практика: '<ul><li><strong>1. План:</strong> Сформулируйте цель, вопросы, критерии сравнения.</li><li><strong>2. Источники:</strong> Попросите список ссылок с краткими аннотациями.</li><li><strong>3. Сжатие:</strong> Для каждого источника — конспект в 3–4 пункта.</li><li><strong>4. Сравнение:</strong> Таблица отличий/плюсов/минусов.</li></ul>',
+                    миниТест: { q: 'Что добавит прозрачности исследованию?', options: ['Отсутствие ссылок', 'Чёткие критерии и ссылки на первоисточники', 'Только итоговый вывод'], correct: 1 }
+                },
+                kk: {
+                    goal: 'Көпқадамды зерттеу: жоспар, сілтемелер, дереккөздерді қысқарту.',
+                    interactive: 'Gemini-ден: 1) зерттеу жоспары, 2) дереккөздер тізімі, 3) қысқаша конспект және салыстыруды сұраңыз.',
+                    case: 'Бірлескен жұмыс құралдары бойынша шолуды дереккөздерімен дайындау қажет.',
+                    задание: 'Жоспар → 5 дереккөз → салыстырмалы кесте → 5–7 сөйлем қорытынды.',
+                    практика: '<ul><li><strong>1. Жоспар:</strong> Мақсат, сұрақтар, салыстыру критерийлері.</li><li><strong>2. Дереккөздер:</strong> Сілтемелер мен аннотациялар.</li><li><strong>3. Қысқарту:</strong> Әр дереккөзге 3–4 тармақ конспект.</li><li><strong>4. Салыстыру:</strong> Артықшылық/кемшілік кестесі.</li></ul>',
+                    миниТест: { q: 'Зерттеуді қалай ашық етуге болады?', options: ['Сілтемелерсіз', 'Критерийлер және бастапқы сілтемелер', 'Тек қорытынды'], correct: 1 }
+                }
+            } },
+            // 31: Google Drawings
+            { id: 30, icon: iconDrawings, title: { ru: '31. Google Drawings — Диаграммы и схемы', kk: '31. Google Drawings — Диаграммалар' }, content: {
+                ru: {
+                    goal: 'Создавать простые схемы/диаграммы, работать со слоями и выравниванием.',
+                    interactive: '<strong>Блок‑схема:</strong> Постройте схему процесса из 6–8 блоков, используйте направляющие и группы.',
+                    case: 'Нужно визуализировать рабочий процесс команды с ролями и переходами.',
+                    задание: 'Создайте схему процесса и экспортируйте её в PNG для вставки в Slides.',
+                    практика: '<ul><li><strong>1. Макет:</strong> Включите сетку/направляющие.</li><li><strong>2. Фигуры:</strong> Прямоугольники/стрелки, цвета и толщина линий.</li><li><strong>3. Группы:</strong> Сгруппируйте связные блоки, выровняйте по центру/краям.</li><li><strong>4. Экспорт:</strong> Файл → Скачать → PNG.</li></ul>',
+                    миниТест: { q: 'Как быстро выровнять несколько объектов?', options: ['Перетаскивать вручную', 'Выравнивание по меню (Выровнять → По центру/краям)', 'Менять координаты вручную'], correct: 1 }
+                },
+                kk: {
+                    goal: 'Қарапайым схемалар/диаграммалар жасау, қабаттар және туралаумен жұмыс.',
+                    interactive: '6–8 блоктан тұратын блок‑схема құрыңыз, бағыттаушылар мен топтарды қолданыңыз.',
+                    case: 'Команда үдерісін рөлдер және ауысулармен визуализациялау керек.',
+                    задание: 'Процестің схемасын жасап, оны Slides-қа қою үшін PNG-ға экспорттаңыз.',
+                    практика: '<ul><li><strong>1. Макет:</strong> Тор/бағыттаушыларды қосыңыз.</li><li><strong>2. Фигурлар:</strong> Төртбұрыштар/жебелер, түстер және сызық қалыңдығы.</li><li><strong>3. Топтар:</strong> Байланысты блоктарды топтап, ортасына/шеттеріне туралаңыз.</li><li><strong>4. Экспорт:</strong> Файл → Жүктеп алу → PNG.</li></ul>',
+                    миниТест: { q: 'Бірнеше объектіні қалай тез туралайсыз?', options: ['Қолмен сүйреп', 'Мәзір арқылы туралау', 'Қолмен координат өзгерту'], correct: 1 }
+                }
+            } }
+        ];
+
+        const bonusData = {
+            ru: {
+                ideas: [
+                    '<strong>Mini-quest:</strong> Каждое приложение использовано в отдельной мини-задаче, участник должен собрать «идеальный рабочий процесс».',
+                    '<strong>Обратная связь:</strong> Участники делятся скриншотами своих таблиц, календарей и заметок, тренер комментирует.',
+                    '<strong>Gamification:</strong> Баллы за выполненные кейсы, интерактивные вопросы в чате.'
+                ]
+            },
+            kk: {
+                ideas: [
+                    '<strong>Mini-quest:</strong> Әрбір қолданба жеке мини-тапсырмада қолданылады, қатысушы «міндетті жұмыс процесін» жинауы керек.',
+                    '<strong>Кері байланыс:</strong> Қатысушылар өздерінің кестелерінің, күнтізбелерінің және жазбаларының скриншоттарымен бөліседі, тренер түсініктеме береді.',
+                    '<strong>Gamification:</strong> Орындалған кейстер, чаттағы интерактивті сұрақтар үшін ұпайлар.'
+                ]
+            }
+        };
+
+        let currentModuleId = 0;
+        const visitedModules = new Set();
+        const correctlyCompletedTests = new Set();
+        let progressChart;
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            // Setup language switch listener
+            document.getElementById('language-switcher').addEventListener('click', (e) => {
+                const button = e.target.closest('button[data-lang]');
+                if (button) {
+                    setLanguage(button.dataset.lang);
+                }
+            });
+
+            // Navigation listener
+            document.getElementById('navigation').addEventListener('click', (e) => {
+                const button = e.target.closest('button[data-id]');
+                if (button) {
+                    const id = parseInt(button.dataset.id);
+                    setActiveModule(id);
+                }
+            });
+            
+            // Initial setup in default language
+            setLanguage(currentLang); 
+            setupBonusModal();
+            setupFeedbackModal();
+            setupQuickLinks();
+            setupSummaryModal();
+            createProgressChart();
+            updateCompletionDisplay();
+            updateTestScoreDisplay();
+            // Start with the first module loaded
+            setActiveModule(0); 
+            renderCourseLanding();
+            renderCourseMaterials();
+            setupAiSettings();
+        });
+
+        function setLanguage(lang) {
+            if (lang === currentLang) return;
+
+            // Update state
+            currentLang = lang;
+            const t = uiText[currentLang];
+
+            // Update language switcher buttons
+            document.querySelectorAll('#language-switcher button').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+
+            // Update static UI elements
+            document.getElementById('main-title').textContent = t.mainTitle;
+            document.getElementById('main-subtitle').textContent = t.mainSubtitle;
+            document.getElementById('welcome-message').textContent = t.welcome;
+            document.getElementById('progress-title').textContent = t.progressTitle;
+            document.getElementById('additional-title').textContent = t.additionalTitle;
+            document.getElementById('bonus-toggle').textContent = t.bonusToggle;
+            document.getElementById('close-feedback').textContent = t.closeButton;
+
+            // Re-render navigation bar (to update titles)
+            renderNavigation();
+
+            // Re-render the current module content (to update content language)
+            setActiveModule(currentModuleId);
+            
+            // Re-render progress displays
+            updateCompletionDisplay();
+            updateTestScoreDisplay();
+
+            // Re-render bonus modal content
+            updateBonusModalContent();
+
+            // Re-render quick links and summary button text
+            renderQuickLinks();
+            updateSummaryTexts();
+            renderCourseLanding();
+            renderCourseMaterials();
+        }
+
+        /**
+         * Helper function to determine a concise title for navigation buttons.
+         * @param {string} moduleTitle - Full title like '1. Введение в Google Workspace'.
+         * @returns {string} Short title like 'Введение'.
+         */
+        function getShortNavTitle(moduleTitle) {
+            // Extract numeric prefix like "4. " if present
+            const numMatch = moduleTitle.match(/^\s*(\d+)\.\s*/);
+            const numPrefix = numMatch ? `${numMatch[1]}. ` : '';
+
+            // Remove leading number and the word "Google " for clearer, unique labels
+            let namePart = moduleTitle.replace(/^\s*\d+\.\s*/, '').replace(/^Google\s+/i, '');
+
+            // If there is a dash/long dash, take the left part as the core label
+            const core = namePart.split(/[–-]/)[0].trim();
+
+            // Use up to two words to avoid duplicates like "Google"
+            const words = core.split(/\s+/);
+            const short = words.slice(0, Math.min(2, words.length)).join(' ');
+
+            return `${numPrefix}${short}`.trim();
+        }
+
+        function getOverrideShortTitle(module, lang) {
+            // Language-aware concise labels to avoid dangling conjunctions like "и"/"және"
+            const map = {
+                ru: {
+                    0: '1. Введение',
+                    1: '2. Аккаунт/Chrome',
+                    2: '3. Gmail/Chat',
+                    3: '4. Calendar',
+                    4: '5. Задачи/Keep',
+                    5: '6. Drive',
+                    6: '7. Sheets',
+                    7: '8. Docs',
+                    8: '9. YouTube',
+                    9: '10. Slides',
+                    10: '11. Forms',
+                    11: '12. Scholar',
+                    12: '13. Meet',
+                    13: '14. Sites',
+                    14: '15. Classroom Старт',
+                    15: '16. Classroom Материалы',
+                    16: '17. Classroom Лента',
+                    17: '18. Classroom Вопросы',
+                    18: '19. Classroom Задания',
+                    19: '20. Classroom Оценка',
+                    20: '21. Тесты Оценка',
+                    21: '22. Forms Формулы',
+                    22: '23. Classroom Интеграции',
+                    23: '24. Gemini Интро',
+                    24: '25. Prompt Eng',
+                    25: '26. Введение Gemini',
+                    26: '27. Gemini Тексты',
+                    27: '28. Gemini Задания',
+                },
+                kk: {
+                    0: '1. Кіріспе',
+                    1: '2. Аккаунт/Chrome',
+                    2: '3. Gmail/Chat',
+                    3: '4. Calendar',
+                    4: '5. Тапсырмалар/Keep',
+                    5: '6. Drive',
+                    6: '7. Sheets',
+                    7: '8. Docs',
+                    8: '9. YouTube',
+                    9: '10. Slides',
+                    10: '11. Forms',
+                    11: '12. Scholar',
+                    12: '13. Meet',
+                    13: '14. Sites',
+                    14: '15. Classroom Бастау',
+                    15: '16. Classroom Материалдар',
+                    16: '17. Classroom Лента',
+                    17: '18. Classroom Сұрақтар',
+                    18: '19. Classroom Тапсырмалар',
+                    19: '20. Classroom Бағалау',
+                    20: '21. Квиз бағалау',
+                    21: '22. Forms Формулалар',
+                    22: '23. Classroom Интеграциялар',
+                    23: '24. Gemini Кіріспе',
+                    24: '25. Prompt Eng',
+                    25: '26. Gemini танысу',
+                    26: '27. Gemini Мәтіндер',
+                    27: '28. Gemini Тапсырмалар',
+                }
+            };
+            return map[lang]?.[module.id] || map.ru[module.id] || null;
+        }
+
+        function renderNavigation() {
+            const navigation = document.getElementById('navigation');
+            navigation.innerHTML = ''; // Clear existing navigation
+
+            bilingualModulesData.forEach(module => {
+                const moduleTitle = module.title[currentLang] || module.title.ru;
+                
+                // Prefer explicit override, fallback to auto-shortening
+                const overrideTitle = getOverrideShortTitle(module, currentLang);
+                const navTitle = overrideTitle || getShortNavTitle(moduleTitle);
+
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <button data-id="${module.id}" title="${moduleTitle}" class="nav-item flex items-center gap-2 transition-colors">
+                        <span class="w-6 h-6 flex items-center justify-center">${module.icon}</span>
+                        <!-- Show short title (visible on small screens and up) -->
+                        <span class="hidden sm:block font-medium">${navTitle}</span>
+                    </button>
+                `;
+                navigation.appendChild(li);
+            });
+            
+            // Re-apply active state after re-rendering
+            const activeModuleButton = navigation.querySelector(`button[data-id="${currentModuleId}"]`);
+            if (activeModuleButton) {
+                activeModuleButton.classList.add('active');
+            }
+
+            // Also render sidebar navigation for desktop
+            renderSidebar();
+        }
+
+
+        function formatPracticeContent(htmlString) {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(htmlString, 'text/html');
+            const ul = doc.querySelector('ul');
+            if (!ul) return `<p>${htmlString}</p>`;
+
+            let formattedList = `<ul class="practice-list list-none pl-0 mt-3">`;
+            const items = ul.querySelectorAll('li');
+            
+            items.forEach((item, index) => {
+                const stepNumber = index + 1;
+                const contentWithEmphasis = item.innerHTML.replace(/(\*\*\d+\. .*?:)/, '<span class="text-gray-900 font-bold">$1</span>');
+                formattedList += `<li data-list-counter="${stepNumber}.">` + contentWithEmphasis.replace(/\*\*/g, '') + `</li>`;
+            });
+
+            formattedList += `</ul>`;
+            return formattedList;
+        }
+        
+        function formatInteractiveContent(htmlString) {
+            let formattedString = htmlString.replace(/<br>/g, '</p><p>');
+            return `<div class="interactive-section text-gray-700">${formattedString}</div>`;
+        }
+
+
+        function setActiveModule(id) {
+            currentModuleId = id;
+            visitedModules.add(id);
+
+            const navButtons = document.querySelectorAll('#navigation .nav-item, #sidebar-navigation .nav-item');
+            navButtons.forEach(btn => {
+                btn.classList.toggle('active', parseInt(btn.dataset.id) === id);
+            });
+
+            const moduleData = bilingualModulesData.find(m => m.id === id);
+            const moduleContentContainer = document.getElementById('module-content');
+            
+            if(moduleData) {
+                const t = uiText[currentLang];
+                const moduleContent = moduleData.content[currentLang] || moduleData.content.ru; // Fallback to Russian
+                const test = moduleContent.миниТест;
+                const testId = `test-${id}`;
+
+                moduleContentContainer.innerHTML = `
+                    <div class="fade-in space-y-8">
+                        <h2 class="text-3xl font-bold text-gray-800 mb-6 pb-2 border-b-2 border-gray-100 flex items-center gap-3">
+                            <span class="w-8 h-8 flex items-center justify-center">${moduleData.icon}</span> 
+                            <span>${moduleData.title[currentLang] || moduleData.title.ru}</span>
+                        </h2>
+                        
+                        <div class="space-y-6">
+                            <!-- Цель -->
+                            <div class="p-4 rounded-xl border border-blue-200 bg-blue-50">
+                                <h3 class="font-semibold text-xl color-blue mb-2 flex items-center gap-2">
+                                    ${iconGoal} 
+                                    ${t.sectionGoal}
+                                </h3>
+                                <p class="text-gray-700">${moduleContent.goal}</p>
+                            </div>
+
+                            <!-- Практика -->
+                            <div class="p-4 rounded-xl border border-green-200 bg-white shadow-lg">
+                                <h3 class="font-semibold text-xl color-green mb-2 flex items-center gap-2 border-b pb-2 border-green-100">
+                                    ${iconPractice}
+                                    ${t.sectionPractice}
+                                </h3>
+                                <div class="text-gray-700 font-medium space-y-2">
+                                    ${formatPracticeContent(moduleContent.практика)}
+                                </div>
+                            </div>
+
+                            <!-- Интерактив -->
+                            <div class="p-4 rounded-xl border border-yellow-300 bg-yellow-50 shadow-lg">
+                                <h3 class="font-semibold text-xl color-yellow mb-2 flex items-center gap-2 border-b pb-2 border-yellow-200">
+                                    ${iconInteractive}
+                                    ${t.sectionInteractive}
+                                </h3>
+                                ${formatInteractiveContent(moduleContent.interactive)}
+                            </div>
+                            
+                            <!-- Задание -->
+                            <div class="p-4 rounded-xl border border-red-200 bg-red-50">
+                                <h3 class="font-semibold text-xl color-red mb-2 flex items-center gap-2">
+                                    ${iconAssignment}
+                                    ${t.sectionAssignment}
+                                </h3>
+                                <p class="text-gray-700 mb-4">${moduleContent.задание}</p>
+
+                                <!-- GEMINI SECTION -->
+                                <div class="mt-4 p-4 bg-red-100 rounded-lg border border-red-300">
+                                    <h4 class="font-bold text-red-700 mb-3 flex items-center gap-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bot"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M22 10 16 8"/><path d="M2 10 8 8"/><path d="M7 22h10"/><path d="M12 22v-4"/></svg>
+                                        ${t.aiHelpTitle}
+                                    </h4>
+                                    <button 
+                                        id="gemini-button-${id}" 
+                                        onclick="generateAssignmentHelp(${id})" 
+                                        class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg transition-colors shadow-md flex items-center gap-2">
+                                        ${t.aiButton}
+                                    </button>
+                                    <div id="assignment-loading-${id}" class="hidden mt-3 flex items-center text-gray-600">
+                                        <svg class="animate-spin h-5 w-5 mr-3 text-red-500" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                                        ${t.aiLoading}
+                                    </div>
+                                    <div id="assignment-result-${id}" class="mt-3 text-sm"></div>
+                                </div>
+                                <!-- END GEMINI SECTION -->
+                            </div>
+                            
+                            <!-- Кейс -->
+                            <div class="p-4 rounded-xl border border-gray-200 bg-gray-50">
+                                <h3 class="font-semibold text-xl color-blue mb-2 flex items-center gap-2">
+                                    ${iconCase}
+                                    ${t.sectionCase}
+                                </h3>
+                                <p class="text-gray-700">${moduleContent.case}</p>
+                            </div>
+
+                            ${moduleContent.video ? `
+                            <!-- Видео -->
+                            <div class="p-4 rounded-xl border border-gray-200 bg-white">
+                                <h3 class="font-semibold text-xl color-blue mb-3 flex items-center gap-2">
+                                    ${iconYouTube}
+                                    ${t.sectionVideo}
+                                </h3>
+                                <div class="relative w-full aspect-video rounded-xl overflow-hidden border border-gray-200 shadow-md">
+                                    <iframe class="w-full h-full" src="${moduleContent.video}" title="Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                                </div>
+                            </div>` : ''}
+                        </div>
+
+                        <!-- Мини-Тест -->
+                        <div class="border-t pt-6 mt-6 bg-white p-6 rounded-lg shadow-inner border border-gray-200">
+                            <h3 class="font-semibold text-2xl text-gray-800 mb-4 flex items-center gap-2">${t.sectionTest}</h3>
+                            <p class="text-gray-700 mb-5">${test.q}</p>
+                            <form id="${testId}" class="space-y-3">
+                                ${test.options.map((option, index) => `
+                                    <label class="flex items-center text-gray-700 cursor-pointer hover:bg-blue-50 p-3 rounded-md transition-colors border border-gray-200">
+                                        <input type="radio" name="answer" value="${index}" class="form-radio h-5 w-5 text-blue-600 focus:ring-blue-500">
+                                        <span class="ml-3 font-medium">${option}</span>
+                                    </label>
+                                `).join('')}
+                                <button type="button" onclick="checkTest(${id})" class="mt-5 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-xl transition-colors w-full md:w-auto shadow-lg hover:shadow-xl">
+                                    ${t.buttonCheck}
+                                </button>
+                            </form>
+                            <p id="test-feedback-${id}" class="mt-4 text-lg font-semibold"></p>
+                        </div>
+                    </div>
+                `;
+            }
+            updateCompletionDisplay();
+            updateProgressChart();
+        }
+
+        function renderSidebar() {
+            const container = document.getElementById('sidebar-navigation');
+            if (!container) return;
+            container.innerHTML = '';
+            bilingualModulesData.forEach(module => {
+                const moduleTitle = module.title[currentLang] || module.title.ru;
+                const overrideTitle = getOverrideShortTitle(module, currentLang);
+                const navTitle = overrideTitle || getShortNavTitle(moduleTitle);
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <button data-id="${module.id}" title="${moduleTitle}" class="nav-item transition-colors" onclick="setActiveModule(${module.id})">
+                        <span class="w-6 h-6 flex items-center justify-center">${module.icon}</span>
+                        <span class="text-label font-medium">${navTitle}</span>
+                    </button>
+                `;
+                container.appendChild(li);
+            });
+            const activeBtn = container.querySelector(`button[data-id="${currentModuleId}"]`);
+            if (activeBtn) activeBtn.classList.add('active');
+        }
+
+        function updateCompletionDisplay() {
+            const total = bilingualModulesData.length;
+            const completed = visitedModules.size;
+            const percentage = total > 0 ? Math.round((completed / total) * 100) : 0;
+            const t = uiText[currentLang];
+            
+            const element = document.getElementById('completion-display');
+            if (element) {
+                element.textContent = `${t.modulesLabel}: ${completed} из ${total} (${percentage}%)`;
+                
+                element.className = 'score-badge mt-4 mx-auto text-lg';
+                if (percentage >= 75) {
+                    element.classList.add('score-high');
+                } else if (completed > 0) {
+                    element.classList.add('score-medium');
+                } else {
+                    element.classList.add('score-low');
+                }
+            }
+        }
+
+        function updateTestScoreDisplay() {
+            const totalTests = bilingualModulesData.length;
+            const correctCount = correctlyCompletedTests.size;
+            const percentage = totalTests > 0 ? Math.round((correctCount / totalTests) * 100) : 0;
+            const t = uiText[currentLang];
+            
+            const scoreElement = document.getElementById('score-display');
+            if (scoreElement) {
+                scoreElement.textContent = `${t.testsLabel}: ${correctCount} из ${totalTests} (${percentage}%)`;
+                
+                scoreElement.className = 'score-badge mt-4 mx-auto text-lg';
+                if (percentage >= 75) {
+                    scoreElement.classList.add('score-high');
+                } else if (correctCount > 0) {
+                    scoreElement.classList.add('score-medium');
+                } else {
+                    scoreElement.classList.add('score-low');
+                }
+            }
+        }
+
+        function checkTest(moduleId) {
+            const moduleData = bilingualModulesData.find(m => m.id === moduleId);
+            if (!moduleData) return;
+
+            const t = uiText[currentLang];
+            const moduleContent = moduleData.content[currentLang] || moduleData.content.ru;
+
+            const form = document.getElementById(`test-${moduleId}`);
+            const feedbackElement = document.getElementById(`test-feedback-${moduleId}`);
+            const selectedOption = form.querySelector('input[name="answer"]:checked');
+            
+            if (!selectedOption) {
+                showFeedback(t.feedbackAttention, t.feedbackMessageEmpty, 'blue');
+                return;
+            }
+
+            const selectedIndex = parseInt(selectedOption.value);
+            const isCorrect = selectedIndex === moduleContent.миниТест.correct;
+            
+            if (isCorrect) {
+                if (!correctlyCompletedTests.has(moduleId)) {
+                    correctlyCompletedTests.add(moduleId);
+                    updateTestScoreDisplay();
+                }
+                
+                showFeedback(t.feedbackCorrect, t.feedbackMessageCorrect, 'green');
+                feedbackElement.textContent = t.feedbackTestCorrect;
+                feedbackElement.classList.remove('text-red-600');
+                feedbackElement.classList.add('text-green-600');
+            } else {
+                showFeedback(t.feedbackWrong, t.feedbackMessageWrong, 'red');
+                feedbackElement.textContent = t.feedbackTestWrong;
+                feedbackElement.classList.remove('text-green-600');
+                feedbackElement.classList.add('text-red-600');
+            }
+        }
+
+        function showFeedback(title, message, color = 'blue') {
+            const modal = document.getElementById('feedback-modal');
+            document.getElementById('feedback-title').textContent = title;
+            document.getElementById('feedback-message').textContent = message;
+            
+            const colorClass = color === 'green' ? 'text-green-600' : color === 'red' ? 'text-red-600' : 'text-blue-600';
+            document.getElementById('feedback-title').className = `text-2xl font-bold mb-3 ${colorClass}`;
+
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function setupFeedbackModal() {
+            const modal = document.getElementById('feedback-modal');
+            const closeButton = document.getElementById('close-feedback');
+            closeButton.addEventListener('click', () => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            });
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.add('hidden');
+                    modal.classList.remove('flex');
+                }
+            });
+        }
+        
+        function createProgressChart() {
+            const ctx = document.getElementById('progressChart').getContext('2d');
+            progressChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Изучено', 'Осталось'], // Keep fixed labels for Chart.js internals
+                    datasets: [{
+                        data: [0, bilingualModulesData.length],
+                        backgroundColor: ['#1a73e8', '#e0e0e0'],
+                        borderColor: '#f7f9fc',
+                        borderWidth: 6,
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '70%',
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const t = uiText[currentLang];
+                                    let label = context.dataIndex === 0 ? t.modulesLabel : (context.dataIndex === 1 ? 'Қалған' : 'Remaining');
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed !== null) {
+                                        label += context.parsed;
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function updateProgressChart() {
+            const completed = visitedModules.size;
+            const total = bilingualModulesData.length;
+            const remaining = total - completed;
+            progressChart.data.datasets[0].data = [completed, remaining];
+            progressChart.update();
+        }
+
+        function updateBonusModalContent() {
+            const t = uiText[currentLang];
+            const bonus = bonusData[currentLang] || bonusData.ru;
+            const bonusContent = document.getElementById('bonus-content');
+            
+            document.getElementById('bonus-modal-title').textContent = t.bonusModalTitle;
+
+            bonusContent.innerHTML = bonus.ideas.map(idea => `<div class="p-3 bg-gray-50 rounded-lg border border-gray-100">${idea}</div>`).join('');
+        }
+
+        function setupBonusModal() {
+            const bonusToggle = document.getElementById('bonus-toggle');
+            const bonusModal = document.getElementById('bonus-modal');
+            const closeModal = document.getElementById('close-modal');
+
+            bonusToggle.addEventListener('click', () => {
+                updateBonusModalContent();
+                bonusModal.classList.remove('hidden');
+                bonusModal.classList.add('flex');
+            });
+
+            closeModal.addEventListener('click', () => {
+                bonusModal.classList.add('hidden');
+                bonusModal.classList.remove('flex');
+            });
+            
+            bonusModal.addEventListener('click', (e) => {
+                if (e.target === bonusModal) {
+                    bonusModal.classList.add('hidden');
+                    bonusModal.classList.remove('flex');
+                }
+            });
+        }
+
+        function setupAiSettings() {
+            const openBtn = document.getElementById('open-ai-settings');
+            const modal = document.getElementById('ai-settings-modal');
+            const closeBtn = document.getElementById('close-ai-settings');
+            const keyInput = document.getElementById('ai-api-key');
+            const modelSelect = document.getElementById('ai-model');
+            if (!openBtn || !modal || !closeBtn || !keyInput || !modelSelect) return;
+            // init values
+            keyInput.value = apiKey;
+            modelSelect.value = apiModel;
+            openBtn.addEventListener('click', () => {
+                keyInput.value = apiKey;
+                modelSelect.value = apiModel;
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+            });
+            closeBtn.addEventListener('click', () => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            });
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.add('hidden');
+                    modal.classList.remove('flex');
+                }
+            });
+            document.getElementById('save-ai-settings').addEventListener('click', () => {
+                apiKey = keyInput.value.trim();
+                apiModel = modelSelect.value;
+                localStorage.setItem('gemini_api_key', apiKey);
+                localStorage.setItem('gemini_api_model', apiModel);
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                showFeedback('OK', 'Настройки ИИ сохранены.', 'green');
+            });
+        }
+
+        // --- COURSE LANDING & MATERIALS (tailored text) ---
+        function renderCourseLanding() {
+            const t = uiText[currentLang];
+            const title = document.getElementById('home-title');
+            const text = document.getElementById('home-text');
+            if (!title || !text) return;
+            if (currentLang === 'kk') {
+                title.textContent = 'Курс туралы';
+                text.textContent = 'Бұл курс Google Workspace-пен практикалық жұмысқа арналған: Meet, Sites және Classroom-дағы нақты тапсырмалар. Төменде модульдерге сілтемелер берілген.';
+            } else {
+                title.textContent = 'О курсе';
+                text.textContent = 'Курс ориентирован на практику в Google Workspace: реальные задания в Meet, Sites и Classroom. Ниже — быстрые ссылки на модули курса.';
+            }
+        }
+
+        function renderCourseMaterials() {
+            const list = document.getElementById('materials-list');
+            const video = document.getElementById('materials-video');
+            const title = document.getElementById('materials-title');
+            const intro = document.getElementById('materials-intro');
+            if (!list) return;
+            const moduleIds = [23,24,25,26,27,12,13,14,15,16,17,18,19,20,21,22];
+            list.innerHTML = moduleIds.map(id => {
+                const m = bilingualModulesData.find(x => x.id === id);
+                if (!m) return '';
+                const mTitle = m.title[currentLang] || m.title.ru;
+                const shortTitle = getOverrideShortTitle(m, currentLang) || getShortNavTitle(mTitle);
+                return `
+                    <button class="nav-item bg-white border border-gray-200 rounded-xl shadow-sm text-left" onclick="setActiveModule(${id}); window.scrollTo({top:0, behavior:'smooth'});">
+                        <div class="flex items-center gap-2"><span class="w-6 h-6">${m.icon}</span><span class="font-semibold">${shortTitle}</span></div>
+                    </button>
+                `;
+            }).join('');
+
+            if (currentLang === 'kk') {
+                title.textContent = 'Курс материалдары';
+                intro.textContent = 'Төменде курстың бейнесі. Қаласаңыз, модульдер тізімін көрсетейін.';
+            } else {
+                title.textContent = 'Материалы курса';
+                intro.textContent = 'Ниже — видео курса. При необходимости открою список модулей.';
+            }
+        }
+
+        // --- QUICK LINKS ---
+        function setupQuickLinks() { /* quick links removed by user */ }
+
+        function renderQuickLinks() {
+            /* noop */
+        }
+
+        // --- SUMMARY MODAL ---
+        function setupSummaryModal() {
+            const openBtn = document.getElementById('summary-toggle');
+            const modal = document.getElementById('summary-modal');
+            const closeBtn = document.getElementById('close-summary');
+            if (!openBtn || !modal || !closeBtn) return;
+            openBtn.addEventListener('click', () => {
+                updateSummaryContent();
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+            });
+            closeBtn.addEventListener('click', () => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            });
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.add('hidden');
+                    modal.classList.remove('flex');
+                }
+            });
+            updateSummaryTexts();
+        }
+
+        function updateSummaryTexts() {
+            const t = uiText[currentLang];
+            const btn = document.getElementById('summary-toggle');
+            const title = document.getElementById('summary-modal-title');
+            if (btn) btn.textContent = currentLang === 'kk' ? 'Конспект модулдер' : 'Конспект модулей';
+            if (title) title.textContent = currentLang === 'kk' ? 'Барлық модульдер конспектісі' : 'Конспект всех модулей';
+        }
+
+        function updateSummaryContent() {
+            const container = document.getElementById('summary-content');
+            if (!container) return;
+            const t = uiText[currentLang];
+            container.innerHTML = bilingualModulesData.map(m => {
+                const title = m.title[currentLang] || m.title.ru;
+                const c = m.content[currentLang] || m.content.ru;
+                return `
+                    <div class="p-4 rounded-lg border border-gray-200 bg-white">
+                        <div class="flex items-center gap-2 mb-2"><span class="w-6 h-6">${m.icon}</span><h3 class="font-semibold text-lg">${title}</h3></div>
+                        <p class="mb-2"><strong>${t.sectionGoal}</strong> ${c.goal || ''}</p>
+                        <p class="mb-2"><strong>${t.sectionAssignment}</strong> ${c.задание || ''}</p>
+                        <button class="mt-2 text-blue-600 font-semibold underline" onclick="setActiveModule(${m.id}); document.getElementById('summary-modal').classList.add('hidden'); document.getElementById('summary-modal').classList.remove('flex');">Перейти к модулю</button>
+                    </div>
+                `;
+            }).join('');
+        }
+    </script>

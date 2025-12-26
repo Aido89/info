@@ -1,0 +1,1445 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AAAThre — IT-Инфраструктура, Видеостриминг и Тренинги</title>
+    <meta name="description" content="Команда интеграторов цифровых решений. IT-инфраструктура, онлайн-трансляции и обучение цифровым навыкам.">
+    
+    <!-- Preconnect для оптимизации -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="leading-relaxed">
+    <!-- Фиксированная навигация -->
+    <nav id="main-nav" class="nav-fixed sticky top-0 z-50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+            <div class="flex justify-between items-center">
+                <a href="#top" class="brand-mark flex items-center space-x-3">
+                    <span class="brand-icon">
+                        <img src="images/logo.svg" alt="AAAThre Logo" class="brand-icon-img">
+                    </span>
+                    <span class="brand-text">AAAThre</span>
+                </a>
+                <div class="hidden md:flex space-x-6 text-gray-600 font-medium">
+                    <a href="#about" class="nav-link hover:accent-text transition duration-200">Обо мне</a>
+                    <a href="#services" class="nav-link hover:accent-text transition duration-200">Направления</a>
+                    <a href="#skills" class="nav-link hover:accent-text transition duration-200">Навыки</a>
+                    <a href="#cases" class="nav-link hover:accent-text transition duration-200">Кейсы</a>
+                    <a href="#formats" class="nav-link hover:accent-text transition duration-200">Услуги</a>
+                    <a href="#contacts" class="nav-link hover:accent-text transition duration-200">Контакты</a>
+                    <a href="training.html" class="nav-link hover:accent-text transition duration-200">Обучение</a>
+                </div>
+                <!-- Мобильное меню -->
+                <button id="mobile-menu-btn" class="md:hidden text-gray-600 hover:text-teal-600 transition">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+            <!-- Мобильное меню (выпадающее) -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 border-t border-gray-200">
+                <div class="flex flex-col space-y-3 pt-4">
+                    <a href="#about" class="nav-link hover:accent-text transition duration-200">Обо мне</a>
+                    <a href="#services" class="nav-link hover:accent-text transition duration-200">Направления</a>
+                    <a href="#skills" class="nav-link hover:accent-text transition duration-200">Навыки</a>
+                    <a href="#cases" class="nav-link hover:accent-text transition duration-200">Кейсы</a>
+                    <a href="#formats" class="nav-link hover:accent-text transition duration-200">Услуги</a>
+                    <a href="#contacts" class="nav-link hover:accent-text transition duration-200">Контакты</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Главный контейнер -->
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- 1. Главный экран (Hero) -->
+        <header class="pt-20 md:pt-32 pb-16 fade-in">
+            <div class="grid md:grid-cols-12 gap-8 items-center">
+                <!-- Левая колонка: Текст и кнопки -->
+                <div class="md:col-span-7">
+                    <h1 class="text-5xl sm:text-6xl font-extrabold text-gray-900 leading-tight mb-4 animate-slide-up">
+                        AAAThre
+                    </h1>
+                    <!-- Слоган -->
+                    <p class="text-2xl sm:text-3xl font-bold text-teal-600 mb-4 animate-slide-up">
+                        Превращаем сложные технологии в простые решения
+                    </p>
+                    <!-- Названия компаний / Партнеры -->
+                    <div class="mb-6 animate-slide-up-delay">
+                        <p class="text-sm font-semibold text-gray-500 mb-2 uppercase tracking-wide">Работаю с</p>
+                        <div class="flex flex-wrap gap-3 items-center">
+                            <span class="text-lg font-semibold text-gray-700">Верный капитал</span>
+                            <span class="text-gray-400">•</span>
+                            <span class="text-lg font-semibold text-gray-700">Sofia Soft</span>
+                            <span class="text-gray-400">•</span>
+                            <span class="text-lg font-semibold text-gray-700">Чемпионат по STEM</span>
+                        </div>
+                    </div>
+                    <!-- Бейджи/Чипы с ролями -->
+                    <div class="flex flex-wrap gap-2 mb-6 animate-slide-up-delay">
+                        <span class="role-chip"><i class="fas fa-puzzle-piece mr-2"></i> Интегратор решений / Solution integrator</span>
+                        <span class="role-chip"><i class="fas fa-camera-retro mr-2"></i> Техпродюсер / Technical Producer</span>
+                        <span class="role-chip"><i class="fas fa-server mr-2"></i> Systems/Platform Engineer</span>
+                        <span class="role-chip"><i class="fas fa-tools mr-2"></i> Generalist</span>
+                    </div>
+                    <p class="text-lg text-gray-600 mb-10 animate-slide-up-delay-3">
+                        Мы — команда из Казахстана. Строим надежные IT-системы, делаем профессиональные трансляции и обучаем людей цифровым навыкам.
+                    </p>
+                    <!-- Кнопки призыва к действию -->
+                    <div class="flex flex-col sm:flex-row flex-wrap gap-3 animate-slide-up-delay-4">
+                        <a href="https://wa.me/message/VGBVTLQBLHQ7I1" target="_blank" class="btn-primary">
+                            <i class="fab fa-whatsapp mr-2"></i> Заказать консультацию
+                        </a>
+                        <a href="#media-card" class="btn-secondary">
+                            <i class="fas fa-video mr-2"></i> Организовать трансляцию
+                        </a>
+                        <a href="#formats" class="btn-secondary">
+                            <i class="fas fa-graduation-cap mr-2"></i> Пригласить как тренера
+                        </a>
+                    </div>
+                </div>
+                <!-- Правая колонка: Логотип с анимированным фоном -->
+                <div class="md:col-span-5 flex justify-center md:justify-end order-first md:order-none mb-8 md:mb-0">
+                    <div class="hero-logo-circle relative w-56 h-56 rounded-full p-2 shadow-2xl animate-float">
+                        <!-- Анимированные сферы (Blobs) -->
+                        <div class="blob-container">
+                            <div class="blob blob-1"></div>
+                            <div class="blob blob-2"></div>
+                        </div>
+                        <!-- Логотип -->
+                        <img src="images/logo.svg" alt="Логотип AAAThre"
+                             class="relative z-20 w-full h-full object-contain rounded-full p-4"
+                             onerror="this.onerror=null; this.src='https://placehold.co/224x224/ffffff/0d9488?text=AK';">
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- 2. Обо мне (Две колонки) -->
+        <section id="about" class="py-16 scroll-mt-20">
+            <h2 class="section-header text-4xl">Обо мне и моем подходе</h2>
+            <div class="grid md:grid-cols-2 gap-10">
+                <!-- Левая колонка: Текст о подходе -->
+                <div class="space-y-6 text-gray-700 leading-relaxed text-lg">
+                    <p class="text-gray-600">
+                        Наш путь начался с простого вопроса: как сделать так, чтобы технологии помогали, а не мешали?
+                    </p>
+                    <p class="text-gray-600">
+                        За <strong>15 лет в IT</strong>, <strong>10 лет в продакшене и стриминге</strong> и <strong>5 лет в обучении</strong> мы научились собирать сложные вещи в понятные решения — без лишней теории и «магии».
+                    </p>
+                    <div class="mt-6 pt-6 border-t border-gray-200">
+                        <h3 class="font-bold text-gray-900 mb-4 text-xl">Что мы делаем</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <p class="font-semibold text-gray-800 mb-2">В IT:</p>
+                                <p class="text-gray-600">Гибридные среды (AD, Entra ID, Intune), автоматизация рутины через PowerShell, мониторинг (Grafana), базовая безопасность и порядок в инфраструктуре.</p>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-gray-800 mb-2">В медиа:</p>
+                                <p class="text-gray-600">Прямые эфиры без сюрпризов — продумываем схему, резервирование, звук и картинку, чтобы всё прошло спокойно.</p>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-gray-800 mb-2">В обучении:</p>
+                                <p class="text-gray-600">Помогаем людям перестать бояться технологий и начать использовать их в работе.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Правая колонка: Факты и интересы -->
+                <div class="space-y-4">
+                    <div class="about-fact hover-scale">
+                        <i class="fas fa-briefcase text-xl accent-text mt-1"></i>
+                        <div>
+                            <p class="font-bold text-gray-900">Опыт работы</p>
+                            <p class="text-sm text-gray-600"><strong>15 лет</strong> в IT-инфраструктуре и системном администрировании. <strong>10 лет</strong> в продакшене и стриминге. <strong>5 лет</strong> в обучении и тренингах.</p>
+                        </div>
+                    </div>
+                    <div class="about-fact hover-scale">
+                        <i class="fas fa-heart text-xl accent-text mt-1"></i>
+                        <div>
+                            <p class="font-bold text-gray-900">Немного личного</p>
+                            <p class="text-sm text-gray-600">Меня вдохновляет история тюркского мира, тактический спорт (Airsoft, <strong>Barys Airsoft Team</strong>) и автоматизация умного дома.</p>
+                        </div>
+                    </div>
+                    <div class="about-fact hover-scale">
+                        <i class="fas fa-user-circle text-xl accent-text mt-1"></i>
+                        <div>
+                            <p class="font-bold text-gray-900">В сети</p>
+                            <p class="text-sm text-gray-600">Меня можно найти как <strong>SysAdminAstana</strong>.</p>
+                        </div>
+                    </div>
+                    <div class="about-fact hover-scale">
+                        <i class="fas fa-comments text-xl accent-text mt-1"></i>
+                        <div>
+                            <p class="font-bold text-gray-900">Языки</p>
+                            <p class="text-sm text-gray-600">Казахский (родной), русский (свободно), английский (техдок + рабочее общение).</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Чем я занимаюсь (ключевые направления) -->
+        <section id="services" class="py-16 scroll-mt-20">
+            <h2 class="section-header text-4xl">Ключевые Направления</h2>
+            <div class="grid sm:grid-cols-2 gap-8">
+                <!-- Карточка 1: IT-инфраструктура -->
+                <div class="card-style hover-lift">
+                    <i class="fas fa-server text-4xl accent-text mb-4"></i>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">IT-инфраструктура и кибербезопасность</h3>
+                    <p class="text-gray-600 text-base mb-4">Установка, настройка и администрирование сетевого и серверного оборудования различных вендоров. Проектирование надежных корпоративных сред.</p>
+                    
+                    <!-- Серверное оборудование -->
+                    <div class="mb-4 pb-4 border-b border-gray-100">
+                        <h4 class="text-sm font-bold text-gray-800 mb-2 flex items-center">
+                            <i class="fas fa-server mr-2 accent-text"></i> Серверное оборудование
+                        </h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="chip-with-icon" title="HP">
+                                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/hp.svg" alt="HP" class="vendor-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                                <i class="fas fa-server mr-1" style="display:none;"></i> HP
+                            </span>
+                            <span class="chip-with-icon" title="Dell">
+                                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/dell.svg" alt="Dell" class="vendor-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                                <i class="fas fa-server mr-1" style="display:none;"></i> Dell
+                            </span>
+                            <span class="chip-with-icon" title="Fujitsu">
+                                <i class="fas fa-server mr-1"></i> Fujitsu
+                            </span>
+                            <span class="chip-with-icon" title="Supermicro">
+                                <i class="fas fa-server mr-1"></i> Supermicro
+                            </span>
+                            <span class="chip-with-icon" title="IBM">
+                                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/ibm.svg" alt="IBM" class="vendor-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                                <i class="fas fa-server mr-1" style="display:none;"></i> IBM
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Сетевое оборудование -->
+                    <div class="mb-4 pb-4 border-b border-gray-100">
+                        <h4 class="text-sm font-bold text-gray-800 mb-2 flex items-center">
+                            <i class="fas fa-network-wired mr-2 accent-text"></i> Сетевое оборудование
+                        </h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="chip-with-icon" title="MikroTik">
+                                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/mikrotik.svg" alt="MikroTik" class="vendor-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                                <i class="fas fa-router mr-1" style="display:none;"></i> MikroTik
+                            </span>
+                            <span class="chip-with-icon" title="FortiGate">
+                                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/fortinet.svg" alt="FortiGate" class="vendor-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                                <i class="fas fa-shield-alt mr-1" style="display:none;"></i> FortiGate
+                            </span>
+                            <span class="chip-with-icon" title="Cisco">
+                                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/cisco.svg" alt="Cisco" class="vendor-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                                <i class="fas fa-network-wired mr-1" style="display:none;"></i> Cisco
+                            </span>
+                            <span class="chip-with-icon" title="Juniper">
+                                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/junipernetworks.svg" alt="Juniper" class="vendor-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                                <i class="fas fa-network-wired mr-1" style="display:none;"></i> Juniper
+                            </span>
+                            <span class="chip-with-icon" title="Aruba">
+                                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/arubanetworks.svg" alt="Aruba" class="vendor-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                                <i class="fas fa-wifi mr-1" style="display:none;"></i> Aruba
+                            </span>
+                            <span class="chip-with-icon" title="Huawei">
+                                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/huawei.svg" alt="Huawei" class="vendor-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                                <i class="fas fa-network-wired mr-1" style="display:none;"></i> Huawei
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Операционные системы Linux -->
+                    <div class="mb-4 pb-4 border-b border-gray-100">
+                        <h4 class="text-sm font-bold text-gray-800 mb-2 flex items-center">
+                            <i class="fab fa-linux mr-2 accent-text"></i> Операционные системы Linux
+                        </h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="chip-with-icon" title="Harvester">
+                                <i class="fas fa-cube mr-1"></i> Harvester
+                            </span>
+                            <span class="chip-with-icon" title="Kubernetes">
+                                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/kubernetes.svg" alt="Kubernetes" class="vendor-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                                <i class="fab fa-docker mr-1" style="display:none;"></i> Kubernetes
+                            </span>
+                            <span class="chip-with-icon" title="Proxmox">
+                                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/proxmox.svg" alt="Proxmox" class="vendor-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                                <i class="fas fa-cube mr-1" style="display:none;"></i> Proxmox
+                            </span>
+                            <span class="chip-with-icon" title="KVM">
+                                <i class="fas fa-desktop mr-1"></i> KVM
+                            </span>
+                            <span class="chip-with-icon" title="Debian">
+                                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/debian.svg" alt="Debian" class="vendor-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                                <i class="fab fa-linux mr-1" style="display:none;"></i> Debian
+                            </span>
+                            <span class="chip-with-icon" title="Ubuntu">
+                                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/ubuntu.svg" alt="Ubuntu" class="vendor-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                                <i class="fab fa-ubuntu mr-1" style="display:none;"></i> Ubuntu
+                            </span>
+                            <span class="chip-with-icon" title="CentOS">
+                                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/centos.svg" alt="CentOS" class="vendor-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                                <i class="fab fa-linux mr-1" style="display:none;"></i> CentOS
+                            </span>
+                            <span class="chip-with-icon" title="RedHat">
+                                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/redhat.svg" alt="RedHat" class="vendor-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                                <i class="fab fa-redhat mr-1" style="display:none;"></i> RedHat
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Microsoft экосистема -->
+                    <div class="mb-4 pb-4 border-b border-gray-100">
+                        <h4 class="text-sm font-bold text-gray-800 mb-2 flex items-center">
+                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/microsoft.svg" alt="Microsoft" class="vendor-icon mr-2" style="width: 16px; height: 16px;" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                            <i class="fab fa-microsoft mr-2 accent-text" style="display:none;"></i> Microsoft экосистема
+                        </h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="chip-with-icon" title="Active Directory">
+                                <i class="fas fa-sitemap mr-1"></i> AD
+                            </span>
+                            <span class="chip-with-icon" title="Entra ID">
+                                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/microsoftazure.svg" alt="Azure" class="vendor-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                                <i class="fab fa-microsoft mr-1" style="display:none;"></i> Entra ID
+                            </span>
+                            <span class="chip-with-icon" title="GPO">
+                                <i class="fas fa-cog mr-1"></i> GPO
+                            </span>
+                            <span class="chip-with-icon" title="Intune">
+                                <i class="fas fa-mobile-alt mr-1"></i> Intune (MDM)
+                            </span>
+                            <span class="chip-with-icon" title="Windows Server">
+                                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/microsoftwindows.svg" alt="Windows" class="vendor-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                                <i class="fab fa-windows mr-1" style="display:none;"></i> Windows Server
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Безопасность -->
+                    <div class="mb-4 pb-4 border-b border-gray-100">
+                        <h4 class="text-sm font-bold text-gray-800 mb-2 flex items-center">
+                            <i class="fas fa-shield-alt mr-2 accent-text"></i> Безопасность
+                        </h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="chip-with-icon" title="Kaspersky">
+                                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/kaspersky.svg" alt="Kaspersky" class="vendor-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                                <i class="fas fa-shield-virus mr-1" style="display:none;"></i> Kaspersky Cloud
+                            </span>
+                            <span class="chip-with-icon" title="VPN">
+                                <i class="fas fa-network-wired mr-1"></i> VPN (site-to-site)
+                            </span>
+                            <span class="chip-with-icon" title="VLAN">
+                                <i class="fas fa-project-diagram mr-1"></i> VLAN
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Мониторинг и DevOps -->
+                    <div class="mb-4">
+                        <h4 class="text-sm font-bold text-gray-800 mb-2 flex items-center">
+                            <i class="fas fa-chart-line mr-2 accent-text"></i> Мониторинг и DevOps
+                        </h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="chip-with-icon" title="Zabbix">
+                                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/zabbix.svg" alt="Zabbix" class="vendor-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                                <i class="fas fa-chart-line mr-1" style="display:none;"></i> Zabbix
+                            </span>
+                            <span class="chip-with-icon" title="Grafana">
+                                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/grafana.svg" alt="Grafana" class="vendor-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                                <i class="fas fa-chart-area mr-1" style="display:none;"></i> Grafana
+                            </span>
+                            <span class="chip-with-icon" title="PowerShell">
+                                <i class="fab fa-microsoft mr-1"></i> PowerShell
+                            </span>
+                            <span class="chip-with-icon" title="Bash">
+                                <i class="fas fa-terminal mr-1"></i> Bash
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Gemini Feature Button -->
+                    <div class="mt-4 pt-4 border-t border-gray-100">
+                        <button onclick="openAIModal()" class="w-full px-4 py-2 bg-gradient-to-r from-yellow-500 to-orange-500 text-white font-bold rounded-xl shadow-md hover:shadow-xl hover:scale-105 transition duration-300 flex items-center justify-center">
+                            <i class="fas fa-magic mr-2"></i> ✨ AI-консультация (Beta)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Карточка 2: Видеостриминг -->
+                <div id="media-card" class="card-style hover-lift">
+                    <i class="fas fa-video text-4xl accent-text mb-4"></i>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Видеостриминг и студийная съемка</h3>
+                    <p class="text-gray-600 text-base mb-4">Профессиональный медиапродакшен и бесперебойное вещание. Установка мультимедийного и обучающего оборудования.</p>
+                    
+                    <!-- Live-продакшен -->
+                    <div class="mb-4 pb-4 border-b border-gray-100">
+                        <h4 class="text-sm font-bold text-gray-800 mb-2 flex items-center">
+                            <i class="fas fa-broadcast-tower mr-2 accent-text"></i> Live-продакшен
+                        </h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="chip-with-icon" title="Многокамерные эфиры">
+                                <i class="fas fa-video mr-1"></i> Многокамерные эфиры
+                            </span>
+                            <span class="chip-with-icon" title="YouTube">
+                                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/youtube.svg" alt="YouTube" class="vendor-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                                <i class="fab fa-youtube mr-1" style="display:none;"></i> YouTube
+                            </span>
+                            <span class="chip-with-icon" title="Zoom">
+                                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/zoom.svg" alt="Zoom" class="vendor-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                                <i class="fas fa-video mr-1" style="display:none;"></i> Zoom
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Оборудование -->
+                    <div class="mb-4 pb-4 border-b border-gray-100">
+                        <h4 class="text-sm font-bold text-gray-800 mb-2 flex items-center">
+                            <i class="fas fa-camera-retro mr-2 accent-text"></i> Оборудование
+                        </h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="chip-with-icon" title="PTZ-камеры">
+                                <i class="fas fa-video mr-1"></i> PTZ-камеры
+                            </span>
+                            <span class="chip-with-icon" title="Видеомикшеры">
+                                <i class="fas fa-sliders-h mr-1"></i> Видеомикшеры
+                            </span>
+                            <span class="chip-with-icon" title="Аудиопульты">
+                                <i class="fas fa-volume-up mr-1"></i> Аудиопульты
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Мультимедиа и обучение -->
+                    <div class="mb-4 pb-4 border-b border-gray-100">
+                        <h4 class="text-sm font-bold text-gray-800 mb-2 flex items-center">
+                            <i class="fas fa-tv mr-2 accent-text"></i> Мультимедиа и обучение
+                        </h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="chip-with-icon" title="LED экраны">
+                                <i class="fas fa-desktop mr-1"></i> LED экраны
+                            </span>
+                            <span class="chip-with-icon" title="Звуковое оборудование">
+                                <i class="fas fa-microphone mr-1"></i> Звук
+                            </span>
+                            <span class="chip-with-icon" title="Световое оборудование">
+                                <i class="fas fa-lightbulb mr-1"></i> Свет
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Слаботочные системы -->
+                    <div class="mb-4 pb-4 border-b border-gray-100">
+                        <h4 class="text-sm font-bold text-gray-800 mb-2 flex items-center">
+                            <i class="fas fa-network-wired mr-2 accent-text"></i> Слаботочные системы
+                        </h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="chip-with-icon" title="Охранные системы">
+                                <i class="fas fa-shield-alt mr-1"></i> Охранные системы
+                            </span>
+                            <span class="chip-with-icon" title="Видеонаблюдение">
+                                <i class="fas fa-camera mr-1"></i> Видеонаблюдение
+                            </span>
+                            <span class="chip-with-icon" title="СКС">
+                                <i class="fas fa-plug mr-1"></i> СКС
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Софт -->
+                    <div class="mb-4 pb-4 border-b border-gray-100">
+                        <h4 class="text-sm font-bold text-gray-800 mb-2 flex items-center">
+                            <i class="fas fa-laptop-code mr-2 accent-text"></i> Софт
+                        </h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="chip-with-icon" title="vMix">
+                                <i class="fas fa-film mr-1"></i> vMix
+                            </span>
+                            <span class="chip-with-icon" title="OBS">
+                                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/obsstudio.svg" alt="OBS" class="vendor-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                                <i class="fas fa-broadcast-tower mr-1" style="display:none;"></i> OBS
+                            </span>
+                            <span class="chip-with-icon" title="Resolume">
+                                <i class="fas fa-magic mr-1"></i> Resolume
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Постпродакшен -->
+                    <div class="mb-4">
+                        <h4 class="text-sm font-bold text-gray-800 mb-2 flex items-center">
+                            <i class="fas fa-cut mr-2 accent-text"></i> Постпродакшен
+                        </h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="chip-with-icon" title="Adobe Premiere Pro">
+                                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/adobepremierepro.svg" alt="Premiere Pro" class="vendor-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                                <i class="fab fa-adobe mr-1" style="display:none;"></i> Premiere Pro
+                            </span>
+                            <span class="chip-with-icon" title="After Effects">
+                                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/adobeaftereffects.svg" alt="After Effects" class="vendor-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                                <i class="fab fa-adobe mr-1" style="display:none;"></i> After Effects
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Карточка 3: Обучение и тренинги -->
+                <div class="card-style hover-lift">
+                    <i class="fas fa-chalkboard-teacher text-4xl accent-text mb-4"></i>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Обучение и тренинги (цифровые навыки, ИИ)</h3>
+                    <p class="text-gray-600 text-base mb-4">Передача сложных технических знаний простым языком. Практические курсы и мастер-классы для педагогов и специалистов.</p>
+                    
+                    <!-- Google Workspace -->
+                    <div class="mb-4 pb-4 border-b border-gray-100">
+                        <h4 class="text-sm font-bold text-gray-800 mb-2 flex items-center">
+                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/google.svg" alt="Google" class="vendor-icon mr-2" style="width: 16px; height: 16px;" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                            <i class="fab fa-google mr-2 accent-text" style="display:none;"></i> Google Workspace
+                        </h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="chip-with-icon" title="Тренинги для педагогов">
+                                <i class="fas fa-user-graduate mr-1"></i> Для педагогов
+                            </span>
+                            <span class="chip-with-icon" title="Тренинги для сотрудников">
+                                <i class="fas fa-users mr-1"></i> Для сотрудников
+                            </span>
+                            <span class="chip-with-icon" title="Коллаборация">
+                                <i class="fas fa-handshake mr-1"></i> Коллаборация
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- AI и STEAM -->
+                    <div class="mb-4 pb-4 border-b border-gray-100">
+                        <h4 class="text-sm font-bold text-gray-800 mb-2 flex items-center">
+                            <i class="fas fa-robot mr-2 accent-text"></i> AI и STEAM
+                        </h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="chip-with-icon" title="ИИ в обучении">
+                                <i class="fas fa-brain mr-1"></i> Применение ИИ
+                            </span>
+                            <span class="chip-with-icon" title="STEAM">
+                                <i class="fas fa-flask mr-1"></i> STEAM
+                            </span>
+                            <span class="chip-with-icon" title="Робототехника">
+                                <i class="fas fa-cog mr-1"></i> Робототехника
+                            </span>
+                            <span class="chip-with-icon" title="Программирование">
+                                <i class="fas fa-code mr-1"></i> Программирование
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Медиаграмотность -->
+                    <div class="mb-4 pb-4 border-b border-gray-100">
+                        <h4 class="text-sm font-bold text-gray-800 mb-2 flex items-center">
+                            <i class="fas fa-book-reader mr-2 accent-text"></i> Медиаграмотность
+                        </h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="chip-with-icon" title="Видеостриминг">
+                                <i class="fas fa-video mr-1"></i> Видеостриминг
+                            </span>
+                            <span class="chip-with-icon" title="Мобилография">
+                                <i class="fas fa-mobile-alt mr-1"></i> Мобилография
+                            </span>
+                            <span class="chip-with-icon" title="Цифровые навыки">
+                                <i class="fas fa-laptop mr-1"></i> Цифровые навыки
+                            </span>
+                            <span class="chip-with-icon" title="Контент-мейкинг">
+                                <i class="fas fa-photo-video mr-1"></i> Контент-мейкинг
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Форматы -->
+                    <div class="mb-4">
+                        <h4 class="text-sm font-bold text-gray-800 mb-2 flex items-center">
+                            <i class="fas fa-calendar-alt mr-2 accent-text"></i> Форматы обучения
+                        </h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="chip-with-icon" title="Семинары">
+                                <i class="fas fa-chalkboard mr-1"></i> Семинары
+                            </span>
+                            <span class="chip-with-icon" title="Мастер-классы">
+                                <i class="fas fa-tools mr-1"></i> Мастер-классы
+                            </span>
+                            <span class="chip-with-icon" title="Практические курсы">
+                                <i class="fas fa-hands-on mr-1"></i> Практические курсы
+                            </span>
+                            <span class="chip-with-icon" title="Онлайн-обучение">
+                                <i class="fas fa-globe mr-1"></i> Онлайн
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Карточка 4: Консалтинг и продуктовые идеи -->
+                <div class="card-style hover-lift">
+                    <i class="fas fa-lightbulb text-4xl accent-text mb-4"></i>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Консалтинг и продуктовые идеи</h3>
+                    <p class="text-gray-600 text-base mb-4">Архитектура сервисов, объединяющих IT и бизнес-логику. Разработка и запуск цифровых продуктов от идеи до MVP.</p>
+                    
+                    <!-- Разработка продуктов -->
+                    <div class="mb-4 pb-4 border-b border-gray-100">
+                        <h4 class="text-sm font-bold text-gray-800 mb-2 flex items-center">
+                            <i class="fas fa-rocket mr-2 accent-text"></i> Разработка продуктов
+                        </h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="chip-with-icon" title="IT-сервисы">
+                                <i class="fas fa-cloud mr-1"></i> IT-сервисы
+                            </span>
+                            <span class="chip-with-icon" title="MVP">
+                                <i class="fas fa-seedling mr-1"></i> MVP
+                            </span>
+                            <span class="chip-with-icon" title="Подписочные модели">
+                                <i class="fas fa-sync-alt mr-1"></i> Подписки
+                            </span>
+                            <span class="chip-with-icon" title="Автомойка по подписке">
+                                <i class="fas fa-car mr-1"></i> Автомойка SaaS
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- AI-автоматизация -->
+                    <div class="mb-4 pb-4 border-b border-gray-100">
+                        <h4 class="text-sm font-bold text-gray-800 mb-2 flex items-center">
+                            <i class="fas fa-robot mr-2 accent-text"></i> AI-автоматизация
+                        </h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="chip-with-icon" title="Сметы в строительстве">
+                                <i class="fas fa-calculator mr-1"></i> Сметы в строительстве
+                            </span>
+                            <span class="chip-with-icon" title="AI-агенты">
+                                <i class="fas fa-user-robot mr-1"></i> AI-агенты
+                            </span>
+                            <span class="chip-with-icon" title="Автоматизация процессов">
+                                <i class="fas fa-cogs mr-1"></i> Автоматизация
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- LLM и AI-серверы -->
+                    <div class="mb-4 pb-4 border-b border-gray-100">
+                        <h4 class="text-sm font-bold text-gray-800 mb-2 flex items-center">
+                            <i class="fas fa-server mr-2 accent-text"></i> LLM и AI-серверы
+                        </h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="chip-with-icon" title="Локальные AI-серверы">
+                                <i class="fas fa-brain mr-1"></i> Локальные AI
+                            </span>
+                            <span class="chip-with-icon" title="Развертывание моделей">
+                                <i class="fas fa-cube mr-1"></i> Развертывание моделей
+                            </span>
+                            <span class="chip-with-icon" title="LLM">
+                                <i class="fas fa-language mr-1"></i> LLM
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Автоматизация процессов -->
+                    <div class="mb-4 pb-4 border-b border-gray-100">
+                        <h4 class="text-sm font-bold text-gray-800 mb-2 flex items-center">
+                            <i class="fas fa-project-diagram mr-2 accent-text"></i> Автоматизация процессов
+                        </h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="chip-with-icon" title="n8n">
+                                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/n8n.svg" alt="n8n" class="vendor-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                                <i class="fas fa-project-diagram mr-1" style="display:none;"></i> n8n
+                            </span>
+                            <span class="chip-with-icon" title="Workflow automation">
+                                <i class="fas fa-stream mr-1"></i> Workflow
+                            </span>
+                            <span class="chip-with-icon" title="Интеграции">
+                                <i class="fas fa-plug mr-1"></i> Интеграции
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Консалтинг -->
+                    <div class="mb-4">
+                        <h4 class="text-sm font-bold text-gray-800 mb-2 flex items-center">
+                            <i class="fas fa-handshake mr-2 accent-text"></i> Консалтинг
+                        </h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="chip-with-icon" title="Пилотные проекты">
+                                <i class="fas fa-flask mr-1"></i> Пилотные проекты
+                            </span>
+                            <span class="chip-with-icon" title="Архитектура сервисов">
+                                <i class="fas fa-sitemap mr-1"></i> Архитектура
+                            </span>
+                            <span class="chip-with-icon" title="Техническое сопровождение">
+                                <i class="fas fa-headset mr-1"></i> Сопровождение
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Карточка 5: Ремонт и обслуживание техники -->
+                <div class="card-style hover-lift">
+                    <i class="fas fa-tools text-4xl accent-text mb-4"></i>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Ремонт и обслуживание техники</h3>
+                    <p class="text-gray-600 text-base mb-4">Профессиональный ремонт и настройка компьютерной техники, восстановление данных и техническая поддержка.</p>
+                    
+                    <!-- Ремонт оборудования -->
+                    <div class="mb-4 pb-4 border-b border-gray-100">
+                        <h4 class="text-sm font-bold text-gray-800 mb-2 flex items-center">
+                            <i class="fas fa-desktop mr-2 accent-text"></i> Ремонт оборудования
+                        </h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="chip-with-icon" title="Персональные компьютеры">
+                                <i class="fas fa-desktop mr-1"></i> ПК
+                            </span>
+                            <span class="chip-with-icon" title="Ноутбуки">
+                                <i class="fas fa-laptop mr-1"></i> Ноутбуки
+                            </span>
+                            <span class="chip-with-icon" title="Моноблоки">
+                                <i class="fas fa-tv mr-1"></i> Моноблоки
+                            </span>
+                            <span class="chip-with-icon" title="Диагностика">
+                                <i class="fas fa-stethoscope mr-1"></i> Диагностика
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Работы по ОС и ПО -->
+                    <div class="mb-4 pb-4 border-b border-gray-100">
+                        <h4 class="text-sm font-bold text-gray-800 mb-2 flex items-center">
+                            <i class="fas fa-cog mr-2 accent-text"></i> Работы по ОС и ПО
+                        </h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="chip-with-icon" title="Установка ОС">
+                                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/microsoftwindows.svg" alt="Windows" class="vendor-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                                <i class="fab fa-windows mr-1" style="display:none;"></i> Установка Windows
+                            </span>
+                            <span class="chip-with-icon" title="Linux">
+                                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/ubuntu.svg" alt="Linux" class="vendor-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                                <i class="fab fa-linux mr-1" style="display:none;"></i> Установка Linux
+                            </span>
+                            <span class="chip-with-icon" title="Драйверы">
+                                <i class="fas fa-download mr-1"></i> Установка драйверов
+                            </span>
+                            <span class="chip-with-icon" title="Программное обеспечение">
+                                <i class="fas fa-box mr-1"></i> Установка ПО
+                            </span>
+                            <span class="chip-with-icon" title="Оптимизация">
+                                <i class="fas fa-tachometer-alt mr-1"></i> Оптимизация системы
+                            </span>
+                            <span class="chip-with-icon" title="Удаление вирусов">
+                                <i class="fas fa-shield-virus mr-1"></i> Удаление вирусов
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Восстановление данных -->
+                    <div class="mb-4 pb-4 border-b border-gray-100">
+                        <h4 class="text-sm font-bold text-gray-800 mb-2 flex items-center">
+                            <i class="fas fa-database mr-2 accent-text"></i> Восстановление данных
+                        </h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="chip-with-icon" title="Жесткие диски">
+                                <i class="fas fa-hdd mr-1"></i> HDD/SSD
+                            </span>
+                            <span class="chip-with-icon" title="Флеш-накопители">
+                                <i class="fas fa-usb mr-1"></i> USB-накопители
+                            </span>
+                            <span class="chip-with-icon" title="Карты памяти">
+                                <i class="fas fa-sd-card mr-1"></i> SD-карты
+                            </span>
+                            <span class="chip-with-icon" title="Восстановление после форматирования">
+                                <i class="fas fa-undo mr-1"></i> После форматирования
+                            </span>
+                            <span class="chip-with-icon" title="Восстановление удаленных файлов">
+                                <i class="fas fa-trash-restore mr-1"></i> Удаленные файлы
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Сопутствующие работы -->
+                    <div class="mb-4">
+                        <h4 class="text-sm font-bold text-gray-800 mb-2 flex items-center">
+                            <i class="fas fa-wrench mr-2 accent-text"></i> Сопутствующие работы
+                        </h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="chip-with-icon" title="Чистка от пыли">
+                                <i class="fas fa-broom mr-1"></i> Чистка от пыли
+                            </span>
+                            <span class="chip-with-icon" title="Замена термопасты">
+                                <i class="fas fa-thermometer-half mr-1"></i> Замена термопасты
+                            </span>
+                            <span class="chip-with-icon" title="Замена комплектующих">
+                                <i class="fas fa-microchip mr-1"></i> Замена комплектующих
+                            </span>
+                            <span class="chip-with-icon" title="Настройка сети">
+                                <i class="fas fa-network-wired mr-1"></i> Настройка сети
+                            </span>
+                            <span class="chip-with-icon" title="Техническая поддержка">
+                                <i class="fas fa-headset mr-1"></i> Техподдержка
+                            </span>
+                            <span class="chip-with-icon" title="Консультации">
+                                <i class="fas fa-comments mr-1"></i> Консультации
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Карточка 6: Создание сайтов и сервисов -->
+                <div class="card-style hover-lift">
+                    <i class="fas fa-globe text-4xl accent-text mb-4"></i>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Создание сайтов и сервисов</h3>
+                    <p class="text-gray-600 text-base mb-4">Разработка современных веб-сайтов, веб-приложений и цифровых сервисов под ключ. От концепции до запуска и поддержки.</p>
+                    
+                    <!-- Типы сайтов -->
+                    <div class="mb-4 pb-4 border-b border-gray-100">
+                        <h4 class="text-sm font-bold text-gray-800 mb-2 flex items-center">
+                            <i class="fas fa-laptop-code mr-2 accent-text"></i> Типы сайтов
+                        </h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="chip-with-icon" title="Корпоративные сайты">
+                                <i class="fas fa-building mr-1"></i> Корпоративные сайты
+                            </span>
+                            <span class="chip-with-icon" title="Лендинги">
+                                <i class="fas fa-window-maximize mr-1"></i> Лендинги
+                            </span>
+                            <span class="chip-with-icon" title="Интернет-магазины">
+                                <i class="fas fa-shopping-cart mr-1"></i> Интернет-магазины
+                            </span>
+                            <span class="chip-with-icon" title="Порталы">
+                                <i class="fas fa-th-large mr-1"></i> Порталы
+                            </span>
+                            <span class="chip-with-icon" title="Веб-приложения">
+                                <i class="fas fa-code mr-1"></i> Веб-приложения
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Технологии -->
+                    <div class="mb-4 pb-4 border-b border-gray-100">
+                        <h4 class="text-sm font-bold text-gray-800 mb-2 flex items-center">
+                            <i class="fas fa-tools mr-2 accent-text"></i> Технологии
+                        </h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="chip-with-icon" title="HTML5/CSS3">
+                                <i class="fab fa-html5 mr-1"></i> HTML5/CSS3
+                            </span>
+                            <span class="chip-with-icon" title="JavaScript">
+                                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/javascript.svg" alt="JavaScript" class="vendor-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                                <i class="fab fa-js mr-1" style="display:none;"></i> JavaScript
+                            </span>
+                            <span class="chip-with-icon" title="React">
+                                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/react.svg" alt="React" class="vendor-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                                <i class="fab fa-react mr-1" style="display:none;"></i> React
+                            </span>
+                            <span class="chip-with-icon" title="Angular">
+                                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/angular.svg" alt="Angular" class="vendor-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                                <i class="fab fa-angular mr-1" style="display:none;"></i> Angular
+                            </span>
+                            <span class="chip-with-icon" title="Node.js">
+                                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/nodedotjs.svg" alt="Node.js" class="vendor-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                                <i class="fab fa-node-js mr-1" style="display:none;"></i> Node.js
+                            </span>
+                            <span class="chip-with-icon" title="PHP">
+                                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/php.svg" alt="PHP" class="vendor-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                                <i class="fab fa-php mr-1" style="display:none;"></i> PHP
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Услуги разработки -->
+                    <div class="mb-4 pb-4 border-b border-gray-100">
+                        <h4 class="text-sm font-bold text-gray-800 mb-2 flex items-center">
+                            <i class="fas fa-list-check mr-2 accent-text"></i> Услуги разработки
+                        </h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="chip-with-icon" title="UI/UX дизайн">
+                                <i class="fas fa-palette mr-1"></i> UI/UX дизайн
+                            </span>
+                            <span class="chip-with-icon" title="Адаптивная верстка">
+                                <i class="fas fa-mobile-alt mr-1"></i> Адаптивная верстка
+                            </span>
+                            <span class="chip-with-icon" title="Интеграции">
+                                <i class="fas fa-plug mr-1"></i> API интеграции
+                            </span>
+                            <span class="chip-with-icon" title="CMS">
+                                <i class="fas fa-cogs mr-1"></i> CMS системы
+                            </span>
+                            <span class="chip-with-icon" title="SEO">
+                                <i class="fas fa-search mr-1"></i> SEO оптимизация
+                            </span>
+                            <span class="chip-with-icon" title="Хостинг">
+                                <i class="fas fa-server mr-1"></i> Развертывание и хостинг
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Поддержка -->
+                    <div class="mb-4">
+                        <h4 class="text-sm font-bold text-gray-800 mb-2 flex items-center">
+                            <i class="fas fa-headset mr-2 accent-text"></i> Поддержка и обслуживание
+                        </h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="chip-with-icon" title="Техническая поддержка">
+                                <i class="fas fa-tools mr-1"></i> Техподдержка
+                            </span>
+                            <span class="chip-with-icon" title="Обновления">
+                                <i class="fas fa-sync-alt mr-1"></i> Обновления
+                            </span>
+                            <span class="chip-with-icon" title="Мониторинг">
+                                <i class="fas fa-chart-line mr-1"></i> Мониторинг
+                            </span>
+                            <span class="chip-with-icon" title="Резервное копирование">
+                                <i class="fas fa-archive mr-1"></i> Резервное копирование
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Навыки и технологии (Чипы) -->
+        <section id="skills" class="py-16 scroll-mt-20">
+            <h2 class="section-header text-4xl">Навыки и Технологии</h2>
+            <div class="space-y-8">
+                <!-- Блок 1: Инфраструктура и Виртуализация -->
+                <div class="card-style p-6 hover-lift">
+                    <h4 class="text-xl font-semibold accent-text mb-4 flex items-center">
+                        <i class="fas fa-cloud-upload-alt mr-3"></i> Инфраструктура и Виртуализация
+                    </h4>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="chip-with-icon" title="Proxmox">
+                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/proxmox.svg" alt="Proxmox" class="vendor-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                            <i class="fas fa-cube mr-1" style="display:none;"></i> Proxmox
+                        </span>
+                        <span class="chip-with-icon" title="Harvester">
+                            <i class="fas fa-cube mr-1"></i> Harvester
+                        </span>
+                        <span class="chip-with-icon" title="Longhorn">
+                            <i class="fas fa-database mr-1"></i> Longhorn
+                        </span>
+                        <span class="chip-with-icon" title="Ceph">
+                            <i class="fas fa-hdd mr-1"></i> Ceph
+                        </span>
+                        <span class="chip-with-icon" title="ЦОД">
+                            <i class="fas fa-building mr-1"></i> ЦОД
+                        </span>
+                        <span class="chip-with-icon" title="Резервное копирование">
+                            <i class="fas fa-archive mr-1"></i> Резервное копирование
+                        </span>
+                        <span class="chip-with-icon" title="Windows Server">
+                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/microsoftwindows.svg" alt="Windows" class="vendor-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                            <i class="fab fa-windows mr-1" style="display:none;"></i> Windows Server
+                        </span>
+                        <span class="chip-with-icon" title="Linux">
+                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/debian.svg" alt="Debian" class="vendor-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                            <i class="fab fa-linux mr-1" style="display:none;"></i> Linux
+                        </span>
+                        <span class="chip-with-icon" title="Kubernetes">
+                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/kubernetes.svg" alt="Kubernetes" class="vendor-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                            <i class="fab fa-docker mr-1" style="display:none;"></i> Kubernetes / K3s
+                        </span>
+                        <span class="chip-with-icon" title="Helm">
+                            <i class="fas fa-anchor mr-1"></i> Helm
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Блок 2: Сети, Безопасность и Автоматизация -->
+                <div class="card-style p-6 hover-lift">
+                    <h4 class="text-xl font-semibold accent-text mb-4 flex items-center">
+                        <i class="fas fa-lock mr-3"></i> Сети, Безопасность и Автоматизация
+                    </h4>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="chip-with-icon" title="MikroTik">
+                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/mikrotik.svg" alt="MikroTik" class="vendor-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                            <i class="fas fa-router mr-1" style="display:none;"></i> MikroTik
+                        </span>
+                        <span class="chip-with-icon" title="VLAN">
+                            <i class="fas fa-project-diagram mr-1"></i> VLAN & Сегментация
+                        </span>
+                        <span class="chip-with-icon" title="VPN">
+                            <i class="fas fa-network-wired mr-1"></i> VPN (site-to-site)
+                        </span>
+                        <span class="chip-with-icon" title="AD">
+                            <i class="fas fa-sitemap mr-1"></i> Гибридный AD / Entra ID
+                        </span>
+                        <span class="chip-with-icon" title="Intune">
+                            <i class="fas fa-mobile-alt mr-1"></i> Microsoft Intune (MDM)
+                        </span>
+                        <span class="chip-with-icon" title="Kaspersky">
+                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/kaspersky.svg" alt="Kaspersky" class="vendor-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                            <i class="fas fa-shield-virus mr-1" style="display:none;"></i> Kaspersky Cloud
+                        </span>
+                        <span class="chip-with-icon" title="Zabbix">
+                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/zabbix.svg" alt="Zabbix" class="vendor-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                            <i class="fas fa-chart-line mr-1" style="display:none;"></i> Zabbix
+                        </span>
+                        <span class="chip-with-icon" title="Grafana">
+                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/grafana.svg" alt="Grafana" class="vendor-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                            <i class="fas fa-chart-area mr-1" style="display:none;"></i> Grafana
+                        </span>
+                        <span class="chip-with-icon" title="PowerShell">
+                            <i class="fab fa-microsoft mr-1"></i> PowerShell
+                        </span>
+                        <span class="chip-with-icon" title="Bash">
+                            <i class="fas fa-terminal mr-1"></i> Bash
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Блок 3: Медиапроизводство и AI -->
+                <div class="card-style p-6 hover-lift">
+                    <h4 class="text-xl font-semibold accent-text mb-4 flex items-center">
+                        <i class="fas fa-tv mr-3"></i> Медиапроизводство и Образовательные Технологии
+                    </h4>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="chip-with-icon" title="vMix">
+                            <i class="fas fa-film mr-1"></i> vMix
+                        </span>
+                        <span class="chip-with-icon" title="OBS">
+                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/obsstudio.svg" alt="OBS" class="vendor-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                            <i class="fas fa-broadcast-tower mr-1" style="display:none;"></i> OBS
+                        </span>
+                        <span class="chip-with-icon" title="PTZ-камеры">
+                            <i class="fas fa-video mr-1"></i> PTZ-камеры
+                        </span>
+                            <span class="chip-with-icon" title="Premiere Pro">
+                                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/adobepremierepro.svg" alt="Premiere Pro" class="vendor-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                                <i class="fab fa-adobe mr-1" style="display:none;"></i> Premiere Pro
+                            </span>
+                            <span class="chip-with-icon" title="After Effects">
+                                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/adobeaftereffects.svg" alt="After Effects" class="vendor-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                                <i class="fab fa-adobe mr-1" style="display:none;"></i> After Effects
+                            </span>
+                        <span class="chip-with-icon" title="Google Workspace">
+                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/google.svg" alt="Google" class="vendor-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                            <i class="fab fa-google mr-1" style="display:none;"></i> Google Workspace
+                        </span>
+                        <span class="chip-with-icon" title="AI/LLM">
+                            <i class="fas fa-brain mr-1"></i> AI/LLM
+                        </span>
+                        <span class="chip-with-icon" title="STEAM">
+                            <i class="fas fa-flask mr-1"></i> STEM / STEAM
+                        </span>
+                        <span class="chip-with-icon" title="Видеография">
+                            <i class="fas fa-camera mr-1"></i> Видеография
+                        </span>
+                        <span class="chip-with-icon" title="Онлайн-вещание">
+                            <i class="fas fa-broadcast-tower mr-1"></i> Онлайн-вещание
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4.5. Мои проекты в цифрах -->
+        <section id="metrics" class="py-16 scroll-mt-20">
+            <h2 class="section-header text-4xl">Мои проекты в цифрах</h2>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="metric-card">
+                    <div class="metric-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <div class="metric-content">
+                        <div class="metric-value">10+</div>
+                        <div class="metric-text">Комплексных IT-проектов: гибрид Entra ID, Intune, сегментация VLAN, резервное копирование, мониторинг (Zabbix, Grafana), миграция антивирусов.</div>
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <div class="metric-content">
+                        <div class="metric-value">50+</div>
+                        <div class="metric-text">Онлайн-трансляций и видеопроектов: конференции, спорт, подкасты, студийные съёмки на YouTube/Facebook/Zoom.</div>
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="metric-content">
+                        <div class="metric-value">30+</div>
+                        <div class="metric-text">Обучающих программ: стримы, видеопродакшн, Google Workspace for Education, цифровые навыки, STEM/STEAM, AI.</div>
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-icon">
+                        <i class="fas fa-desktop"></i>
+                    </div>
+                    <div class="metric-content">
+                        <div class="metric-value">700+</div>
+                        <div class="metric-text">Рабочих станций и 10+ серверов под администрированием: централизация, безопасность, обновления, политики.</div>
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <div class="metric-content">
+                        <div class="metric-value">3+</div>
+                        <div class="metric-text">Пилотных цифровых проектов: от идеи до запуска MVP, автоматизация бизнес-процессов, разработка IT-сервисов.</div>
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-icon">
+                        <i class="fas fa-smile"></i>
+                    </div>
+                    <div class="metric-content">
+                        <div class="metric-value">500+</div>
+                        <div class="metric-text">Счастливых клиентов за 15 лет работы: от частных лиц до крупных корпораций, доверивших нам свои IT-задачи и проекты.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Проекты и кейсы -->
+        <section id="cases" class="py-16 scroll-mt-20">
+            <h2 class="section-header text-4xl">Проекты и Кейсы</h2>
+            <div class="space-y-8">
+                <!-- Кейс 1: Модернизация IT-инфраструктуры -->
+                <div class="card-style border-l-4 border-teal-500 bg-gray-50 grid sm:grid-cols-3 gap-4 hover-lift">
+                    <h3 class="text-xl font-bold text-gray-800 sm:col-span-3 mb-2">
+                        <i class="fas fa-building mr-2 accent-text"></i> Комплексная модернизация IT-сети
+                    </h3>
+                    <div>
+                        <span class="case-infographic-title">Задача</span>
+                        <p class="case-infographic-item">Унификация, централизация и повышение безопасности IT-инфраструктуры крупной корпоративной сети.</p>
+                    </div>
+                    <div>
+                        <span class="case-infographic-title">Что сделал</span>
+                        <p class="case-infographic-item">Внедрил Гибридный AD с Microsoft Entra ID. Развернул Intune, KSC Cloud и Zabbix для унифицированного мониторинга.</p>
+                    </div>
+                    <div>
+                        <span class="case-infographic-title">Результат</span>
+                        <p class="case-infographic-item">Единая, безопасная IT-среда с высокой доступностью (99.9%) и снижением операционных расходов.</p>
+                    </div>
+                </div>
+
+                <!-- Кейс 2: Онлайн-трансляция конференции -->
+                <div class="card-style border-l-4 border-teal-500 bg-gray-50 grid sm:grid-cols-3 gap-4 hover-lift">
+                    <h3 class="text-xl font-bold text-gray-800 sm:col-span-3 mb-2">
+                        <i class="fas fa-broadcast-tower mr-2 accent-text"></i> Организация высококачественного онлайн-вещания
+                    </h3>
+                    <div>
+                        <span class="case-infographic-title">Задача</span>
+                        <p class="case-infographic-item">Провести прямую многокамерную трансляцию международной конференции с удаленными спикерами.</p>
+                    </div>
+                    <div>
+                        <span class="case-infographic-title">Что сделал</span>
+                        <p class="case-infographic-item">Использовал vMix для микширования PTZ-камер, настроил резервирование интернет-каналов и гарантировал безупречный поток.</p>
+                    </div>
+                    <div>
+                        <span class="case-infographic-title">Результат</span>
+                        <p class="case-infographic-item">Бесперебойный, профессиональный эфир для аудитории более 5000+ зрителей, повысивший имидж организатора.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5.5. Конструктор заказа -->
+        <section id="order-constructor" class="py-16 scroll-mt-20">
+            <h2 class="section-header text-4xl">Конструктор заказа</h2>
+            <p class="text-gray-600 mb-8 text-lg">Выберите услугу и опции для расчета стоимости:</p>
+            <div class="card-style p-8">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-3">Выберите услугу:</label>
+                        <select id="service-type" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-teal-500 focus:border-teal-500 mb-6">
+                            <option value="it-infra">Аудит и настройка IT-инфраструктуры</option>
+                            <option value="streaming" selected>Онлайн-трансляция / Студийная съемка</option>
+                            <option value="training">Обучение и тренинги</option>
+                            <option value="consulting">Консалтинг / AI-разработка</option>
+                            <option value="videography">Видеография и фотосъемка</option>
+                            <option value="repair">Ремонт и обслуживание техники</option>
+                            <option value="webdev">Создание сайтов и сервисов</option>
+                        </select>
+                        
+                        <!-- Специфичные опции для каждой услуги -->
+                        <div id="service-options">
+                            <!-- Опции будут динамически загружаться через JavaScript -->
+                        </div>
+                        
+                        <label class="block text-sm font-semibold text-gray-700 mb-3 mt-6">Дополнительные опции:</label>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="checkbox" id="urgent" class="mr-2 w-4 h-4 text-teal-600">
+                                <span>Срочный заказ (+20%)</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" id="on-site" class="mr-2 w-4 h-4 text-teal-600">
+                                <span>Выезд / Доп. площадка (+50,000₸)</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="bg-teal-50 border-2 border-teal-200 rounded-xl p-6">
+                            <h3 class="text-xl font-bold text-gray-800 mb-4">Итоговая стоимость:</h3>
+                            <div class="text-4xl font-extrabold text-teal-600 mb-2" id="total-price">0₸</div>
+                            <p class="text-sm text-gray-600 mb-4" id="price-breakdown"></p>
+                            <a href="#" id="whatsapp-link" target="_blank" class="btn-primary w-full text-center">
+                                <i class="fab fa-whatsapp mr-2"></i> Заказать через WhatsApp
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Форматы работы и услуги -->
+        <section id="formats" class="py-16 scroll-mt-20">
+            <h2 class="section-header text-4xl">Форматы работы и Услуги</h2>
+            <p class="text-gray-600 mb-8 text-lg">Я предлагаю гибкие решения, адаптированные под ваши цели:</p>
+            <div class="grid sm:grid-cols-2 gap-6">
+                <div class="card-style p-6 hover-lift">
+                    <h3 class="text-xl font-bold accent-text mb-2 flex items-center">
+                        <i class="fas fa-headset mr-3"></i> Аудит и настройка IT-инфраструктуры
+                    </h3>
+                    <p class="text-sm text-gray-500 mb-3">Подходит корпоративным клиентам и IT-отделам.</p>
+                    <p class="text-base text-gray-700">
+                        Оценка безопасности, сегментации, мониторинга и разработка плана модернизации с учетом лучших мировых практик.
+                    </p>
+                </div>
+                <div class="card-style p-6 hover-lift">
+                    <h3 class="text-xl font-bold accent-text mb-2 flex items-center">
+                        <i class="fas fa-camera-retro mr-3"></i> Онлайн-трансляции под ключ
+                    </h3>
+                    <p class="text-sm text-gray-500 mb-3">Подходит организаторам мероприятий и продюсерам.</p>
+                    <p class="text-base text-gray-700">
+                        Полное техническое сопровождение: от подготовки оборудования (PTZ, звук, свет) до монтажа в реальном времени и вывода на целевые платформы.
+                    </p>
+                </div>
+                <div class="card-style p-6 hover-lift">
+                    <h3 class="text-xl font-bold accent-text mb-2 flex items-center">
+                        <i class="fas fa-graduation-cap mr-3"></i> Обучающие курсы и мастер-классы
+                    </h3>
+                    <p class="text-sm text-gray-500 mb-3">Подходит образовательным учреждениям и IT-тренерам.</p>
+                    <p class="text-base text-gray-700">
+                        Авторские программы по ИИ, Google Workspace, видеостримингу и цифровым навыкам для преподавателей и технических специалистов.
+                    </p>
+                </div>
+                <div class="card-style p-6 hover-lift">
+                    <h3 class="text-xl font-bold accent-text mb-2 flex items-center">
+                        <i class="fas fa-rocket mr-3"></i> Консалтинг по цифровым продуктам
+                    </h3>
+                    <p class="text-sm text-gray-500 mb-3">Подходит стартапам и предпринимателям.</p>
+                    <p class="text-base text-gray-700">
+                        Помощь в архитектуре, интеграции IT-инфраструктуры и бизнес-логики для запуска новых цифровых сервисов (от идеи до MVP).
+                    </p>
+                </div>
+                <div class="card-style p-6 hover-lift">
+                    <h3 class="text-xl font-bold accent-text mb-2 flex items-center">
+                        <i class="fas fa-tools mr-3"></i> Ремонт и обслуживание техники
+                    </h3>
+                    <p class="text-sm text-gray-500 mb-3">Подходит частным лицам и малым офисам.</p>
+                    <p class="text-base text-gray-700">
+                        Профессиональный ремонт ПК, ноутбуков и моноблоков. Работы по установке и настройке ОС и ПО. Восстановление данных с различных носителей и сопутствующие технические услуги.
+                    </p>
+                </div>
+                <div class="card-style p-6 hover-lift">
+                    <h3 class="text-xl font-bold accent-text mb-2 flex items-center">
+                        <i class="fas fa-globe mr-3"></i> Создание сайтов и сервисов
+                    </h3>
+                    <p class="text-sm text-gray-500 mb-3">Подходит бизнесу всех масштабов и стартапам.</p>
+                    <p class="text-base text-gray-700">
+                        Разработка современных веб-сайтов, веб-приложений и цифровых сервисов под ключ. От концепции и дизайна до запуска, хостинга и технической поддержки. UI/UX дизайн, адаптивная верстка, интеграции и SEO-оптимизация.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. Отзывы и доверие -->
+        <section id="testimonials" class="py-16 scroll-mt-20">
+            <h2 class="section-header text-4xl">Отзывы и Доверие</h2>
+            <div class="slider">
+                <div class="slider-track">
+                    <div class="slide">
+                        <div class="testimonial-card bg-white p-6 rounded-2xl shadow-xl">
+                            <div class="quote-icon">
+                                <i class="fas fa-quote-left"></i>
+                            </div>
+                            <p class="testimonial-text">"Работаем с командой AAAThre уже несколько лет — они проводят стримы для наших спортивных мероприятий 4 раза в год. Всегда стабильно, качественно, без сбоев. Ребята из команды Контраст (Илияс, Рауфал) очень довольны результатом. Надежный партнер!"</p>
+                            <div class="testimonial-meta">
+                                <p class="name"><strong>Верный капитал</strong></p>
+                                <p class="role">Команда Контраст (Илияс, Рауфал)</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div class="testimonial-card bg-white p-6 rounded-2xl shadow-xl">
+                            <div class="quote-icon">
+                                <i class="fas fa-quote-left"></i>
+                            </div>
+                            <p class="testimonial-text">"Команда AAAThre настроила нам сервер на Harvester — все работает отлично, стабильно, без проблем. Очень довольны результатом. Профессионалы своего дела, рекомендую!"</p>
+                            <div class="testimonial-meta">
+                                <p class="name"><strong>Sofia Soft</strong></p>
+                                <p class="role">Дмитрий</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div class="testimonial-card bg-white p-6 rounded-2xl shadow-xl">
+                            <div class="quote-icon">
+                                <i class="fas fa-quote-left"></i>
+                            </div>
+                            <p class="testimonial-text">"Провели чемпионат по STEM — Робо Бои. Команда AAAThre организовала трансляцию на высшем уровне. Все прошло гладко, зрители остались довольны качеством. Спасибо за профессионализм!"</p>
+                            <div class="testimonial-meta">
+                                <p class="name"><strong>Чемпионат по STEM</strong></p>
+                                <p class="role">Магжан</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slider-controls">
+                    <button id="prev-slide" class="slider-btn">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <div id="slider-dots" class="slider-dots"></div>
+                    <button id="next-slide" class="slider-btn">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. Контакты (Яркий финальный блок) -->
+        <footer id="contacts" class="py-16 bg-gradient-to-br from-gray-900 via-gray-800 to-teal-900 mt-16 rounded-t-3xl shadow-2xl scroll-mt-20">
+            <div class="px-6 sm:px-8 text-white">
+                <h2 class="text-4xl font-extrabold text-center mb-4">Давайте сотрудничать!</h2>
+                <p class="text-center text-xl text-gray-300 max-w-3xl mx-auto mb-12">
+                    Для быстрых вопросов пишите в мессенджеры (@AIDOKHAN), для официальных предложений и партнерства — на e-mail.
+                </p>
+
+                <!-- Сетка контактов (крупные кнопки) -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-4 justify-items-center">
+                    <!-- WhatsApp (Основной) -->
+                    <a href="https://wa.me/message/VGBVTLQBLHQ7I1" target="_blank" class="contact-btn bg-green-500 hover:bg-green-600">
+                        <i class="fab fa-whatsapp text-3xl mb-1"></i>
+                        <p class="font-bold text-sm">WhatsApp</p>
+                        <p class="text-xs">SysAdminAstana</p>
+                    </a>
+                    <!-- Telegram -->
+                    <a href="https://t.me/AIDOKHAN" target="_blank" class="contact-btn bg-sky-500 hover:bg-sky-600">
+                        <i class="fab fa-telegram-plane text-3xl mb-1"></i>
+                        <p class="font-bold text-sm">Telegram</p>
+                        <p class="text-xs">@AIDOKHAN</p>
+                    </a>
+                    <!-- E-mail -->
+                    <a href="mailto:aidyn@example.com" class="contact-btn bg-teal-600 hover:bg-teal-700">
+                        <i class="fas fa-envelope text-3xl mb-1"></i>
+                        <p class="font-bold text-sm">E-mail</p>
+                        <p class="text-xs">Деловая почта</p>
+                    </a>
+                    <!-- YouTube -->
+                    <a href="https://youtube.com/@aidynkhan?si=semRuuU5BdVjdS9V" target="_blank" class="contact-btn bg-red-600 hover:bg-red-700">
+                        <i class="fab fa-youtube text-3xl mb-1"></i>
+                        <p class="font-bold text-sm">YouTube</p>
+                        <p class="text-xs">/@aidynkhan</p>
+                    </a>
+                    <!-- Instagram -->
+                    <a href="https://www.instagram.com/aidokhandev" target="_blank" class="contact-btn bg-pink-600 hover:bg-pink-700">
+                        <i class="fab fa-instagram text-3xl mb-1"></i>
+                        <p class="font-bold text-sm">Instagram</p>
+                        <p class="text-xs">@aidokhandev</p>
+                    </a>
+                    <!-- TikTok -->
+                    <a href="https://www.tiktok.com/@aidyn_admin?_r=1&_t=ZG-927o0oIwMa0" target="_blank" class="contact-btn bg-black hover:opacity-80">
+                        <i class="fab fa-tiktok text-3xl mb-1"></i>
+                        <p class="font-bold text-sm">TikTok</p>
+                        <p class="text-xs">@aidyn_admin</p>
+                    </a>
+                    <!-- GitHub -->
+                    <a href="https://github.com/Aido89" target="_blank" class="contact-btn bg-gray-700 hover:bg-gray-800">
+                        <i class="fab fa-github text-3xl mb-1"></i>
+                        <p class="font-bold text-sm">GitHub</p>
+                        <p class="text-xs">/Aido89</p>
+                    </a>
+                </div>
+
+                <!-- Блок для QR-кодов -->
+                <div class="mt-16 pt-8 border-t border-gray-700">
+                    <h4 class="text-center text-2xl font-semibold text-white mb-6">Сканируйте, чтобы сохранить контакты</h4>
+                    <div class="flex flex-wrap justify-center gap-6">
+                        <div class="text-center bg-white p-3 rounded-lg shadow-xl hover-scale">
+                            <img src="images/qr-whatsapp.JPG" alt="QR Code WhatsApp" class="rounded-lg mb-1 w-28 h-28" onerror="onQrLoadError(event)">
+                            <span class="text-xs text-gray-800">WhatsApp</span>
+                        </div>
+                        <div class="text-center bg-white p-3 rounded-lg shadow-xl hover-scale">
+                            <img src="images/qr-telegram.JPG" alt="QR Code Telegram" class="rounded-lg mb-1 w-28 h-28" onerror="onQrLoadError(event)">
+                            <span class="text-xs text-gray-800">Telegram</span>
+                        </div>
+                        <div class="text-center bg-white p-3 rounded-lg shadow-xl hover-scale">
+                            <img src="images/qr-instagram.jpg" alt="QR Code Instagram" class="rounded-lg mb-1 w-28 h-28" onerror="onQrLoadError(event)">
+                            <span class="text-xs text-gray-800">Instagram</span>
+                        </div>
+                        <div class="text-center bg-white p-3 rounded-lg shadow-xl hover-scale hidden sm:block">
+                            <img src="images/qr-youtube.jpg" alt="QR Code YouTube" class="rounded-lg mb-1 w-28 h-28" onerror="onQrLoadError(event)">
+                            <span class="text-xs text-gray-800">YouTube</span>
+                        </div>
+                        <div class="text-center bg-white p-3 rounded-lg shadow-xl hover-scale hidden sm:block">
+                            <img src="images/qr-tiktok.jpg" alt="QR Code TikTok" class="rounded-lg mb-1 w-28 h-28" onerror="onQrLoadError(event)">
+                            <span class="text-xs text-gray-800">TikTok</span>
+                        </div>
+                    </div>
+                </div>
+                <p class="mt-12 text-center text-sm text-gray-400">
+                    &copy; 2025 AAAThre. Создано с фокусом на результат.
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- AI Consultation Modal -->
+    <div id="ai-consultation-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <div class="flex justify-between items-start mb-4">
+                <h3 class="text-2xl font-bold text-gray-900 flex items-center">
+                    <i class="fas fa-robot text-teal-500 mr-3"></i> AI-консультант
+                </h3>
+                <button onclick="closeAIModal()" class="text-gray-400 hover:text-gray-600 transition duration-150">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <p class="text-sm text-gray-600 mb-4">
+                Получите краткий экспертный ответ на ваш технический вопрос (IT-инфраструктура, DevOps, безопасность).
+            </p>
+            <div class="flex space-x-2 mb-4">
+                <input type="text" id="ai-input-query" placeholder="Например: Как лучше всего настроить Hybrid AD?" 
+                       class="w-full px-4 py-2 border border-gray-300 rounded-xl focus:ring-teal-500 focus:border-teal-500"
+                       onkeypress="if(event.key === 'Enter') requestAdvice()">
+                <button onclick="requestAdvice()" class="px-4 py-2 accent-bg text-white font-semibold rounded-xl hover:bg-teal-700 transition duration-300 flex items-center">
+                    <i class="fas fa-comment-dots"></i>
+                </button>
+            </div>
+            <!-- AI Output Area -->
+            <div id="ai-output" class="mt-6 hidden">
+                <div id="ai-loading" class="flex items-center text-teal-600 space-x-2 hidden">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <p>Ищем лучшее решение...</p>
+                </div>
+                <div id="ai-result" class="text-gray-700 space-y-4">
+                    <!-- Content will be injected here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Кнопка "Наверх" -->
+    <button id="scroll-top-btn" class="fixed bottom-8 right-8 z-40 bg-teal-600 text-white p-4 rounded-full shadow-2xl hover:bg-teal-700 transition duration-300 opacity-0 pointer-events-none">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Custom JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
+

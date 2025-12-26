@@ -1,0 +1,38 @@
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment variables
+.env
+.env.local
+config.local.js
+
+# Dependencies (if using package manager)
+node_modules/
+package-lock.json
+
+# Build files
+dist/
+build/
+
+# Temporary files
+*.tmp
+*.temp
+
+# Images (optional - uncomment if you don't want to commit images)
+# images/*.jpg
+# images/*.png
+# images/*.jpeg
+
