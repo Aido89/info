@@ -110,13 +110,42 @@ document.addEventListener('DOMContentLoaded', () => {
     const serviceOptionsDiv = document.getElementById('service-options');
     const urgentCheckbox = document.getElementById('urgent');
     const onSiteCheckbox = document.getElementById('on-site');
-    const totalEl = document.getElementById('total-price');
-    const breakdownEl = document.getElementById('price-breakdown');
-    const whatsappLink = document.getElementById('whatsapp-link');
+    const totalEls = document.querySelectorAll('.js-total-price');
+    const breakdownEls = document.querySelectorAll('.js-price-breakdown');
+    const streamingOutCityEl = () => document.getElementById('streaming-out-city');
+    const streamingInsuranceEl = () => document.getElementById('streaming-insurance');
 
     function formatPrice(value) {
         return value.toLocaleString('ru-RU') + '₸';
     }
+
+    /** Пресеты типа трансляции (база сметы) */
+    const BROADCAST_PRESETS = {
+        party: 80000,
+        podcast: 120000,
+        webinar: 150000,
+        sport: 200000,
+        concert: 250000,
+        forum: 300000,
+        live: 180000,
+        record: 100000
+    };
+
+    /** Плитки спецоборудования и свет/звук/пост */
+    const STREAMING_TILE_PRICES = {
+        crane: 100000,
+        crane9m: 150000,
+        pavilion: 100000,
+        datavideo: 120000,
+        lens40x: 40000,
+        optics400m: 40000,
+        led: 20000,
+        tele: 20000,
+        lav: 15000,
+        montage: 50000,
+        color: 20000,
+        graphics: 15000
+    };
 
     // Шаблоны опций для каждой услуги
     const serviceTemplates = {
@@ -149,32 +178,146 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         `,
         'streaming': `
-            <label class="block text-sm font-semibold text-gray-700 mb-3">Операторы:</label>
-            <div class="mb-6">
+            <p class="text-sm text-gray-600 mb-6"><strong>1 смена = 10 ч.</strong> Операторы: <strong>40 000₸ / смену / чел.</strong> Вторая смена к ставке операторов с наценкой <strong>+80%</strong>.</p>
+            <div class="mb-8">
+                <label class="block text-sm font-semibold text-gray-700 mb-3">Выберите тип трансляции</label>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                    ${[
+                        ['party', 'Частная вечеринка'],
+                        ['podcast', 'Подкаст'],
+                        ['webinar', 'Вебинар'],
+                        ['sport', 'Спорт'],
+                        ['concert', 'Концерт'],
+                        ['forum', 'Форум'],
+                        ['live', 'Прямой эфир'],
+                        ['record', 'Запись эфира']
+                    ].map(([val, label]) => `
+                    <label class="broadcast-tile">
+                        <input type="radio" name="broadcast-preset" value="${val}" class="sr-only"${val === 'forum' ? ' checked' : ''}>
+                        <span class="broadcast-tile__inner">${label}</span>
+                    </label>`).join('')}
+                </div>
+            </div>
+            <label class="block text-sm font-semibold text-gray-700 mb-3">Основное оборудование</label>
+            <div class="space-y-3 mb-8">
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span class="text-sm text-gray-800">Sony FX-3 (50k)</span>
+                    <select id="qty-sony-fx3" class="px-3 py-2 border border-gray-300 rounded-lg text-sm">
+                        ${[0, 1, 2, 3, 4].map(n => `<option value="${n}">${n} шт.</option>`).join('')}
+                    </select>
+                </div>
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span class="text-sm text-gray-800">Sony α7 III (30k)</span>
+                    <select id="qty-sony-a7" class="px-3 py-2 border border-gray-300 rounded-lg text-sm">
+                        ${[0, 1, 2, 3, 4].map(n => `<option value="${n}">${n} шт.</option>`).join('')}
+                    </select>
+                </div>
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span class="text-sm text-gray-800">Sony 500 (30k)</span>
+                    <select id="qty-sony-500" class="px-3 py-2 border border-gray-300 rounded-lg text-sm">
+                        ${[0, 1, 2, 3, 4].map(n => `<option value="${n}">${n} шт.</option>`).join('')}
+                    </select>
+                </div>
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span class="text-sm text-gray-800">Sony Handycam (15k)</span>
+                    <select id="qty-handycam" class="px-3 py-2 border border-gray-300 rounded-lg text-sm">
+                        ${[0, 1].map(n => `<option value="${n}">${n} шт.</option>`).join('')}
+                    </select>
+                </div>
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span class="text-sm text-gray-800">PTZ Clever mic — доп. камера (15k)</span>
+                    <select id="qty-ptz-clever" class="px-3 py-2 border border-gray-300 rounded-lg text-sm">
+                        ${[0, 1].map(n => `<option value="${n}">${n} шт.</option>`).join('')}
+                    </select>
+                </div>
+            </div>
+            <label class="block text-sm font-semibold text-gray-700 mb-3">Спецоборудование и площадка</label>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 mb-8">
+                ${[
+                    ['crane', 'Кран Jib (+100k)'],
+                    ['crane9m', 'Кран ABC 9m (+150k)'],
+                    ['pavilion', 'Павильон (+100k)'],
+                    ['datavideo', 'Пульт Datavideo (+120k)'],
+                    ['lens40x', 'Объектив 40× (+40k)'],
+                    ['optics400m', 'Оптика 400м (+40k)']
+                ].map(([val, text]) => `
+                <label class="equipment-pill">
+                    <input type="checkbox" name="streaming-tile-extra" value="${val}" class="sr-only peer">
+                    <span class="equipment-pill__inner">${text}</span>
+                </label>`).join('')}
+            </div>
+            <label class="block text-sm font-semibold text-gray-700 mb-3">Свет, звук и пост-продакшн</label>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 mb-8">
+                ${[
+                    ['led', 'LED свет (+20k)'],
+                    ['tele', 'Суфлер (+20k)'],
+                    ['lav', 'Петли 2 шт (+15k)'],
+                    ['montage', 'Монтаж (+50k)'],
+                    ['color', 'Цветокор (+20k)'],
+                    ['graphics', 'Графика (+15k)']
+                ].map(([val, text]) => `
+                <label class="equipment-pill">
+                    <input type="checkbox" name="streaming-tile-extra" value="${val}" class="sr-only peer">
+                    <span class="equipment-pill__inner">${text}</span>
+                </label>`).join('')}
+            </div>
+            <label class="block text-sm font-semibold text-gray-700 mb-3">Подкасты (опционально)</label>
+            <div class="mb-8 space-y-2">
                 <label class="flex items-center mb-2">
-                    <input type="radio" name="operators" value="with" class="mr-2 w-4 h-4 text-teal-600" checked>
-                    <span>С операторами (50,000₸ за камеру)</span>
+                    <input type="radio" name="podcast-package" value="none" class="mr-2 w-4 h-4 text-teal-600" checked>
+                    <span>Без подкаст-пакета</span>
+                </label>
+                <label class="flex items-center mb-2">
+                    <input type="radio" name="podcast-package" value="online" class="mr-2 w-4 h-4 text-teal-600">
+                    <span>Podcast онлайн — 100k (свет, звук, декор, запись, стрим)</span>
                 </label>
                 <label class="flex items-center">
-                    <input type="radio" name="operators" value="without" class="mr-2 w-4 h-4 text-teal-600">
-                    <span>Без операторов (30,000₸ за камеру)</span>
+                    <input type="radio" name="podcast-package" value="with-edit" class="mr-2 w-4 h-4 text-teal-600">
+                    <span>Podcast + монтаж — 150k</span>
                 </label>
             </div>
-            <label class="block text-sm font-semibold text-gray-700 mb-3">Количество камер:</label>
-            <select id="cameras-count" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-teal-500 focus:border-teal-500 mb-6">
-                ${Array.from({length: 15}, (_, i) => i + 2).map(num => 
-                    `<option value="${num}">${num} камер${num === 2 || num === 3 || num === 4 ? 'ы' : ''}</option>`
-                ).join('')}
-            </select>
-            <label class="block text-sm font-semibold text-gray-700 mb-3">Дополнительные специалисты:</label>
+            <label class="block text-sm font-semibold text-gray-700 mb-3">Персонал и смены</label>
+            <div class="grid sm:grid-cols-2 gap-4 mb-8">
+                <div>
+                    <label class="block text-xs text-gray-600 mb-1">Кол-во операторов (до 8)</label>
+                    <select id="operator-count" class="w-full px-4 py-3 border border-gray-300 rounded-xl text-sm">
+                        ${[0, 1, 2, 3, 4, 5, 6, 7, 8].map(n =>
+                            `<option value="${n}"${n === 1 ? ' selected' : ''}>${n === 0 ? '0 чел.' : n + ' чел.'}</option>`
+                        ).join('')}
+                    </select>
+                    <p class="text-xs text-gray-500 mt-1">от 40 000₸ за 1 чел. / смену</p>
+                </div>
+                <div>
+                    <label class="block text-xs text-gray-600 mb-1">Смена (10 часов)</label>
+                    <select id="shift-count" class="w-full px-4 py-3 border border-gray-300 rounded-xl text-sm">
+                        <option value="1">1 смена</option>
+                        <option value="2">2 смены — вторая смена +80%</option>
+                    </select>
+                </div>
+            </div>
+            <label class="block text-sm font-semibold text-gray-700 mb-3">Дополнительные специалисты</label>
             <div class="mb-6 space-y-2">
                 <label class="flex items-center">
                     <input type="checkbox" name="streaming-staff" value="sound" class="mr-2 w-4 h-4 text-teal-600">
-                    <span>Режиссер звука (+50,000₸)</span>
+                    <span>Режиссёр звука (+50,000₸)</span>
                 </label>
                 <label class="flex items-center">
                     <input type="checkbox" name="streaming-staff" value="director" class="mr-2 w-4 h-4 text-teal-600">
-                    <span>Режиссер эфира (+80,000₸)</span>
+                    <span>Режиссёр эфира (+80,000₸)</span>
+                </label>
+            </div>
+            <div class="space-y-2 mb-2">
+                <label class="flex items-center">
+                    <input type="checkbox" id="streaming-out-city" class="mr-2 w-4 h-4 text-teal-600">
+                    <span>Выезд за город (+20% к смете)</span>
+                </label>
+                <label class="flex items-center">
+                    <input type="checkbox" id="streaming-insurance" class="mr-2 w-4 h-4 text-teal-600">
+                    <span>Страховка оборудования (+5,000₸)</span>
+                </label>
+                <label class="flex items-center">
+                    <input type="checkbox" name="streaming-tile-extra" value="rails" class="mr-2 w-4 h-4 text-teal-600">
+                    <span>Рельсы (цена по договорённости)</span>
                 </label>
             </div>
         `,
@@ -368,8 +511,9 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     function updateServiceOptions() {
+        if (!serviceSelect || !serviceOptionsDiv) return;
         const serviceType = serviceSelect.value;
-        if (serviceOptionsDiv && serviceTemplates[serviceType]) {
+        if (serviceTemplates[serviceType]) {
             serviceOptionsDiv.innerHTML = serviceTemplates[serviceType];
             // Добавляем обработчики событий для новых элементов
             attachEventListeners();
@@ -388,7 +532,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function calcTotal() {
-        if (!serviceSelect || !totalEl) return;
+        if (!serviceSelect) return;
         
         const serviceType = serviceSelect.value;
         let total = 0;
@@ -422,26 +566,122 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 break;
                 
-            case 'streaming':
-                const operators = document.querySelector('input[name="operators"]:checked')?.value;
-                const camerasCount = parseInt(document.getElementById('cameras-count')?.value) || 2;
-                const pricePerCamera = operators === 'with' ? 50000 : 30000;
-                const camerasTotal = camerasCount * pricePerCamera;
-                total = camerasTotal;
-                breakdown.push(`${camerasCount} камер × ${formatPrice(pricePerCamera)} = ${formatPrice(camerasTotal)}`);
-                
-                // Дополнительные специалисты
-                const streamingStaff = document.querySelectorAll('input[name="streaming-staff"]:checked');
-                streamingStaff.forEach(staff => {
+            case 'streaming': {
+                const shifts = Math.min(2, Math.max(1, parseInt(document.getElementById('shift-count')?.value || '1', 10) || 1));
+                const numOps = Math.min(8, Math.max(0, parseInt(document.getElementById('operator-count')?.value || '0', 10) || 0));
+
+                const PRICE_FX3 = 50000;
+                const PRICE_SONY_A7 = 30000;
+                const PRICE_SONY500 = 30000;
+                const PRICE_HANDYCAM = 15000;
+                const PRICE_PTZ = 15000;
+                const DAILY_OP = 40000;
+
+                const presetKey = document.querySelector('input[name="broadcast-preset"]:checked')?.value;
+                const presetLabels = {
+                    party: 'Частная вечеринка', podcast: 'Подкаст', webinar: 'Вебинар', sport: 'Спорт',
+                    concert: 'Концерт', forum: 'Форум', live: 'Прямой эфир', record: 'Запись эфира'
+                };
+
+                let subtotal = 0;
+
+                if (presetKey && BROADCAST_PRESETS[presetKey]) {
+                    const p = BROADCAST_PRESETS[presetKey];
+                    subtotal += p;
+                    breakdown.push(`Тип: ${presetLabels[presetKey] || presetKey} — ${formatPrice(p)}`);
+                }
+
+                const qtyFx3 = Math.min(4, Math.max(0, parseInt(document.getElementById('qty-sony-fx3')?.value || '0', 10) || 0));
+                const qtySony = Math.min(4, Math.max(0, parseInt(document.getElementById('qty-sony-a7')?.value || '0', 10) || 0));
+                const qty500 = Math.min(4, Math.max(0, parseInt(document.getElementById('qty-sony-500')?.value || '0', 10) || 0));
+                const qtyHandycam = Math.min(1, Math.max(0, parseInt(document.getElementById('qty-handycam')?.value || '0', 10) || 0));
+                const qtyPtz = Math.min(1, Math.max(0, parseInt(document.getElementById('qty-ptz-clever')?.value || '0', 10) || 0));
+
+                if (qtyFx3 > 0) {
+                    const line = qtyFx3 * PRICE_FX3;
+                    subtotal += line;
+                    breakdown.push(`Sony FX-3: ${qtyFx3}×${formatPrice(PRICE_FX3)} = ${formatPrice(line)}`);
+                }
+                if (qtySony > 0) {
+                    const line = qtySony * PRICE_SONY_A7;
+                    subtotal += line;
+                    breakdown.push(`Sony α7 III: ${qtySony}×${formatPrice(PRICE_SONY_A7)} = ${formatPrice(line)}`);
+                }
+                if (qty500 > 0) {
+                    const line = qty500 * PRICE_SONY500;
+                    subtotal += line;
+                    breakdown.push(`Sony 500: ${qty500}×${formatPrice(PRICE_SONY500)} = ${formatPrice(line)}`);
+                }
+                if (qtyHandycam > 0) {
+                    const line = qtyHandycam * PRICE_HANDYCAM;
+                    subtotal += line;
+                    breakdown.push(`Sony Handycam: ${formatPrice(line)}`);
+                }
+                if (qtyPtz > 0) {
+                    const line = qtyPtz * PRICE_PTZ;
+                    subtotal += line;
+                    breakdown.push(`PTZ Clever mic: ${formatPrice(line)}`);
+                }
+
+                if (numOps > 0) {
+                    let opLine = numOps * DAILY_OP;
+                    if (shifts === 2) {
+                        opLine += Math.round(numOps * DAILY_OP * 1.8);
+                    }
+                    subtotal += opLine;
+                    breakdown.push(`Операторы: ${numOps} чел. × ${shifts} смен(а) — ${formatPrice(opLine)}`);
+                }
+
+                const shiftMult = shifts;
+                document.querySelectorAll('input[name="streaming-tile-extra"]:checked').forEach(box => {
+                    const v = box.value;
+                    if (v === 'rails') {
+                        breakdown.push('Рельсы: стоимость по договорённости');
+                        return;
+                    }
+                    const base = STREAMING_TILE_PRICES[v];
+                    if (!base) return;
+                    let price = base;
+                    if (v === 'crane' || v === 'pavilion' || v === 'crane9m') {
+                        price *= shiftMult;
+                    }
+                    subtotal += price;
+                    breakdown.push(`${box.parentElement?.textContent?.trim() || v}: ${formatPrice(price)}`);
+                });
+
+                const podcastPkg = document.querySelector('input[name="podcast-package"]:checked')?.value;
+                if (podcastPkg === 'online') {
+                    subtotal += 100000;
+                    breakdown.push(`+${formatPrice(100000)} (Podcast онлайн)`);
+                } else if (podcastPkg === 'with-edit') {
+                    subtotal += 150000;
+                    breakdown.push(`+${formatPrice(150000)} (Podcast + монтаж)`);
+                }
+
+                document.querySelectorAll('input[name="streaming-staff"]:checked').forEach(staff => {
                     let addPrice = 0;
                     if (staff.value === 'sound') addPrice = 50000;
                     else if (staff.value === 'director') addPrice = 80000;
                     if (addPrice > 0) {
-                        total += addPrice;
+                        subtotal += addPrice;
                         breakdown.push(`+${formatPrice(addPrice)} (${staff.parentElement.textContent.trim()})`);
                     }
                 });
+
+                if (streamingOutCityEl()?.checked) {
+                    const before = subtotal;
+                    subtotal = Math.round(subtotal * 1.2);
+                    breakdown.push(`Выезд за город (+20%): ${formatPrice(before)} → ${formatPrice(subtotal)}`);
+                }
+
+                if (streamingInsuranceEl()?.checked) {
+                    subtotal += 5000;
+                    breakdown.push(`+${formatPrice(5000)} (страховка оборудования)`);
+                }
+
+                total = subtotal;
                 break;
+            }
                 
             case 'training':
                 let trainingBase = basePrices['training'];
@@ -598,39 +838,51 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         // Обновление отображения
-        totalEl.textContent = formatPrice(total);
-        
-        // Детализация стоимости
-        if (breakdownEl) {
-            if (breakdown.length > 0) {
-                breakdownEl.innerHTML = breakdown.join('<br>');
-            } else {
-                breakdownEl.textContent = '';
-            }
-        }
+        totalEls.forEach(el => { el.textContent = formatPrice(total); });
+        const breakdownHtml = breakdown.length > 0 ? breakdown.join('<br>') : '';
+        breakdownEls.forEach(el => { el.innerHTML = breakdownHtml; });
         
         // Обновление ссылки WhatsApp
         updateWhatsAppLink(serviceType, total);
     }
 
     function updateWhatsAppLink(serviceType, total) {
-        if (!whatsappLink) return;
+        const whatsappLinks = document.querySelectorAll('.whatsapp-link');
+        if (!whatsappLinks.length) return;
         
         const serviceName = serviceSelect.options[serviceSelect.selectedIndex].text;
-        let message = `Здравствуйте! Хочу заказать услугу:\n\nУслуга: ${serviceName}\n\n`;
+        let message = `*📋 ЗАЯВКА — AAAThre*\n\n`;
+        message += `*Услуга:* ${serviceName}\n\n`;
         
         // Детали в зависимости от услуги
         switch(serviceType) {
-            case 'streaming':
-                const operators = document.querySelector('input[name="operators"]:checked')?.value;
-                const camerasCount = document.getElementById('cameras-count')?.value;
-                message += `Операторы: ${operators === 'with' ? 'С операторами' : 'Без операторов'}\n`;
-                message += `Количество камер: ${camerasCount}\n`;
+            case 'streaming': {
+                const preset = document.querySelector('input[name="broadcast-preset"]:checked')?.value;
+                message += `*🎬 Тип эфира:* ${preset || '—'}\n`;
+                message += `*🔄 Смены:* ${document.getElementById('shift-count')?.value || '1'} (10 ч / смена)\n`;
+                message += `*👷 Операторы:* ${document.getElementById('operator-count')?.value ?? '0'} чел. (40k / смена)\n`;
+                message += `\n*📷 Камеры:*\n`;
+                message += `• FX-3: ${document.getElementById('qty-sony-fx3')?.value || '0'} шт.\n`;
+                message += `• α7 III: ${document.getElementById('qty-sony-a7')?.value || '0'} шт.\n`;
+                message += `• Sony 500: ${document.getElementById('qty-sony-500')?.value || '0'} шт.\n`;
+                message += `• Handycam: ${document.getElementById('qty-handycam')?.value || '0'} шт.\n`;
+                message += `• PTZ Clever: ${document.getElementById('qty-ptz-clever')?.value || '0'} шт.\n`;
+                const tiles = document.querySelectorAll('input[name="streaming-tile-extra"]:checked');
+                if (tiles.length > 0) {
+                    message += `\n*🛠 Доп. оборудование:*\n`;
+                    tiles.forEach(t => { message += `• ${t.parentElement?.textContent?.trim() || t.value}\n`; });
+                }
+                const podcastPkg = document.querySelector('input[name="podcast-package"]:checked')?.value;
+                if (podcastPkg === 'online') message += '\n*🎙 Подкаст-пакет:* онлайн (100k)\n';
+                else if (podcastPkg === 'with-edit') message += '\n*🎙 Подкаст-пакет:* + монтаж (150k)\n';
                 const streamingStaff = document.querySelectorAll('input[name="streaming-staff"]:checked');
                 if (streamingStaff.length > 0) {
-                    message += `Доп. специалисты: ${Array.from(streamingStaff).map(s => s.parentElement.textContent.trim()).join(', ')}\n`;
+                    message += `\n*🎧 Специалисты:* ${Array.from(streamingStaff).map(s => s.parentElement.textContent.trim()).join(', ')}\n`;
                 }
+                if (document.getElementById('streaming-out-city')?.checked) message += '\n*📍 Выезд за город:* да (+20%)\n';
+                if (document.getElementById('streaming-insurance')?.checked) message += '\n*🛡 Страховка:* да\n';
                 break;
+            }
             case 'it-infra':
                 const itOptions = document.querySelectorAll('input[name="it-option"]:checked');
                 if (itOptions.length > 0) {
@@ -690,15 +942,49 @@ document.addEventListener('DOMContentLoaded', () => {
         if (urgentCheckbox?.checked) options.push('Срочный заказ');
         if (onSiteCheckbox?.checked) options.push('Выезд/Доп. площадка');
         if (options.length > 0) {
-            message += `Доп. опции: ${options.join(', ')}\n`;
+            message += `\n*⚡ Доп. опции:* ${options.join(', ')}\n`;
         }
         
-        message += `\nИтоговая стоимость: ${formatPrice(total)}\n\nПожалуйста, уточните детали.`;
+        message += `\n*Итого:* ${formatPrice(total)}\n\n_Прошу подтвердить детали и слот в графике._`;
         
-        whatsappLink.href = `https://wa.me/message/VGBVTLQBLHQ7I1?text=${encodeURIComponent(message)}`;
+        const href = `https://wa.me/message/VGBVTLQBLHQ7I1?text=${encodeURIComponent(message)}`;
+        whatsappLinks.forEach(a => { a.href = href; });
     }
 
+    let orderStep = 1;
+    const orderPanel1 = document.getElementById('order-step-1');
+    const orderPanel2 = document.getElementById('order-step-2');
+    const orderPanel3 = document.getElementById('order-step-3');
+
+    function updateOrderStepperUI(step) {
+        document.querySelectorAll('[data-step-indicator]').forEach(el => {
+            const s = parseInt(el.getAttribute('data-step-indicator'), 10);
+            el.classList.toggle('is-active', s === step);
+            el.classList.toggle('is-done', s < step);
+        });
+        document.querySelectorAll('.order-stepper__connector').forEach((c, i) => {
+            c.classList.toggle('is-done', i + 1 < step);
+        });
+    }
+
+    function setOrderStep(step) {
+        orderStep = Math.min(3, Math.max(1, step));
+        orderPanel1?.classList.toggle('hidden', orderStep !== 1);
+        orderPanel2?.classList.toggle('hidden', orderStep !== 2);
+        orderPanel3?.classList.toggle('hidden', orderStep !== 3);
+        updateOrderStepperUI(orderStep);
+        calcTotal();
+        document.getElementById('order-constructor')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    document.getElementById('order-btn-next-1')?.addEventListener('click', () => setOrderStep(2));
+    document.getElementById('order-btn-back-2')?.addEventListener('click', () => setOrderStep(1));
+    document.getElementById('order-btn-next-2')?.addEventListener('click', () => setOrderStep(3));
+    document.getElementById('order-btn-back-3')?.addEventListener('click', () => setOrderStep(2));
+
     // Инициализация
+    updateOrderStepperUI(1);
+
     if (serviceSelect) {
         serviceSelect.addEventListener('change', updateServiceOptions);
     }

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Обо мне - Каканов Айдын Серикболович</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <script type="module" crossorigin src="Portfolio redesign/build/assets/index-Bwy9Z6ma.js"></script>
+    <link rel="stylesheet" crossorigin href="Portfolio redesign/build/assets/index-DXu3oBTV.css">
+    <style>
+      .back-button {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        z-index: 1000;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border: 2px solid rgba(13, 148, 136, 0.3);
+        border-radius: 50px;
+        padding: 12px 24px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: #0d9488;
+        font-weight: 600;
+        text-decoration: none;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+      }
+      .back-button:hover {
+        background: #0d9488;
+        color: white;
+        transform: translateX(-4px);
+        box-shadow: 0 6px 16px rgba(13, 148, 136, 0.3);
+      }
+      .back-button i {
+        font-size: 16px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <a href="index.html" class="back-button">
+      <i class="fas fa-arrow-left"></i>
+      <span>На главную</span>
+    </a>
+    <div id="root"></div>
+  </body>
+</html>
+

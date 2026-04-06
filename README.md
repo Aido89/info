@@ -16,12 +16,25 @@
 
 ```
 .
-├── index.html          # Основной HTML файл
-├── styles.css          # Все стили и анимации
-├── script.js           # JavaScript функциональность
-├── README.md           # Документация
-└── config.js           # Конфигурация (API ключи)
+├── index.html              # Главная (портфолио, конструктор заказа)
+├── myinfo.html             # Страница «Обо мне» (сборка Portfolio redesign)
+├── training.html           # Длинная страница Google Workspace Training
+├── it-infrastructure.html  # Услуги IT-инфраструктуры
+├── it-training.html        # Обучение / STEAM
+├── it-repair.html          # Ремонт ПК
+├── live-streaming.html     # Видеостриминг
+├── web-development.html    # Веб-разработка
+├── styles.css              # Общие стили
+├── script.js               # Навигация, слайдер, конструктор заказа, AI
+├── config.example.js       # Пример конфигурации (скопировать в config.js)
+├── package-lock.json       # Lockfile без зависимостей (статический сайт)
+├── SETUP.md                # Пошаговая настройка
+├── README.md               # Этот файл
+├── install                 # Краткая отсылка к запуску (см. SETUP.md)
+└── my.md                   # Личные заметки (опционально)
 ```
+
+Подкаталоги вроде `Portfolio redesign/`, `blog/`, `assets/` — дополнительные материалы и сборки.
 
 ## 🛠️ Технологии
 
@@ -66,9 +79,8 @@
    ```
 
 2. **Настройте API ключ (опционально)**
-   - Откройте `script.js`
-   - Найдите переменную `apiKey`
-   - Вставьте ваш Gemini API ключ
+   - Скопируйте `config.example.js` в `config.js` и задайте ключ (если проект подключает конфиг), **или**
+   - Откройте `script.js`, найдите `const apiKey = ""` и вставьте ключ Gemini
 
 3. **Откройте в браузере**
    - Просто откройте `index.html` в браузере
@@ -136,7 +148,7 @@
 
 ## 📄 Лицензия
 
-© 2025 Aidyn Khan. Все права защищены.
+© 2026 Aidyn Khan. Все права защищены.
 
 ## 🤝 Вклад
 

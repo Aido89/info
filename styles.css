@@ -861,3 +861,158 @@ button:focus {
     outline-offset: 2px;
 }
 
+/* ============================================
+   ORDER CONSTRUCTOR — STEPPER & TILES
+   ============================================ */
+.order-stepper__track {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.25rem;
+}
+
+.order-stepper__step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 0 0 auto;
+    min-width: 4rem;
+    transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.order-stepper__circle {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 0.95rem;
+    background: #e2e8f0;
+    color: #64748b;
+    border: 2px solid transparent;
+    transition: background 0.35s ease, color 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s ease;
+}
+
+.order-stepper__step.is-active .order-stepper__circle {
+    background: linear-gradient(135deg, #0d9488, #14b8a6);
+    color: #fff;
+    box-shadow: 0 8px 20px -6px rgba(13, 148, 136, 0.55);
+    transform: scale(1.05);
+}
+
+.order-stepper__step.is-done .order-stepper__circle {
+    background: #ccfbf1;
+    color: #0f766e;
+    border-color: #5eead4;
+}
+
+.order-stepper__label {
+    margin-top: 0.35rem;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #94a3b8;
+    text-align: center;
+    max-width: 5rem;
+    line-height: 1.2;
+}
+
+@media (min-width: 640px) {
+    .order-stepper__label {
+        font-size: 0.7rem;
+        max-width: none;
+    }
+}
+
+.order-stepper__step.is-active .order-stepper__label {
+    color: #0d9488;
+}
+
+.order-stepper__connector {
+    flex: 1 1 auto;
+    height: 3px;
+    border-radius: 2px;
+    background: #e2e8f0;
+    margin: 0 0.15rem;
+    margin-bottom: 1.5rem;
+    min-width: 0.75rem;
+    transition: background 0.4s ease;
+}
+
+.order-stepper__connector.is-done {
+    background: linear-gradient(90deg, #5eead4, #0d9488);
+}
+
+.broadcast-tile {
+    display: block;
+    cursor: pointer;
+}
+
+.broadcast-tile__inner {
+    display: block;
+    padding: 0.65rem 0.5rem;
+    border-radius: 0.85rem;
+    border: 2px solid #e2e8f0;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-align: center;
+    color: #334155;
+    background: #fff;
+    transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.broadcast-tile:hover .broadcast-tile__inner {
+    border-color: #99f6e4;
+    box-shadow: 0 4px 14px -4px rgba(13, 148, 136, 0.35);
+}
+
+.broadcast-tile input:checked + .broadcast-tile__inner,
+.broadcast-tile input:focus-visible + .broadcast-tile__inner {
+    border-color: #0d9488;
+    background: #f0fdfa;
+    color: #0f766e;
+    box-shadow: 0 4px 16px -4px rgba(13, 148, 136, 0.45);
+}
+
+.equipment-pill {
+    display: block;
+    cursor: pointer;
+}
+
+.equipment-pill__inner {
+    display: block;
+    padding: 0.55rem 0.65rem;
+    border-radius: 9999px;
+    border: 1px solid #e2e8f0;
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    text-align: center;
+    color: #475569;
+    background: rgba(255, 255, 255, 0.9);
+    transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.equipment-pill input:checked + .equipment-pill__inner {
+    border-color: #0d9488;
+    background: #ccfbf1;
+    color: #0f766e;
+}
+
+.order-summary-glass {
+    background: rgba(255, 255, 255, 0.72);
+    border: 1px solid rgba(13, 148, 136, 0.2);
+    box-shadow: 0 12px 40px -16px rgba(13, 148, 136, 0.35);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.order-summary-glass--final {
+    background: linear-gradient(145deg, rgba(240, 253, 250, 0.95), rgba(255, 255, 255, 0.9));
+    border: 1px solid rgba(13, 148, 136, 0.25);
+    box-shadow: 0 20px 50px -20px rgba(13, 148, 136, 0.45);
+}
+

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профессиональный Видеостриминг и Студийная Съемка — AAAThre</title>
+    <meta name="description" content="Организация прямых эфиров, спортивных трансляций (Verny Cup) и студийная съемка подкастов в Казахстане. vMix, PTZ-камеры, 4K качество.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+</head>
+<body class="leading-relaxed bg-gray-950 text-white">
+    <!-- Фиксированная навигация -->
+    <nav id="main-nav" class="nav-fixed sticky top-0 z-50 !bg-gray-950/90 border-b border-white/10">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+            <div class="flex justify-between items-center">
+                <a href="index.html" class="brand-mark flex items-center space-x-3">
+                    <span class="brand-icon bg-teal-500">
+                        <img src="images/logo.svg" alt="AAAThre Logo" class="brand-icon-img">
+                    </span>
+                    <span class="brand-text text-white">AAAThre</span>
+                </a>
+                <div class="hidden md:flex space-x-6 text-gray-300 font-medium">
+                    <a href="index.html" class="nav-link hover:text-teal-400">Главная</a>
+                    <a href="it-infrastructure.html" class="nav-link hover:text-teal-400">IT-инфраструктура</a>
+                    <a href="it-training.html" class="nav-link hover:text-teal-400">Обучение</a>
+                    <a href="index.html#order-constructor" class="nav-link hover:text-teal-400">Заказать эфир</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Hero секция страницы -->
+        <header class="pt-24 pb-16 fade-in text-center">
+            <h1 class="text-5xl md:text-7xl font-extrabold mb-8 leading-tight text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-emerald-400">
+                Живые эфиры мирового уровня
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-400 mb-12 max-w-2xl mx-auto">
+                От турниров Verny Cup до бизнес-конференций. Стабильный сигнал, многокамерная съемка и профессиональный звук.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#portfolio-gallery" class="px-8 py-4 bg-teal-600 text-white font-bold rounded-full hover:bg-teal-700 transition-all shadow-xl">
+                    Посмотреть примеры 
+                </a>
+                <a href="https://wa.me/message/VGBVTLQBLHQ7I1" class="px-8 py-4 bg-white/10 text-white font-bold rounded-full hover:bg-white/20 transition-all backdrop-blur-lg">
+                    Узнать стоимость
+                </a>
+            </div>
+        </header>
+
+        <!-- Оборудование и услуги -->
+        <section class="py-12">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="card-style !bg-white/5 border border-white/10 p-6 text-center">
+                    <i class="fas fa-video text-teal-400 text-3xl mb-4"></i>
+                    <h3 class="text-lg font-bold mb-2">PTZ-Камеры 4K</h3>
+                    <p class="text-xs text-gray-400 mb-4">Panasonic & Sony PTZ. Дистанционное управление и кристальная четкость.</p>
+                    <div class="flex flex-wrap justify-center gap-1">
+                        <span class="px-1.5 py-0.5 bg-white/10 rounded text-[9px] uppercase">4K/60fps</span>
+                        <span class="px-1.5 py-0.5 bg-white/10 rounded text-[9px] uppercase">NDI|HX</span>
+                    </div>
+                </div>
+                <div class="card-style !bg-white/5 border border-white/10 p-6 text-center">
+                    <i class="fas fa-microchip text-teal-400 text-3xl mb-4"></i>
+                    <h3 class="text-lg font-bold mb-2">Станции vMix</h3>
+                    <p class="text-xs text-gray-400 mb-4">Серверы vMix 4K. Титры, повторы, многоканальная запись.</p>
+                    <div class="flex flex-wrap justify-center gap-1">
+                        <span class="px-1.5 py-0.5 bg-white/10 rounded text-[9px] uppercase">VMIX 4K</span>
+                        <span class="px-1.5 py-0.5 bg-white/10 rounded text-[9px] uppercase">SRT</span>
+                    </div>
+                </div>
+                <div class="card-style !bg-white/5 border border-white/10 p-6 text-center">
+                    <i class="fas fa-satellite-dish text-teal-400 text-3xl mb-4"></i>
+                    <h3 class="text-lg font-bold mb-2">Резервирование</h3>
+                    <p class="text-xs text-gray-400 mb-4">Агрегация 4G/5G каналов (Speedify/LiveU) для стабильности.</p>
+                    <div class="flex flex-wrap justify-center gap-1">
+                         <span class="px-1.5 py-0.5 bg-white/10 rounded text-[9px] uppercase">BONDING</span>
+                         <span class="px-1.5 py-0.5 bg-white/10 rounded text-[9px] uppercase">FAILOVER</span>
+                    </div>
+                </div>
+                <div class="card-style !bg-white/5 border border-white/10 p-6 text-center">
+                    <i class="fas fa-microphone text-teal-400 text-3xl mb-4"></i>
+                    <h3 class="text-lg font-bold mb-2">Про-Аудио</h3>
+                    <p class="text-xs text-gray-400 mb-4">Цифровые пульты Behringer/Midas. Радиосистемы Shure.</p>
+                    <div class="flex flex-wrap justify-center gap-1">
+                         <span class="px-1.5 py-0.5 bg-white/10 rounded text-[9px] uppercase">DANTE</span>
+                         <span class="px-1.5 py-0.5 bg-white/10 rounded text-[9px] uppercase">XLR</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Перечень услуг -->
+        <section class="py-12 border-t border-white/10">
+            <h2 class="text-2xl font-bold mb-8">Наши возможности</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="space-y-4">
+                    <div class="flex items-start gap-4">
+                        <div class="w-8 h-8 rounded-lg bg-teal-500/20 flex items-center justify-center shrink-0">
+                            <i class="fas fa-trophy text-teal-400 text-sm"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold">Спортивные трансляции</h4>
+                            <p class="text-sm text-gray-400">Графика счета в реальном времени, видеоповторы, комментаторские позиции.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="w-8 h-8 rounded-lg bg-teal-500/20 flex items-center justify-center shrink-0">
+                            <i class="fas fa-users text-teal-400 text-sm"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold">Бизнес-конференции</h4>
+                            <p class="text-sm text-gray-400">Интеграция спикеров из Zoom/Teams, трансляция на несколько платформ одновременно.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <div class="flex items-start gap-4">
+                        <div class="w-8 h-8 rounded-lg bg-teal-500/20 flex items-center justify-center shrink-0">
+                            <i class="fas fa-clapperboard text-teal-400 text-sm"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold">Студийная съемка</h4>
+                            <p class="text-sm text-gray-400">Съемка подкастов, интервью и обучающих курсов в 3-4 камеры.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="w-8 h-8 rounded-lg bg-teal-500/20 flex items-center justify-center shrink-0">
+                            <i class="fas fa-broadcast-tower text-teal-400 text-sm"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold">Телемосты</h4>
+                            <p class="text-sm text-gray-400">Организация прямых включений между городами с минимальной задержкой.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Видео-портфолио (Verny Cup) -->
+        <section id="portfolio-gallery" class="py-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">Кейс: Спортивные трансляции Verny Cup</h2>
+            <div class="swiper portfolio-swiper !bg-transparent p-0 overflow-hidden rounded-3xl shadow-2xl">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="aspect-video">
+                            <iframe src="https://www.youtube.com/embed/Uz5CjA7wByI" title="Verny Cup" class="w-full h-full" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                         <div class="aspect-video">
+                            <iframe src="https://www.youtube.com/embed/RmnXxdF4CpY" title="Verny Cup" class="w-full h-full" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Статистика -->
+        <section class="py-12 border-t border-white/10 mt-12">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div>
+                    <span class="block text-4xl font-bold text-teal-500">50+</span>
+                    <span class="text-gray-500 text-sm uppercase tracking-widest">Проектов</span>
+                </div>
+                <div>
+                    <span class="block text-4xl font-bold text-teal-500">5000+</span>
+                    <span class="text-gray-500 text-sm uppercase tracking-widest">Зрителей</span>
+                </div>
+                <div>
+                    <span class="block text-4xl font-bold text-teal-500">100%</span>
+                    <span class="text-gray-500 text-sm uppercase tracking-widest">Отзывов</span>
+                </div>
+                <div>
+                    <span class="block text-4xl font-bold text-teal-500">4K</span>
+                    <span class="text-gray-500 text-sm uppercase tracking-widest">Качество</span>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Кнопка "Назад на главную" -->
+    <a href="index.html" class="fixed bottom-8 left-8 bg-teal-600 text-white px-4 py-2 rounded-full shadow-lg hover:bg-teal-700 transition-all z-50 font-bold">
+        <i class="fas fa-arrow-left mr-2"></i> На главную
+    </a>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            new Swiper('.portfolio-swiper', {
+                loop: true,
+                pagination: { el: '.swiper-pagination', clickable: true },
+                autoplay: { delay: 5000 },
+            });
+        });
+    </script>
+</body>
+</html>
