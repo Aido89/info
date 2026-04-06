@@ -23,13 +23,23 @@ config.local.js
 node_modules/
 package-lock.json
 
-# Build files
+# Build files (только в корне репозитория; не скрывать Portfolio redesign/build)
 dist/
-build/
+/build/
 
 # Temporary files
 *.tmp
 *.temp
+
+# Сборка для хостинга (пересоздаётся package-hosting.ps1)
+hosting-upload/
+hosting-upload.zip
+
+# Локальные архивы / бэкапы
+77.zip
+
+# Вложенный репозиторий Vite (не дублировать историю в корне)
+Portfolio redesign/.git/
 
 # Images (optional - uncomment if you don't want to commit images)
 # images/*.jpg

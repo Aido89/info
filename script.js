@@ -14,53 +14,56 @@ document.addEventListener('DOMContentLoaded', () => {
     const nextBtn = document.getElementById('next-slide');
     let currentSlide = 0;
 
+    const setMobileMenuOpen = (open) => {
+        if (!mobileMenuBtn || !mobileMenu) return;
+        mobileMenu.classList.toggle('hidden', !open);
+        mobileMenuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        mobileMenuBtn.setAttribute('aria-label', open ? 'Закрыть меню' : 'Открыть меню');
+        const icon = mobileMenuBtn.querySelector('i');
+        if (icon) {
+            icon.classList.toggle('fa-times', open);
+            icon.classList.toggle('fa-bars', !open);
+        }
+    };
+
     // Add shadow to nav on scroll
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            nav.classList.add('shadow-lg');
-        } else {
-            nav.classList.remove('shadow-lg');
-        }
-
-        // Show/hide scroll to top button
-        if (window.scrollY > 300) {
-            scrollTopBtn.classList.add('visible');
-        } else {
-            scrollTopBtn.classList.remove('visible');
-        }
-    });
-
-    // Scroll to top functionality
-    scrollTopBtn.addEventListener('click', () => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    });
-
-    // Mobile menu toggle
-    if (mobileMenuBtn && mobileMenu) {
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-            const icon = mobileMenuBtn.querySelector('i');
-            if (mobileMenu.classList.contains('hidden')) {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
+        if (nav) {
+            if (window.scrollY > 50) {
+                nav.classList.add('shadow-lg');
             } else {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times');
+                nav.classList.remove('shadow-lg');
             }
+        }
+
+        if (scrollTopBtn) {
+            if (window.scrollY > 300) {
+                scrollTopBtn.classList.add('visible');
+            } else {
+                scrollTopBtn.classList.remove('visible');
+            }
+        }
+    });
+
+    if (scrollTopBtn) {
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
+
+    if (mobileMenuBtn && mobileMenu) {
+        mobileMenuBtn.setAttribute('aria-controls', 'mobile-menu');
+        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+        mobileMenuBtn.addEventListener('click', () => {
+            const open = mobileMenu.classList.contains('hidden');
+            setMobileMenuOpen(open);
         });
 
-        // Close mobile menu when clicking on a link
-        const mobileLinks = mobileMenu.querySelectorAll('a');
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-                const icon = mobileMenuBtn.querySelector('i');
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            });
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => setMobileMenuOpen(false));
         });
     }
 
@@ -1001,9 +1004,10 @@ document.addEventListener('DOMContentLoaded', () => {
     updateServiceOptions();
 
     // Testimonials slider setup
-    if (sliderTrack && slides.length) {
+    if (sliderTrack && slides.length && dotsContainer) {
         slides.forEach((_, idx) => {
             const dot = document.createElement('button');
+            dot.type = 'button';
             dot.className = 'slider-dot' + (idx === 0 ? ' active' : '');
             dot.setAttribute('aria-label', `Слайд ${idx + 1}`);
             dot.addEventListener('click', () => goToSlide(idx));
@@ -1103,7 +1107,8 @@ async function getITAdvice(query) {
     const outputDiv = document.getElementById('ai-output');
     const loadingDiv = document.getElementById('ai-loading');
     const resultDiv = document.getElementById('ai-result');
-    
+    if (!outputDiv || !loadingDiv || !resultDiv) return;
+
     outputDiv.classList.remove('hidden');
     loadingDiv.classList.remove('hidden');
     resultDiv.innerHTML = '';
@@ -1172,21 +1177,22 @@ function requestAdvice() {
     const input = document.getElementById('ai-input-query');
     const resultDiv = document.getElementById('ai-result');
     const outputDiv = document.getElementById('ai-output');
-    
+    if (!input || !resultDiv || !outputDiv) return;
+
     if (input.value.trim() === "") {
         outputDiv.classList.remove('hidden');
         resultDiv.innerHTML = '<p class="p-4 bg-red-100 text-red-700 rounded-xl">Пожалуйста, введите ваш технический вопрос.</p>';
         return;
     }
-    
-    // Clear previous error/result
-    resultDiv.innerHTML = ''; 
+
+    resultDiv.innerHTML = '';
     getITAdvice(input.value.trim());
 }
 
 // Function to open AI modal
 function openAIModal() {
     const modal = document.getElementById('ai-consultation-modal');
+    if (!modal) return;
     modal.classList.remove('hidden');
     document.body.style.overflow = 'hidden';
     
@@ -1200,6 +1206,7 @@ function openAIModal() {
 // Function to close the AI consultation modal
 function closeAIModal() {
     const modal = document.getElementById('ai-consultation-modal');
+    if (!modal) return;
     modal.classList.add('hidden');
     document.body.style.overflow = '';
     
@@ -1262,12 +1269,12 @@ if ('IntersectionObserver' in window) {
 // ANALYTICS & TRACKING (Optional)
 // ============================================
 
-// Track external link clicks
+// Внешние ссылки: безопасность и единообразие
 document.querySelectorAll('a[target="_blank"]').forEach(link => {
-    link.addEventListener('click', () => {
-        // You can add analytics tracking here
-        console.log('External link clicked:', link.href);
-    });
+    if (!link.rel || !link.rel.includes('noopener')) {
+        const parts = ['noopener', 'noreferrer'];
+        link.rel = link.rel ? `${link.rel} ${parts.join(' ')}` : parts.join(' ');
+    }
 });
 
 // ============================================

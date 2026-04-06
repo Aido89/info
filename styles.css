@@ -1,15 +1,16 @@
 /* ============================================
    GLOBAL STYLES & FONTS
+   (Inter подключается в HTML: один запрос, без @import)
    ============================================ */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
 body {
     font-family: 'Inter', sans-serif;
-    background-color: #ffffff;
+    background-color: #f8fafc;
     background-image:
-        radial-gradient(circle at 20% 20%, rgba(13,148,136,0.06), transparent 25%),
-        radial-gradient(circle at 80% 30%, rgba(20,184,166,0.05), transparent 28%),
-        radial-gradient(circle at 60% 80%, rgba(52,211,153,0.05), transparent 30%);
+        radial-gradient(circle at 12% 0%, rgba(13, 148, 136, 0.09), transparent 42%),
+        radial-gradient(circle at 88% 15%, rgba(20, 184, 166, 0.06), transparent 38%),
+        radial-gradient(circle at 50% 100%, rgba(52, 211, 153, 0.05), transparent 45%),
+        linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
     scroll-behavior: smooth;
 }
 
@@ -290,8 +291,8 @@ body {
  .card-style {
      background: #ffffff;
      padding: 1.5rem;
-     border-radius: 1rem;
-     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+     border-radius: 1.25rem;
+     box-shadow: 0 4px 24px -4px rgba(15, 23, 42, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
      border: 1px solid #f3f4f6;
      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
      transform: translateY(0);
@@ -1016,3 +1017,263 @@ button:focus {
     box-shadow: 0 20px 50px -20px rgba(13, 148, 136, 0.45);
 }
 
+/* ============================================
+   ДОСТУПНОСТЬ И UX (WCAG-ориентированно)
+   ============================================ */
+
+/* Вне экрана по умолчанию — работает даже без overflow:hidden у предка (в отличие от translateY) */
+.skip-link {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    z-index: 100;
+    padding: 0.65rem 1rem;
+    background: #0d9488;
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.875rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: left 0.2s ease, top 0.2s ease;
+}
+
+.skip-link:focus {
+    outline: 3px solid #0f766e;
+    outline-offset: 2px;
+}
+
+.skip-link:focus,
+.skip-link:focus-visible {
+    left: 0.75rem;
+    top: 0.75rem;
+}
+
+/* Видимое кольцо фокуса для клавиатуры (не мешает мыши) */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+    outline: 3px solid rgba(13, 148, 136, 0.65);
+    outline-offset: 2px;
+}
+
+.nav-link:focus-visible {
+    border-radius: 0.375rem;
+}
+
+/* Снижение анимаций по системным настройкам */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* ============================================
+   ЕДИНАЯ ТЕМА САЙТА (эталон — directions.html)
+   Классы .site-* = те же правила, что direction-*
+   ============================================ */
+
+.direction-subnav,
+.site-subnav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    padding: 0.65rem 0;
+    border-top: 1px solid rgba(13, 148, 136, 0.12);
+    background: linear-gradient(180deg, rgba(240, 253, 250, 0.95), rgba(255, 255, 255, 0.98));
+}
+
+.direction-pill,
+.site-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.45rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: #0f766e;
+    background: #fff;
+    border: 1px solid rgba(13, 148, 136, 0.25);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
+}
+
+.direction-pill:hover,
+.site-pill:hover {
+    background: #ccfbf1;
+    border-color: #0d9488;
+}
+
+.direction-pill:focus-visible,
+.site-pill:focus-visible {
+    outline: 3px solid rgba(13, 148, 136, 0.65);
+    outline-offset: 2px;
+}
+
+.direction-section,
+.site-section {
+    scroll-margin-top: 6.5rem;
+}
+
+.direction-hero,
+.site-hero {
+    position: relative;
+    overflow: hidden;
+    border-radius: 2.25rem;
+    padding: 2rem 1.5rem;
+    margin-bottom: 2rem;
+    /* Вертикальный глубокий teal → тёмно-изумрудный (как на макете) */
+    background: linear-gradient(
+        180deg,
+        #0f766e 0%,
+        #0a5c54 38%,
+        #064e3b 72%,
+        #022c26 100%
+    );
+    color: #fff;
+    box-shadow:
+        0 24px 60px -20px rgba(2, 44, 38, 0.55),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.direction-hero::before,
+.site-hero::before {
+    content: "";
+    position: absolute;
+    right: -15%;
+    top: -25%;
+    width: min(70%, 420px);
+    height: min(95%, 520px);
+    background: radial-gradient(
+        ellipse at center,
+        rgba(45, 212, 191, 0.38) 0%,
+        rgba(13, 148, 136, 0.12) 45%,
+        transparent 70%
+    );
+    pointer-events: none;
+    z-index: 0;
+}
+
+.direction-hero > *,
+.site-hero > * {
+    position: relative;
+    z-index: 1;
+}
+
+header .site-hero {
+    margin-bottom: 0;
+}
+
+/* Кнопки hero: стекло + белые (макет) */
+.btn-hero-glass {
+    padding: 0.75rem 1.5rem;
+    font-weight: 700;
+    border-radius: 9999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.12);
+    border: 2px solid rgba(255, 255, 255, 0.42);
+    color: #fff;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+}
+
+.btn-hero-glass:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.6);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+}
+
+.site-hero .btn-hero-white {
+    background: #ffffff;
+    color: #0f766e;
+    border: 2px solid #ffffff;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12);
+}
+
+.site-hero .btn-hero-white:hover {
+    background: #f0fdfa;
+    border-color: #f0fdfa;
+    color: #0d9488;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.14);
+}
+
+.site-hero .role-chip {
+    background: #ffffff;
+    color: #0f766e;
+    border: 1px solid rgba(255, 255, 255, 0.65);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.site-hero .role-chip:hover {
+    background: #f0fdfa;
+    border-color: #99f6e4;
+}
+
+.site-hero .hero-logo-circle--glow {
+    box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.12),
+        0 12px 40px rgba(0, 0, 0, 0.2),
+        0 0 70px rgba(110, 231, 183, 0.42);
+}
+
+.direction-stream-panel,
+.site-accent-panel {
+    border-radius: 1.5rem;
+    background: linear-gradient(180deg, #0f172a 0%, #020617 100%);
+    color: #e2e8f0;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 25px 60px -25px rgba(0, 0, 0, 0.5);
+}
+
+/* Подзаголовок страницы (как на directions) */
+.site-kicker {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #0d9488;
+    margin-bottom: 0.5rem;
+}
+
+.site-hero .site-kicker {
+    color: rgba(255, 255, 255, 0.88);
+}
+
+/* CTA-полоса внизу секций */
+.site-cta-band {
+    border-radius: 1rem;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    background: linear-gradient(135deg, #0f766e 0%, #115e59 50%, #134e4a 100%);
+    color: #fff;
+    box-shadow: 0 16px 40px -18px rgba(13, 148, 136, 0.55);
+}
+
+.site-cta-band h2,
+.site-cta-band p {
+    color: inherit;
+}
+
+.site-cta-band p {
+    opacity: 0.92;
+}

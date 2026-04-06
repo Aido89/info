@@ -5,25 +5,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Проекты и кейсы — AAAThre</title>
     <meta name="description" content="Реализованные проекты: IT, трансляции, внедрения.">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="theme-color" content="#0d9488">
+    <link rel="canonical" href="https://speedsoft.kz/cases.html">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="ru_KZ">
+    <meta property="og:url" content="https://speedsoft.kz/cases.html">
+    <meta property="og:title" content="Проекты и кейсы — AAAThre">
+    <meta property="og:description" content="Реализованные проекты: IT, трансляции, внедрения.">
+    <meta property="og:image" content="https://speedsoft.kz/images/logo.svg">
+    <meta name="twitter:card" content="summary_large_image">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+      .site-hero,
+      .direction-hero {
+        position: relative;
+        overflow: hidden;
+        color: #fff;
+        background: linear-gradient(
+          180deg,
+          #0f766e 0%,
+          #0a5c54 38%,
+          #064e3b 72%,
+          #022c26 100%
+        );
+      }
+    </style>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body class="leading-relaxed">
+    <a href="#top" class="skip-link">К основному содержимому</a>
 
-    <nav id="main-nav" class="nav-fixed sticky top-0 z-50">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
-            <div class="flex justify-between items-center">
+    <nav id="main-nav" class="nav-fixed sticky top-0 z-50" aria-label="Основная навигация">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-3">
                 <a href="index.html#top" class="brand-mark flex items-center space-x-3">
                     <span class="brand-icon">
-                        <img src="images/logo.svg" alt="AAAThre Logo" class="brand-icon-img">
+                        <img src="images/logo.svg" alt="AAAThre Logo" class="brand-icon-img" width="40" height="40">
                     </span>
                     <span class="brand-text">AAAThre</span>
                 </a>
-                <div class="hidden md:flex flex-wrap gap-x-4 gap-y-1 text-gray-600 font-medium text-sm">
+                <div class="hidden md:flex flex-wrap gap-x-5 gap-y-1 text-gray-600 font-medium text-sm">
                     <a href="index.html" class="nav-link hover:accent-text transition duration-200">Главная</a>
                     <a href="services.html" class="nav-link hover:accent-text transition duration-200">Направления</a>
                     <a href="skills.html" class="nav-link hover:accent-text transition duration-200">Навыки</a>
@@ -32,13 +58,18 @@
                     <a href="index.html#order-constructor" class="nav-link hover:accent-text transition duration-200">Смета</a>
                     <a href="index.html#contacts" class="nav-link hover:accent-text transition duration-200">Контакты</a>
                     <a href="myinfo.html" class="nav-link hover:accent-text transition duration-200">Обо мне</a>
-                    <a href="training.html" class="nav-link hover:accent-text transition duration-200">Обучение</a>
+                    <a href="training.html" class="nav-link hover:accent-text transition duration-200">Курс Workspace</a>
                 </div>
-                <button id="mobile-menu-btn" class="md:hidden text-gray-600 hover:text-teal-600 transition" aria-label="Меню">
-                    <i class="fas fa-bars text-2xl"></i>
+                <button type="button" id="mobile-menu-btn" class="md:hidden text-gray-600 hover:text-teal-600 transition p-2 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg" aria-controls="mobile-menu" aria-expanded="false" aria-label="Открыть меню">
+                    <i class="fas fa-bars text-2xl" aria-hidden="true"></i>
                 </button>
             </div>
-            <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 border-t border-gray-200">
+            <div class="direction-subnav" aria-label="Быстрые разделы страницы">
+                <a class="direction-pill" href="#cases"><i class="fas fa-briefcase" aria-hidden="true"></i> К кейсам</a>
+                <a class="direction-pill" href="directions.html"><i class="fas fa-compass" aria-hidden="true"></i> Все услуги</a>
+                <a class="direction-pill" href="index.html#order-constructor"><i class="fas fa-calculator" aria-hidden="true"></i> Смета</a>
+            </div>
+            <div id="mobile-menu" class="hidden md:hidden pb-4 border-t border-gray-200" role="navigation" aria-label="Мобильное меню">
                 <div class="flex flex-col space-y-3 pt-4">
                     <a href="index.html" class="nav-link hover:accent-text transition duration-200">Главная</a>
                     <a href="services.html" class="nav-link hover:accent-text transition duration-200">Направления</a>
@@ -47,11 +78,13 @@
                     <a href="formats.html" class="nav-link hover:accent-text transition duration-200">Услуги</a>
                     <a href="index.html#order-constructor" class="nav-link hover:accent-text transition duration-200">Смета</a>
                     <a href="index.html#contacts" class="nav-link hover:accent-text transition duration-200">Контакты</a>
+                    <a href="myinfo.html" class="nav-link hover:accent-text transition duration-200">Обо мне</a>
+                    <a href="training.html" class="nav-link hover:accent-text transition duration-200">Курс Workspace</a>
                 </div>
             </div>
         </div>
     </nav>
-<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-4">
+<div id="top" class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-4" tabindex="-1">
             <nav class="text-sm text-gray-500 mb-8" aria-label="Навигация"><a href="index.html" class="hover:text-teal-600">Главная</a> <span class="mx-1">/</span> <span class="text-gray-800 font-medium">Проекты и кейсы</span></nav>
 <section id="cases" class="py-16 scroll-mt-20">
             <h2 class="section-header text-4xl">Проекты и Кейсы</h2>

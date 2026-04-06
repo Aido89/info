@@ -19,11 +19,12 @@
 ├── index.html              # Главная (портфолио, конструктор заказа)
 ├── myinfo.html             # Страница «Обо мне» (сборка Portfolio redesign)
 ├── training.html           # Длинная страница Google Workspace Training
-├── it-infrastructure.html  # Услуги IT-инфраструктуры
-├── it-training.html        # Обучение / STEAM
-├── it-repair.html          # Ремонт ПК
-├── live-streaming.html     # Видеостриминг
-├── web-development.html    # Веб-разработка
+├── directions.html         # Все услуги на одной странице (IT, стриминг, веб, обучение, ремонт)
+├── it-infrastructure.html  # Редирект → directions.html#dir-it (сохранён старый URL)
+├── it-training.html        # Редирект → directions.html#dir-training
+├── it-repair.html          # Редирект → directions.html#dir-repair
+├── live-streaming.html     # Редирект → directions.html#dir-stream
+├── web-development.html    # Редирект → directions.html#dir-web
 ├── styles.css              # Общие стили
 ├── script.js               # Навигация, слайдер, конструктор заказа, AI
 ├── config.example.js       # Пример конфигурации (скопировать в config.js)

@@ -6,23 +6,29 @@
     <title>AAAThre — IT-Инфраструктура, Видеостриминг и Тренинги</title>
     <meta name="description" content="Команда интеграторов цифровых решений. IT-инфраструктура, онлайн-трансляции и обучение цифровым навыкам в Астане.">
     <meta name="keywords" content="AAAThre, IT-инфраструктура, видеостриминг, онлайн-трансляции, подкасты, обучение, Астана, Казахстан">
-    <link rel="canonical" href="https://aaathre.kz/">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="theme-color" content="#0d9488">
+    <meta name="author" content="AAAThre">
+    <link rel="canonical" href="https://speedsoft.kz/">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="ru_KZ">
-    <meta property="og:url" content="https://aaathre.kz/">
+    <meta property="og:url" content="https://speedsoft.kz/">
     <meta property="og:title" content="AAAThre — IT-Инфраструктура, Видеостриминг и Тренинги">
     <meta property="og:description" content="Команда интеграторов цифровых решений. IT-инфраструктура, онлайн-трансляции и обучение цифровым навыкам.">
-    <meta property="og:image" content="https://aaathre.kz/images/logo.svg">
+    <meta property="og:image" content="https://speedsoft.kz/images/logo.svg">
+    <meta property="og:image:alt" content="Логотип AAAThre — IT, стриминг, обучение">
+    <meta property="og:site_name" content="AAAThre">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="AAAThre — IT-Инфраструктура, Видеостриминг и Тренинги">
     <meta name="twitter:description" content="Команда интеграторов цифровых решений. IT-инфраструктура, онлайн-трансляции и обучение цифровым навыкам.">
-    <meta name="twitter:image" content="https://aaathre.kz/images/logo.svg">
+    <meta name="twitter:image" content="https://speedsoft.kz/images/logo.svg">
     
     <!-- Preconnect для оптимизации -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="preconnect" href="https://cdn.tailwindcss.com">
     <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="dns-prefetch" href="https://wa.me">
     
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -33,17 +39,56 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     
+    <!-- Критические стили: если styles.css не загрузился с хостинга, hero не «белый текст на белом фоне» -->
+    <style>
+      .site-hero,
+      .direction-hero {
+        position: relative;
+        overflow: hidden;
+        color: #fff;
+        background: linear-gradient(
+          180deg,
+          #0f766e 0%,
+          #0a5c54 38%,
+          #064e3b 72%,
+          #022c26 100%
+        );
+      }
+    </style>
     <!-- Custom Styles -->
     <link rel="stylesheet" href="styles.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "name": "AAAThre",
+          "url": "https://speedsoft.kz/",
+          "logo": "https://speedsoft.kz/images/logo.svg",
+          "description": "Интеграторы цифровых решений: IT-инфраструктура, видеостриминг и обучение в Казахстане.",
+          "areaServed": { "@type": "Place", "name": "Казахстан" }
+        },
+        {
+          "@type": "WebSite",
+          "name": "AAAThre",
+          "url": "https://speedsoft.kz/",
+          "publisher": { "@type": "Organization", "name": "AAAThre" },
+          "inLanguage": "ru-KZ"
+        }
+      ]
+    }
+    </script>
 </head>
 <body class="leading-relaxed">
+    <a href="#top" class="skip-link">К основному содержимому</a>
     <!-- Фиксированная навигация -->
-    <nav id="main-nav" class="nav-fixed sticky top-0 z-50">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
-            <div class="flex justify-between items-center">
+    <nav id="main-nav" class="nav-fixed sticky top-0 z-50" aria-label="Основная навигация">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-3">
                 <a href="#top" class="brand-mark flex items-center space-x-3">
                     <span class="brand-icon">
-                        <img src="images/logo.svg" alt="AAAThre Logo" class="brand-icon-img">
+                        <img src="images/logo.svg" alt="AAAThre Logo" class="brand-icon-img" width="40" height="40">
                     </span>
                     <span class="brand-text">AAAThre</span>
                 </a>
@@ -55,15 +100,20 @@
                     <a href="#order-constructor" class="nav-link hover:accent-text transition duration-200">Смета</a>
                     <a href="#contacts" class="nav-link hover:accent-text transition duration-200">Контакты</a>
                     <a href="myinfo.html" class="nav-link hover:accent-text transition duration-200">Обо мне</a>
-                    <a href="training.html" class="nav-link hover:accent-text transition duration-200">Обучение</a>
+                    <a href="training.html" class="nav-link hover:accent-text transition duration-200">Курс Workspace</a>
                 </div>
-                <!-- Мобильное меню -->
-                <button id="mobile-menu-btn" class="md:hidden text-gray-600 hover:text-teal-600 transition">
-                    <i class="fas fa-bars text-2xl"></i>
+                <button type="button" id="mobile-menu-btn" class="md:hidden text-gray-600 hover:text-teal-600 transition p-2 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg" aria-controls="mobile-menu" aria-expanded="false" aria-label="Открыть меню">
+                    <i class="fas fa-bars text-2xl" aria-hidden="true"></i>
                 </button>
             </div>
-            <!-- Мобильное меню (выпадающее) -->
-            <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 border-t border-gray-200">
+            <div class="direction-subnav" aria-label="Быстрые разделы страницы">
+                <a class="direction-pill" href="#site-sections"><i class="fas fa-layer-group" aria-hidden="true"></i> Разделы</a>
+                <a class="direction-pill" href="#order-constructor"><i class="fas fa-calculator" aria-hidden="true"></i> Смета</a>
+                <a class="direction-pill" href="#testimonials"><i class="fas fa-comments" aria-hidden="true"></i> Отзывы</a>
+                <a class="direction-pill" href="#contacts"><i class="fas fa-address-book" aria-hidden="true"></i> Контакты</a>
+                <a class="direction-pill" href="directions.html"><i class="fas fa-compass" aria-hidden="true"></i> Все услуги</a>
+            </div>
+            <div id="mobile-menu" class="hidden md:hidden pb-4 border-t border-gray-200" role="navigation" aria-label="Мобильное меню">
                 <div class="flex flex-col space-y-3 pt-4">
                     <a href="services.html" class="nav-link hover:accent-text transition duration-200">Направления</a>
                     <a href="skills.html" class="nav-link hover:accent-text transition duration-200">Навыки</a>
@@ -72,35 +122,37 @@
                     <a href="#order-constructor" class="nav-link hover:accent-text transition duration-200">Смета</a>
                     <a href="#contacts" class="nav-link hover:accent-text transition duration-200">Контакты</a>
                     <a href="myinfo.html" class="nav-link hover:accent-text transition duration-200">Обо мне</a>
-                    <a href="training.html" class="nav-link hover:accent-text transition duration-200">Обучение</a>
+                    <a href="training.html" class="nav-link hover:accent-text transition duration-200">Курс Workspace</a>
                 </div>
             </div>
         </div>
     </nav>
 
     <!-- Главный контейнер -->
-    <div id="top" class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-20">
+    <main id="top" class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-20" tabindex="-1">
         <!-- 1. Главный экран (Hero) -->
-        <header class="pt-20 md:pt-32 pb-16 fade-in">
-            <div class="grid md:grid-cols-12 gap-8 items-center">
+        <header class="pt-10 md:pt-14 pb-12 fade-in">
+            <div class="site-hero overflow-hidden">
+                <div class="grid md:grid-cols-12 gap-8 items-center p-6 md:p-8 lg:p-10">
                 <!-- Левая колонка: Текст и кнопки -->
                 <div class="md:col-span-7">
-                    <h1 class="text-5xl sm:text-6xl font-extrabold text-gray-900 leading-tight mb-4 animate-slide-up">
+                    <p class="site-kicker mb-3 tracking-[0.12em]">Интегратор цифровых решений · Казахстан</p>
+                    <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white leading-tight mb-5 animate-slide-up drop-shadow-sm">
                         AAAThre
                     </h1>
                     <!-- Слоган -->
-                    <p class="text-2xl sm:text-3xl font-bold text-teal-600 mb-4 animate-slide-up">
+                    <p class="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-5 animate-slide-up leading-snug max-w-xl">
                         Превращаем сложные технологии в простые решения
                     </p>
                     <!-- Названия компаний / Партнеры -->
                     <div class="mb-6 animate-slide-up-delay">
-                        <p class="text-sm font-semibold text-gray-500 mb-2 uppercase tracking-wide">Работаю с</p>
+                        <p class="text-sm font-semibold text-teal-100/80 mb-2 uppercase tracking-wide">Работаю с</p>
                         <div class="flex flex-wrap gap-3 items-center">
-                            <span class="text-lg font-semibold text-gray-700">Верный капитал</span>
-                            <span class="text-gray-400">•</span>
-                            <span class="text-lg font-semibold text-gray-700">Sofia Soft</span>
-                            <span class="text-gray-400">•</span>
-                            <span class="text-lg font-semibold text-gray-700">Чемпионат по STEM</span>
+                            <span class="text-lg font-semibold text-white">Верный капитал</span>
+                            <span class="text-teal-200/70">•</span>
+                            <span class="text-lg font-semibold text-white">Sofia Soft</span>
+                            <span class="text-teal-200/70">•</span>
+                            <span class="text-lg font-semibold text-white">Чемпионат по STEM</span>
                         </div>
                     </div>
                     <!-- Бейджи/Чипы с ролями -->
@@ -110,25 +162,25 @@
                         <span class="role-chip"><i class="fas fa-server mr-2"></i> Systems/Platform Engineer</span>
                         <span class="role-chip"><i class="fas fa-tools mr-2"></i> Generalist</span>
                     </div>
-                    <p class="text-lg text-gray-600 mb-10 animate-slide-up-delay-3">
+                    <p class="text-base md:text-lg text-white/90 mb-10 animate-slide-up-delay-3 max-w-xl leading-relaxed">
                         Мы — команда из Казахстана. Строим надежные IT-системы, делаем профессиональные трансляции и обучаем людей цифровым навыкам.
                     </p>
                     <!-- Кнопки призыва к действию -->
                     <div class="flex flex-col sm:flex-row flex-wrap gap-3 animate-slide-up-delay-4">
-                        <a href="https://wa.me/message/VGBVTLQBLHQ7I1" target="_blank" class="btn-primary">
+                        <a href="https://wa.me/message/VGBVTLQBLHQ7I1" target="_blank" rel="noopener noreferrer" class="btn-hero-glass">
                             <i class="fab fa-whatsapp mr-2"></i> Заказать консультацию
                         </a>
-                        <a href="#media-card" class="btn-secondary">
+                        <a href="directions.html#dir-stream" class="btn-secondary btn-hero-white">
                             <i class="fas fa-video mr-2"></i> Организовать трансляцию
                         </a>
-                        <a href="formats.html" class="btn-secondary">
+                        <a href="formats.html" class="btn-secondary btn-hero-white">
                             <i class="fas fa-graduation-cap mr-2"></i> Пригласить как тренера
                         </a>
                     </div>
                 </div>
                 <!-- Правая колонка: Логотип с анимированным фоном -->
                 <div class="md:col-span-5 flex justify-center md:justify-end order-first md:order-none mb-8 md:mb-0">
-                    <div class="hero-logo-circle relative w-56 h-56 rounded-full p-2 shadow-2xl animate-float">
+                    <div class="hero-logo-circle hero-logo-circle--glow relative w-56 h-56 md:w-64 md:h-64 rounded-full p-2 shadow-2xl animate-float ring-2 ring-white/30 bg-white/10 backdrop-blur-sm">
                         <!-- Анимированные сферы (Blobs) -->
                         <div class="blob-container">
                             <div class="blob blob-1"></div>
@@ -137,8 +189,13 @@
                         <!-- Логотип -->
                         <img src="images/logo.svg" alt="Логотип AAAThre"
                              class="relative z-20 w-full h-full object-contain rounded-full p-4"
+                             width="224"
+                             height="224"
+                             fetchpriority="high"
+                             decoding="async"
                              onerror="this.onerror=null; this.src='https://placehold.co/224x224/ffffff/0d9488?text=AK';">
                     </div>
+                </div>
                 </div>
             </div>
         </header>
@@ -147,7 +204,7 @@
         <!-- Разделы (полный контент на отдельных страницах) -->
         <section id="site-sections" class="py-14 scroll-mt-20">
             <h2 class="section-header text-3xl">Разделы</h2>
-            <p class="text-gray-600 mb-8 max-w-2xl">Подробные описания направлений, навыков, кейсов и форматов вынесены на отдельные страницы — главная остаётся короче.</p>
+            <p class="text-gray-600 mb-8 max-w-2xl">Подробные описания направлений, навыков, кейсов и форматов вынесены на отдельные страницы — главная остаётся короче. <a href="directions.html" class="text-teal-600 font-semibold hover:underline">Краткий обзор всех услуг на одной странице</a>.</p>
             <div class="grid sm:grid-cols-2 gap-5">
                 <a href="services.html" class="card-style p-6 hover-lift block group border border-transparent hover:border-teal-200">
                     <h3 class="text-lg font-bold accent-text mb-2 flex items-center gap-2"><i class="fas fa-compass"></i> Ключевые направления</h3>
@@ -321,12 +378,12 @@
                     </div>
                 </div>
                 <div class="slider-controls">
-                    <button id="prev-slide" class="slider-btn">
-                        <i class="fas fa-chevron-left"></i>
+                    <button type="button" id="prev-slide" class="slider-btn" aria-label="Предыдущий отзыв">
+                        <i class="fas fa-chevron-left" aria-hidden="true"></i>
                     </button>
-                    <div id="slider-dots" class="slider-dots"></div>
-                    <button id="next-slide" class="slider-btn">
-                        <i class="fas fa-chevron-right"></i>
+                    <div id="slider-dots" class="slider-dots" role="tablist" aria-label="Выбор отзыва"></div>
+                    <button type="button" id="next-slide" class="slider-btn" aria-label="Следующий отзыв">
+                        <i class="fas fa-chevron-right" aria-hidden="true"></i>
                     </button>
                 </div>
             </div>
@@ -391,17 +448,17 @@
                 </p>
             </div>
         </footer>
-    </div>
+    </main>
 
     <!-- AI Consultation Modal -->
-    <div id="ai-consultation-modal" class="modal-overlay hidden">
+    <div id="ai-consultation-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="ai-modal-title">
         <div class="modal-content">
             <div class="flex justify-between items-start mb-4">
-                <h3 class="text-2xl font-bold text-gray-900 flex items-center">
-                    <i class="fas fa-robot text-teal-500 mr-3"></i> AI-консультант
+                <h3 id="ai-modal-title" class="text-2xl font-bold text-gray-900 flex items-center">
+                    <i class="fas fa-robot text-teal-500 mr-3" aria-hidden="true"></i> AI-консультант
                 </h3>
-                <button onclick="closeAIModal()" class="text-gray-400 hover:text-gray-600 transition duration-150">
-                    <i class="fas fa-times text-xl"></i>
+                <button type="button" onclick="closeAIModal()" class="text-gray-400 hover:text-gray-600 transition duration-150 p-2 rounded-lg min-w-[44px] min-h-[44px] flex items-center justify-center" aria-label="Закрыть окно">
+                    <i class="fas fa-times text-xl" aria-hidden="true"></i>
                 </button>
             </div>
             <p class="text-sm text-gray-600 mb-4">
@@ -429,8 +486,8 @@
     </div>
 
     <!-- Кнопка "Наверх" -->
-    <button id="scroll-top-btn" class="fixed bottom-8 right-8 z-40 bg-teal-600 text-white p-4 rounded-full shadow-2xl hover:bg-teal-700 transition duration-300 opacity-0 pointer-events-none">
-        <i class="fas fa-arrow-up"></i>
+    <button type="button" id="scroll-top-btn" class="fixed bottom-8 right-8 z-40 bg-teal-600 text-white p-4 rounded-full shadow-2xl hover:bg-teal-700 transition duration-300 opacity-0 pointer-events-none min-w-[48px] min-h-[48px] flex items-center justify-center" aria-label="Прокрутить страницу наверх">
+        <i class="fas fa-arrow-up" aria-hidden="true"></i>
     </button>
 
     <!-- Custom JavaScript -->
